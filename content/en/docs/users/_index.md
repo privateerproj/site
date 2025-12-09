@@ -21,44 +21,16 @@ There are several key benefits to Privateer Plugins:
 
 ## Installation
 
-### Install the Privateer CLI
+### Install Privateer CLI
 
-There are several ways to install Privateer:
+For detailed installation instructions, see [Install Privateer](/docs/users/install-privateer/).
 
-#### Option 1: Install via Script
+**Quick Reference:**
+- **Install via Script**: Use the provided installation script (recommended)
+- **Download from Releases**: Get the binary from [GitHub Releases](https://github.com/privateerproj/privateer/releases)
+- **Build from Source**: Clone and build from the repository
 
-Run the following command to install Privateer using the provided install script:
-
-```bash
-/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/privateer/03ced90caae9f3c9203eb7f82f2c46ccf2ff15fc/install.sh)"
-```
-
-#### Option 2: Download from Releases
-
-Download the latest release from [GitHub Releases](https://github.com/privateerproj/privateer/releases).
-
-#### Option 3: Build from Source
-
-To build Privateer from source:
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/privateerproj/privateer.git
-   cd privateer
-   ```
-
-2. **Install Dependencies**
-
-   ```bash
-   go mod tidy
-   ```
-
-3. **Build Privateer**
-
-   ```bash
-   make release
-   ```
+After installation, verify with `privateer version`.
 
 ### Install Privateer Plugins
 
@@ -68,16 +40,6 @@ For detailed instructions on finding and installing plugins, see [Install Plugin
 - **Default Path**: `$HOME/.privateer/bin`
 - **Customize via CLI**: Use `--binaries-path` in your CLI command to change the path to your binaries
 - **Customize via config**: Specify a custom binaries path in your config via the top level value `binaries-path: your/bin/path`
-
-### Verify Installation
-
-After installation, verify that Privateer is working correctly:
-
-```bash
-privateer version
-```
-
-You should see version information displayed.
 
 ## Quick Start
 
