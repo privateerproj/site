@@ -8,6 +8,8 @@ description: >
 
 ## Welcome, Developers
 
+<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" style="float: right; max-width: 120px; margin: 0 0 20px 20px;">
+
 This page orients you to the developer documentation. Start here, then dive into the SDK and plugin guides.
 
 ## Plugin Development Overview

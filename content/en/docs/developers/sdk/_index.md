@@ -8,6 +8,8 @@ description: >
 
 ## Privateer SDK
 
+<img src="/images/sdk.svg" alt="Privateer SDK" style="float: right; max-width: 120px; margin: 0 0 20px 20px;">
+
 The Privateer SDK provides the interface and utilities needed for plugin development:
 
 {{< godoc-link package="github.com/privateerproj/privateer-sdk" text="View SDK Documentation" >}}

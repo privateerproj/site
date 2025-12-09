@@ -4,10 +4,40 @@ Add styles or override variables from the theme here.
 
 */
 
-$primary: #0066cc;
-$secondary: #00aaff;
+// Privateer Brand Colors
+$primary: #24CCCC;        // Teal - Primary brand color
+$secondary: #565B66;       // Dark Grey - Secondary color
+$light-grey: #DDDEE0;     // Light Grey - Backgrounds and borders
+$white: #FFFFFF;          // White - Text on dark, backgrounds
 
+// Bootstrap color overrides
+$dark: $secondary;         // Use dark grey for dark text
+$gray-100: $light-grey;   // Light grey for light backgrounds
+$gray-200: #E5E6E8;       // Slightly lighter grey variant
+$gray-300: #D0D1D4;       // Medium light grey
+$gray-400: #B8BAC0;       // Medium grey
+$gray-500: #9FA2AB;       // Medium dark grey
+$gray-600: #7A7F8A;       // Darker grey
+$gray-700: $secondary;     // Dark grey
+$gray-800: #3E4147;       // Very dark grey
+$gray-900: #2A2C30;       // Almost black grey
+
+// Theme settings
 $enable-gradients: false;
 $enable-rounded: true;
 $enable-shadows: false;
+
+// Link colors
+$link-color: $primary;
+$link-hover-color: darken($primary, 10%);
+
+// Button colors
+$btn-primary-bg: $primary;
+$btn-primary-border: $primary;
+$btn-primary-hover-bg: darken($primary, 5%);
+$btn-primary-hover-border: darken($primary, 5%);
+
+// Text colors
+$body-color: $secondary;
+$text-muted: $gray-600;
 

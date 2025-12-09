@@ -7,7 +7,7 @@ Add your own custom SCSS styles here.
 // Fix overscroll background color issue
 // Set background color on html and body to prevent white flash during overscroll
 html {
-  background-color: #000;
+  background-color: #FFFFFF;
   min-height: 100%;
 }
 
@@ -16,4 +16,34 @@ code[class*="language-"],
 pre[class*="language-"] {
   color: #e7e9db !important;
   text-shadow: none !important;
+}
+
+// Ensure primary color (teal) is used for brand elements
+.td-navbar {
+  background-color: #565B66; // Dark grey navbar
+}
+
+// Style buttons to use teal primary color
+.btn-primary {
+  background-color: #24CCCC;
+  border-color: #24CCCC;
+  
+  &:hover {
+    background-color: #1FB3B3;
+    border-color: #1FB3B3;
+  }
+}
+
+// Style links to use teal
+a {
+  color: #24CCCC;
+  
+  &:hover {
+    color: #1FB3B3;
+  }
+}
+
+// Use light grey for subtle backgrounds
+.bg-light {
+  background-color: #DDDEE0 !important;
 }
