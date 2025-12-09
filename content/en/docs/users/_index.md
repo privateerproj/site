@@ -62,8 +62,9 @@ To build Privateer from source:
 
 ### Install Privateer Plugins
 
-Plugins are built and maintained by the community. Choose the plugin(s) that you wish to run, and install them to your binaries path.
+For detailed instructions on finding and installing plugins, see [Install Plugins](/docs/users/install-plugins/).
 
+**Quick Reference:**
 - **Default Path**: `$HOME/.privateer/bin`
 - **Customize via CLI**: Use `--binaries-path` in your CLI command to change the path to your binaries
 - **Customize via config**: Specify a custom binaries path in your config via the top level value `binaries-path: your/bin/path`
