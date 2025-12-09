@@ -6,11 +6,9 @@ description: >
   Learn how to develop plugins and use the Privateer SDK.
 ---
 
-## Developer Documentation
-
-This section covers everything you need to know to develop plugins for Privateer and use the Privateer SDK.
-
 ## Documentation Sections
+### [Getting Started](/docs/developers/getting-started/)
+Orientation for developers: prerequisites, where to go next, and key links.
 
 ### [Get to Know the SDK](/docs/developers/sdk/)
 Learn about the Privateer SDK and how to use it in your plugins.

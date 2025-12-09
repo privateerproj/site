@@ -1,7 +1,7 @@
 ---
 title: "Create a New Plugin"
 linkTitle: "Create a New Plugin"
-weight: 2
+weight: 3
 description: >
   Learn how to create and maintain Privateer plugins.
 ---
