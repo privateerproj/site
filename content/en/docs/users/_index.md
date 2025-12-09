@@ -10,15 +10,6 @@ description: >
 
 This section covers everything you need to know to use Privateer for infrastructure validation.
 
-## Using Privateer Plugins
-
-There are several key benefits to Privateer Plugins:
-
-- **Community-Driven Plugins:** Our open development model ensures that Plugins are crafted and maintained collaboratively by the community, reflecting a wealth of expertise and insights.
-- **Comprehensive Resource Validation:** Privateer empowers you to validate a diverse array of resources in a single execution. No more piecemeal validation processes; instead, experience efficiency and thoroughness in one go.
-- **Consistent Machine-Readable Output:** Regardless of the specific Plugin, you're guaranteed a standardized, machine-readable test output. This consistency simplifies the automation and integration of test results, enabling seamless decision-making.
-- **Empowering Service Providers:** Privateer finds its calling in projects like Compliant Financial Infrastructure and Common Cloud Controls within FINOS. Service providers can leverage Privateer Plugins developed by FINOS to certify resources for use in regulated industries, such as insurance and banking.
-
 ## Installation
 
 ### Install Privateer CLI
@@ -55,7 +46,7 @@ write-directory: sample_output
 services:
   my-cloud-service1:
     plugin: example
-    test-suite:
+    test-suites:
       - tlp_red
 ```
 
