@@ -10,6 +10,17 @@ description: >
 
 This page orients you to the developer documentation. Start here, then dive into the SDK and plugin guides.
 
+## Plugin Development Overview
+
+Privateer plugins are community-driven validation modules that can be developed and maintained independently. Plugins use the Privateer SDK to integrate with the core framework.
+
+### Why Develop Plugins?
+
+- **Extend Functionality**: Add support for new cloud providers, services, or validation rules
+- **Community Contribution**: Share your validation logic with the community
+- **Standardized Interface**: Use the SDK to ensure consistent behavior across plugins
+- **Reusable Logic**: Leverage common utilities and cloud provider logic from the SDK
+
 ## What you’ll need
 
 - Go 1.19 or later

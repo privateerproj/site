@@ -1,41 +1,20 @@
 ---
 title: "Create a New Plugin"
 linkTitle: "Create a New Plugin"
-weight: 3
+weight: 10
 description: >
   Learn how to create and maintain Privateer plugins.
 ---
-
-## Plugin Development
-
-### Overview
-
-Privateer plugins are community-driven validation modules that can be developed and maintained independently. Plugins use the Privateer SDK to integrate with the core framework.
-
-### Why Develop Plugins?
-
-- **Extend Functionality**: Add support for new cloud providers, services, or validation rules
-- **Community Contribution**: Share your validation logic with the community
-- **Standardized Interface**: Use the SDK to ensure consistent behavior across plugins
-- **Reusable Logic**: Leverage common utilities and cloud provider logic from the SDK
 
 ## Getting Started with Plugin Development
 
 ### Prerequisites
 
 - Go 1.19 or later
-- Understanding of the Privateer SDK (see [Get to Know the SDK](/docs/developers/sdk/))
-- Access to the infrastructure you want to validate
-
-### Using the SDK
-
-The Privateer SDK provides the interface and utilities needed for plugin development:
-
-{{< godoc-link package="github.com/privateerproj/privateer-sdk" text="View SDK Documentation" >}}
 
 ## Generating a Plugin
 
-Privateer includes a command to generate a plugin from a FINOS Common Cloud Controls catalog:
+Privateer includes a command to generate a plugin from a YAML controls catalog document that complies with the [Gemara](https://gemara.openssf.org) Layer 2 schema:
 
 ```bash
 privateer generate-plugin \
@@ -44,12 +23,9 @@ privateer generate-plugin \
   --output-dir my-plugin/
 ```
 
-This generates a complete plugin structure based on the catalog, including:
+This generates a complete plugin structure based on the catalog, including placeholders for data collection, evaluation plans, and assessments.
 
-- Data collection logic
-- Evaluation plans
-- Test sets and assessments
-- Configuration templates
+The generated catalog may still have non-functional values which you will need to update before it can compile.
 
 ### Command Options
 

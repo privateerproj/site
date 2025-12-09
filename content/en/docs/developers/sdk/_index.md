@@ -1,7 +1,7 @@
 ---
 title: "Get to Know the SDK"
 linkTitle: "Get to Know the SDK"
-weight: 2
+weight: 20
 description: >
   Learn about the Privateer SDK and how to use it in your plugins.
 ---
