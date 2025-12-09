@@ -9,8 +9,7 @@ enableRobotsTXT = true
 theme = ["github.com/google/docsy", "github.com/google/docsy/dependencies"]
 
 # Will give values to .Lastmod etc.
-# Disabled for now since we're not in a git repo yet
-enableGitInfo = false
+enableGitInfo = true
 
 # Language settings
 contentDir = "content/en"
