@@ -60,7 +60,7 @@ After generating a plugin, you need to build it:
    make binary
    ```
 
-After building, see [Run a Plugin in Debug Mode](/docs/developers/plugins/run-debug-mode/) for instructions on running your plugin.
+After building, see [Debug a Plugin](/docs/developers/run-debug-mode/) for instructions on running your plugin.
 
 ## Plugin Structure
 
@@ -74,14 +74,7 @@ A typical Privateer plugin includes:
 
 ## Plugin Installation
 
-Once developed, plugins can be installed to the Privateer binaries path:
-
-- **Default Path**: `$HOME/.privateer/bin`
-- **Custom Path**: Specify via `--binaries-path` flag or config file
-
-## Example Plugin
-
-For an example of a complete plugin implementation, see the [raid-wireframe](https://github.com/privateerproj/raid-wireframe) plugin, which serves as a reference implementation.
+Once developed, plugins need to be installed before they can be used. For detailed installation instructions, see [Install Plugins](/docs/users/install-plugins/) in the users documentation.
 
 ## Contributing Plugins
 
@@ -92,14 +85,8 @@ We welcome contributions! To contribute a plugin:
 3. Create comprehensive documentation
 4. Submit a pull request or share via the community
 
-## Resources
-
-- [Privateer SDK Documentation](https://pkg.go.dev/github.com/privateerproj/privateer-sdk)
-- [Get to Know the SDK](/docs/developers/sdk/)
-- [Example Plugin: raid-wireframe](https://github.com/privateerproj/raid-wireframe)
-
 ## Next Steps
 
 - Review the [Get to Know the SDK](/docs/developers/sdk/) to understand the plugin interface
-- Check out example plugins in the community
-- Start building your first plugin!
+- Learn how to [debug your plugin](/docs/developers/run-debug-mode/) during development
+- Check out the [raid-wireframe example plugin](https://github.com/privateerproj/raid-wireframe) for a complete reference implementation

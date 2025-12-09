@@ -62,13 +62,8 @@ The Privateer CLI provides command-line tools for running validation tests. It o
 - **Plugin Orchestration**: Manages plugin lifecycle and execution
 - **Output Generation**: Creates standardized log and result files
 
-## Resources
-
-- [Privateer SDK Documentation](https://pkg.go.dev/github.com/privateerproj/privateer-sdk)
-- [Privateer Core Documentation](https://pkg.go.dev/github.com/privateerproj/privateer)
-- [Create a New Plugin](/docs/developers/plugins/)
-
 ## Next Steps
 
 - Learn how to [create a new plugin](/docs/developers/plugins/) using the SDK
 - Review the [SDK Documentation](https://pkg.go.dev/github.com/privateerproj/privateer-sdk) for detailed API reference
+- Explore the [Privateer Core Documentation](https://pkg.go.dev/github.com/privateerproj/privateer) to understand the CLI interface
