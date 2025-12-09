@@ -21,9 +21,9 @@ Privateer plugins are community-driven validation modules that can be developed 
 - **Standardized Interface**: Use the SDK to ensure consistent behavior across plugins
 - **Reusable Logic**: Leverage common utilities and cloud provider logic from the SDK
 
-## What you’ll need
+## What you'll need
 
-- Go 1.19 or later
+- **Go 1.19 or later** - Required for plugin development
 - Access to the infrastructure or services you want to validate
 - A working Privateer CLI (see **For Users** if you need to install)
 
