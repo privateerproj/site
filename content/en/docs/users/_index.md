@@ -45,7 +45,9 @@ For detailed instructions on finding and installing plugins, see [Install Plugin
 
 ### 1. Create a Configuration File
 
-Create a configuration file (e.g., `config.yml`) that specifies the plugins you want to run:
+For detailed configuration file documentation, see [Configuration File](/docs/users/config-file/).
+
+**Quick Example:**
 
 ```yaml
 loglevel: Debug
@@ -59,10 +61,6 @@ services:
 
 > [!NOTE]
 > If your configuration file is stored in a non-default location, specify its file path using the `-c` or `--config` flag.
-
-### Advanced Config Management
-
-Privateer's roadmap includes plans for integrating with systems like etcd and Consul to enhance configuration and secret management.
 
 ### 2. Run Privateer
 
