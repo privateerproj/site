@@ -16,13 +16,11 @@ To run the plugin by itself in debug mode:
 ./example debug --service my-cloud-service1
 ```
 
-> [!TIP]
-> If you use a different service name, make sure the service name matches what is in the config.yml in the root of the repository.
+_**TIP:** If you use a different service name, make sure the service name matches what is in the config.yml in the root of the repository._
 
-> [!IMPORTANT]
-> The `test_output/[service_name]` folder should include a log file and a yaml file for each test suite.
->
-> Example: `test_output/my-cloud-service1/my-cloud-service1.log` and `test_output/my-cloud-service1/tlp_red.yml`
+The `test_output/[service_name]` folder should include a log file and a yaml file for each test suite.
+
+**Example:** `test_output/my-cloud-service1/my-cloud-service1.log` and `test_output/my-cloud-service1/tlp_red.yml`
 
 ### Running from Privateer
 

@@ -40,8 +40,7 @@ To install a plugin:
    cp plugin-binary $HOME/.privateer/bin
    ```
 
-   > [!NOTE]
-   > If the `$HOME/.privateer/bin` directory doesn't exist, it should have been created during Privateer installation. If it's missing, create it with `mkdir -p $HOME/.privateer/bin` or refer to the [Install Privateer](/docs/users/install-privateer/#post-installation-setup) guide.
+_**NOTE:** If the `$HOME/.privateer/bin` directory doesn't exist, it should have been created during Privateer installation. If it's missing, create it with `mkdir -p $HOME/.privateer/bin` or refer to the [Install Privateer](/docs/users/install-privateer/#post-installation-setup) guide._
 
 3. **Make it executable** (if needed):
 

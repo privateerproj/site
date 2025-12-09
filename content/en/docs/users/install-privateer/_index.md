@@ -34,8 +34,7 @@ This script will:
 - Set up the necessary directories
 - Add Privateer to your PATH (if configured)
 
-> [!NOTE]
-> The installation script uses a specific commit hash. For the latest version, check the [Privateer repository](https://github.com/privateerproj/privateer) for the most recent install script.
+_**NOTE:** The installation script uses a specific commit hash. For the latest version, check the [Privateer repository](https://github.com/privateerproj/privateer) for the most recent install script._
 
 ### Option 2: Download from Releases
 

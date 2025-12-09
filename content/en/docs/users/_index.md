@@ -50,8 +50,7 @@ services:
       - tlp_red
 ```
 
-> [!NOTE]
-> If your configuration file is stored in a non-default location, specify its file path using the `-c` or `--config` flag.
+_**NOTE:** If your configuration file is stored in a non-default location, specify its file path using the `-c` or `--config` flag._
 
 ### 2. Run Privateer
 
