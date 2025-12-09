@@ -10,3 +10,10 @@ html {
   background-color: #000;
   min-height: 100%;
 }
+
+// Override Prism code block text color and remove text-shadow
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #e7e9db !important;
+  text-shadow: none !important;
+}
