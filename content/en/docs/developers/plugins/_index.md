@@ -8,30 +8,26 @@ description: >
 
 ## Generating a Plugin
 
-Privateer includes a command to generate a plugin from a YAML controls catalog document that complies with the [Gemara](https://gemara.openssf.org) Layer 2 schema. This allows you to not have to start from scratch on a new plugin.
+Privateer includes a command to generate a plugin from a YAML controls catalog document that complies with the [Gemara](https://gemara.openssf.org) Layer 2 schema.
 
-> [!NOTE]
-> Currently the generator supports YAML files that comply with the Gemara Layer 2 schema. This file is needed to be used to setup the plugin's test suite and test sets. All that is needed to be done after that is writing the actual tests.
+To start without a catalog instead, you can simply clone the [example plugin](https://github.com/privateerproj/plugin-example) and adjust it to your needs.
 
 ### Getting Started
 
-1. **Get a catalog file**: You can use a catalog file like `CCC.VPC_2025.01.yaml` from the [Common Cloud Controls Repository Releases page](https://github.com/finos/common-cloud-controls/releases).
-
-   > [!NOTE]
-   > Version may change or you may need to expand the `Assets` section to find the latest yaml file.
+1. **Get a catalog file**: You can use any Gemara Layer 2 catalog, such as recent releases from the [Common Cloud Controls](https://github.com/finos/common-cloud-controls/releases) project.
 
 2. **Generate the plugin**: In the root of your workspace, run the following command:
 
-   ```bash
-   privateer generate-plugin \
-     --source-path ~/path/to/catalog.yaml \
-     --service-name "MyService" \
-     --output-dir my-plugin/
-   ```
+```bash
+privateer generate-plugin \
+    --source-path ~/path/to/catalog.yaml \
+    --service-name "MyService" \
+    --output-dir my-plugin/
+```
 
-   This generates a complete plugin structure based on the catalog, including placeholders for data collection, evaluation plans, and assessments.
+This generates a complete plugin structure based on the catalog, including placeholders for data collection, evaluation plans, and assessments.
 
-   The generated catalog may still have non-functional values which you will need to update before it can compile.
+The generated catalog may still have non-functional values which you will need to update before it can compile.
 
 ### Command Options
 
@@ -64,46 +60,7 @@ After generating a plugin, you need to build it:
    make binary
    ```
 
-### Running the Generated Plugin
-
-#### Running in Debug Mode
-
-To run the plugin by itself in debug mode:
-
-```bash
-./example debug --service my-cloud-service1
-```
-
-> [!TIP]
-> If you use a different service name, make sure the service name matches what is in the config.yml in the root of the repository.
-
-> [!IMPORTANT]
-> The `test_output/[service_name]` folder should include a log file and a yaml file for each test suite.
->
-> Example: `test_output/my-cloud-service1/my-cloud-service1.log` and `test_output/my-cloud-service1/tlp_red.yml`
-
-#### Running from Privateer
-
-To run the plugin from Privateer:
-
-1. **Copy the plugin binary to the Privateer binaries path**:
-
-   ```bash
-   cp example $HOME/.privateer/bin
-   ```
-
-2. **Copy the configuration to the parent directory**:
-
-   ```bash
-   cp config.yml ../
-   cd ..
-   ```
-
-3. **Run Privateer**:
-
-   ```bash
-   privateer run
-   ```
+After building, see [Run a Plugin in Debug Mode](/docs/developers/plugins/run-debug-mode/) for instructions on running your plugin.
 
 ## Plugin Structure
 
