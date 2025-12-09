@@ -1,0 +1,12 @@
+/*
+
+Add your own custom SCSS styles here.
+
+*/
+
+// Fix overscroll background color issue
+// Set background color on html and body to prevent white flash during overscroll
+html {
+  background-color: #000;
+  min-height: 100%;
+}
