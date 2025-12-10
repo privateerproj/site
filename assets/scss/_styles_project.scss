@@ -47,3 +47,36 @@ a {
 .bg-light {
   background-color: #DDDEE0 !important;
 }
+
+// Partner logo hover effects
+.td-box--white a img {
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Teal gradient for cover block (darker at top, lighter at bottom)
+.td-cover-block.-bg-primary {
+  background: linear-gradient(180deg, 
+    darken(#24CCCC, 15%) 0%, 
+    #24CCCC 50%, 
+    lighten(#24CCCC, 5%) 100%
+  ) !important;
+}
+
+// Reduce bottom padding on H1 title in cover block
+.td-cover-block h1 {
+  padding-bottom: 0.5rem !important;
+}
+
+// Reduce spacing in partners row
+.partners-row {
+  gap: 1rem;
+  
+  .col-auto {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
