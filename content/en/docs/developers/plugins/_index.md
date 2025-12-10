@@ -10,6 +10,8 @@ description: >
 
 <img src="/images/map.svg" alt="Plugin" style="float: right; max-width: 120px; margin: 0 0 20px 20px;">
 
+### Prerequisites
+
 Privateer includes a command to generate a plugin from a YAML controls catalog document that complies with the [Gemara](https://gemara.openssf.org) Layer 2 schema.
 
 To start without a catalog instead, you can simply clone the [example plugin](https://github.com/privateerproj/plugin-example) and adjust it to your needs.
@@ -29,7 +31,7 @@ privateer generate-plugin \
 
 This generates a complete plugin structure based on the catalog, including placeholders for data collection, evaluation plans, and assessments.
 
-The generated catalog may still have non-functional values which you will need to update before it can compile.
+The generated plugin may still have non-functional values which you will need to update before it can compile.
 
 ### Command Options
 
