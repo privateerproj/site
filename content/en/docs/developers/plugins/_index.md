@@ -8,7 +8,7 @@ description: >
 
 ## Generating a Plugin
 
-<img src="/images/plugin.svg" alt="Plugin" style="float: right; max-width: 120px; margin: 0 0 20px 20px;">
+<img src="/images/map.svg" alt="Plugin" style="float: right; max-width: 120px; margin: 0 0 20px 20px;">
 
 Privateer includes a command to generate a plugin from a YAML controls catalog document that complies with the [Gemara](https://gemara.openssf.org) Layer 2 schema.
 
@@ -70,11 +70,11 @@ A typical Privateer plugin includes the following components, organized hierarch
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; align-items: center;">
   <div style="text-align: center;">
-    <img src="/images/plugin.svg" alt="Plugin" width="100">
+    <img src="/images/map.svg" alt="Plugin" width="100">
     <p><strong>Plugin</strong></p>
   </div>
   <div style="text-align: center;">
-    <img src="/images/testSuite.svg" alt="EvaluationSuite" width="100">
+    <img src="/images/cannon.svg" alt="EvaluationSuite" width="100">
     <p><strong>EvaluationSuite</strong></p>
   </div>
   <div style="text-align: center;">
@@ -82,7 +82,7 @@ A typical Privateer plugin includes the following components, organized hierarch
     <p><strong>Test Set</strong></p>
   </div>
   <div style="text-align: center;">
-    <img src="/images/test.svg" alt="Test" width="100">
+    <img src="/images/match.svg" alt="Test" width="100">
     <p><strong>Test</strong></p>
   </div>
 </div>
