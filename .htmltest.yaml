@@ -1,0 +1,8 @@
+DirectoryIndex: "index.html"
+DirectoryPath: "public"
+EnforceHTTPS: false
+IgnoreURLs:
+- "^/index\\.html$"
+IgnoreDirs:
+- "lib"
+CacheExpires: "6h"

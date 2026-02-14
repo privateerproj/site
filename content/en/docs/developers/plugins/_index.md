@@ -80,10 +80,6 @@ A typical Privateer plugin includes the following components, organized hierarch
     <p><strong>EvaluationSuite</strong></p>
   </div>
   <div style="text-align: center;">
-    <img src="/images/testSet.svg" alt="Test Set" width="100">
-    <p><strong>Test Set</strong></p>
-  </div>
-  <div style="text-align: center;">
     <img src="/images/match.svg" alt="Test" width="100">
     <p><strong>Test</strong></p>
   </div>
