@@ -62,7 +62,7 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
-      - name: Verify links
+      - name: Verify links and images
         uses: wjdp/htmltest-action@31be84a95c860a331e0cf9a99f71e3eb39d2f86b
         with:
           config: .htmltest.yaml
