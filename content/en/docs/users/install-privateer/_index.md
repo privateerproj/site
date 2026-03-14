@@ -42,22 +42,25 @@ You can manually download and install Privateer from GitHub Releases:
 
 1. **Visit the Releases Page**: Go to [GitHub Releases](https://github.com/privateerproj/privateer/releases)
 
-2. **Download the Binary**: Download the appropriate binary for your operating system and architecture:
-   - Linux: `privateer-linux-amd64` or `privateer-linux-arm64`
-   - macOS: `privateer-darwin-amd64` or `privateer-darwin-arm64`
-   - Windows: `privateer-windows-amd64.exe`
+2. **Download the Archive**: Download the appropriate archive for your operating system and architecture:
+   - Linux (x86_64): `privateer_Linux_x86_64.tar.gz`
+   - Linux (arm64): `privateer_Linux_arm64.tar.gz`
+   - macOS (universal): `privateer_Darwin_all.tar.gz`
+   - Windows (x86_64): `privateer_Windows_x86_64.zip`
 
-3. **Install the Binary**:
-   
+3. **Extract and Install the Binary**:
+
    **Linux/macOS:**
    ```bash
-   # Rename and move to a directory in your PATH
-   mv privateer-* /usr/local/bin/privateer
-   chmod +x /usr/local/bin/privateer
+   # Extract the archive
+   tar xzf privateer_*.tar.gz
+   # Move the binary to a directory in your PATH
+   mv pvtr /usr/local/bin/pvtr
+   chmod +x /usr/local/bin/pvtr
    ```
-   
+
    **Windows:**
-   - Move the executable to a directory in your PATH, or add the directory to your system PATH
+   - Extract the zip and move `pvtr.exe` to a directory in your PATH, or add the directory to your system PATH
 
 4. **Create Privateer Directories** (if needed):
    ```bash
@@ -89,9 +92,8 @@ If you want to build Privateer from source or need a custom build:
 4. **Install the Binary**:
    ```bash
    # Copy to a directory in your PATH
-   cp privateer /usr/local/bin/
-   # Or on macOS:
-   cp privateer-darwin /usr/local/bin/privateer
+   # The default `make binary` target produces a `pvtr` binary
+   cp pvtr /usr/local/bin/pvtr
    ```
 
 ## Verify Installation
@@ -99,13 +101,13 @@ If you want to build Privateer from source or need a custom build:
 After installation, verify that Privateer is working correctly:
 
 ```bash
-privateer version
+pvtr version
 ```
 
 You should see version information displayed, for example:
 
 ```
-Privateer version 0.0.0
+0.0.0
 ```
 
 If you see an error, check that:
@@ -155,14 +157,14 @@ If you get a permission error:
 
 1. **Check File Permissions**: Ensure the binary has execute permissions:
    ```bash
-   chmod +x /path/to/privateer
+   chmod +x /path/to/pvtr
    ```
 
 2. **Check Directory Permissions**: Ensure you have write access to `$HOME/.privateer/bin`
 
 ### Version Check Fails
 
-If `privateer version` doesn't work:
+If `pvtr version` doesn't work:
 
 1. **Verify Binary**: Check that the binary file is not corrupted
 2. **Re-download**: Try downloading and installing again

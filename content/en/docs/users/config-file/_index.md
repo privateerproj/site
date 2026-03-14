@@ -15,7 +15,7 @@ Privateer uses configuration files to specify which plugins to run, how to run t
 By default, Privateer looks for a configuration file named `config.yml` in the current working directory. You can specify a different file or location using the `-c` or `--config` flag:
 
 ```bash
-privateer run -c /path/to/my-config.yml
+pvtr run -c /path/to/my-config.yml
 ```
 
 ## Configuration Structure
@@ -172,7 +172,7 @@ All other settings will use their default values.
 When you have multiple services defined, you can run a specific service using the `-s` or `--service` flag:
 
 ```bash
-privateer run -c config.yml -s my-cloud-service1
+pvtr run -c config.yml -s my-cloud-service1
 ```
 
 If you don't specify a service, Privateer will run all services defined in the configuration.
@@ -232,10 +232,10 @@ You can use different configuration files for different environments:
 
 ```bash
 # Development
-privateer run -c config.dev.yml
+pvtr run -c config.dev.yml
 
 # Production
-privateer run -c config.prod.yml
+pvtr run -c config.prod.yml
 ```
 
 ### Future: External Configuration

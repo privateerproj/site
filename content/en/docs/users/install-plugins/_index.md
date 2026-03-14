@@ -57,7 +57,7 @@ You can customize where Privateer looks for plugins in two ways:
 Use the `--binaries-path` flag when running Privateer:
 
 ```bash
-privateer run --binaries-path /custom/path/to/binaries
+pvtr run --binaries-path /custom/path/to/binaries
 ```
 
 #### Via Configuration File
@@ -82,7 +82,7 @@ services:
 Use the `list` command to see which plugins are installed:
 
 ```bash
-privateer list
+pvtr list
 ```
 
 This shows plugins requested by your configuration and whether they're installed.
@@ -90,7 +90,7 @@ This shows plugins requested by your configuration and whether they're installed
 To see all plugins (installed or requested):
 
 ```bash
-privateer list -a
+pvtr list -a
 ```
 
 ### Verify Plugin Works
@@ -110,7 +110,7 @@ After installing a plugin, you can verify it works by:
 2. **Running Privateer**:
 
    ```bash
-   privateer run -c config.yml
+   pvtr run -c config.yml
    ```
 
 If the plugin is correctly installed and configured, Privateer will execute it successfully.
@@ -136,7 +136,7 @@ If Privateer can't find your plugin:
 
 3. **Verify permissions**: Make sure the plugin binary has execute permissions
 
-4. **Use the list command**: Run `privateer list -a` to see what Privateer can detect
+4. **Use the list command**: Run `pvtr list -a` to see what Privateer can detect
 
 ### Multiple Plugin Versions
 
