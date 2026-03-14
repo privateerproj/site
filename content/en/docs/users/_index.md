@@ -21,7 +21,7 @@ For detailed installation instructions, see [Install Privateer](/docs/users/inst
 - **Download from Releases**: Get the binary from [GitHub Releases](https://github.com/privateerproj/privateer/releases)
 - **Build from Source**: Clone and build from the repository
 
-After installation, verify with `privateer version`.
+After installation, verify with `pvtr version`.
 
 ### Install Privateer Plugins
 
@@ -57,7 +57,7 @@ _**NOTE:** If your configuration file is stored in a non-default location, speci
 Execute Privateer with your configuration:
 
 ```bash
-privateer run -c config.yml
+pvtr run -c config.yml
 ```
 
 ### 3. Review Results

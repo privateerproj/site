@@ -23,7 +23,7 @@ To start without a catalog instead, you can simply clone the [example plugin](ht
 2. **Generate the plugin**: In the root of your workspace, run the following command:
 
 ```bash
-privateer generate-plugin \
+pvtr generate-plugin \
     --source-path ~/path/to/catalog.yaml \
     --service-name "MyService" \
     --output-dir my-plugin/

@@ -42,6 +42,6 @@ To run the plugin from Privateer:
 3. **Run Privateer**:
 
    ```bash
-   privateer run
+   pvtr run
    ```
 
