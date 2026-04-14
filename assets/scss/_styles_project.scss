@@ -5,7 +5,6 @@ Add your own custom SCSS styles here.
 */
 
 // Fix overscroll background color issue
-// Set background color on html and body to prevent white flash during overscroll
 html {
   background-color: #FFFFFF;
   min-height: 100%;
@@ -18,65 +17,161 @@ pre[class*="language-"] {
   text-shadow: none !important;
 }
 
-// Ensure primary color (teal) is used for brand elements
+// Navbar - deep navy with subtle bottom border
 .td-navbar {
-  background-color: #565B66; // Dark grey navbar
+  background-color: #1B2A3D;
+  border-bottom: 2px solid #0AADAD;
+  box-shadow: 0 2px 12px rgba(27, 42, 61, 0.15);
 }
 
-// Style buttons to use teal primary color
+// Primary buttons - teal
 .btn-primary {
-  background-color: #24CCCC;
-  border-color: #24CCCC;
-  
+  background-color: #0AADAD;
+  border-color: #0AADAD;
+
   &:hover {
-    background-color: #1FB3B3;
-    border-color: #1FB3B3;
+    background-color: #089494;
+    border-color: #089494;
   }
 }
 
-// Style links to use teal
+// Secondary buttons - gold accent for CTAs
+.btn-secondary {
+  background-color: #E5A820;
+  border-color: #E5A820;
+  color: #1B2A3D;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(229, 168, 32, 0.3);
+
+  &:hover {
+    background-color: #D49A18;
+    border-color: #D49A18;
+    color: #1B2A3D;
+    box-shadow: 0 4px 16px rgba(229, 168, 32, 0.4);
+  }
+}
+
+// Style links
 a {
-  color: #24CCCC;
-  
+  color: #0AADAD;
+
   &:hover {
-    color: #1FB3B3;
+    color: #089494;
   }
 }
 
-// Use light grey for subtle backgrounds
+// Light backgrounds
 .bg-light {
-  background-color: #DDDEE0 !important;
+  background-color: #EEF0F2 !important;
 }
 
-// Partner logo hover effects
+// Partner logo section
 .td-box--white a img {
-  transition: opacity 0.2s ease;
-  
+  transition: all 0.25s ease;
+
   &:hover {
     opacity: 0.8;
+    transform: scale(1.05);
   }
 }
 
-// Teal gradient for cover block (darker at top, lighter at bottom)
+// Hero cover block - rich gradient from dark navy to deep teal
 .td-cover-block.-bg-primary {
-  background: linear-gradient(180deg, 
-    darken(#24CCCC, 15%) 0%, 
-    #24CCCC 50%, 
-    lighten(#24CCCC, 5%) 100%
+  background: linear-gradient(
+    160deg,
+    #1B2A3D 0%,
+    #153040 20%,
+    #0D5858 50%,
+    #0AADAD 85%,
+    #12C5C5 100%
   ) !important;
 }
 
-// Reduce bottom padding on H1 title in cover block
-.td-cover-block h1 {
-  padding-bottom: 0.5rem !important;
+// All text in cover block must be white
+.td-cover-block {
+  color: #FFFFFF !important;
+
+  h1 {
+    color: #FFFFFF !important;
+    padding-bottom: 0.5rem !important;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .lead {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 300;
+  }
 }
 
-// Reduce spacing in partners row
+// Navbar text white
+.td-navbar {
+  .navbar-brand {
+    color: #FFFFFF !important;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+
+    &:hover {
+      color: #FFFFFF !important;
+    }
+  }
+}
+
+// Partners row
 .partners-row {
   gap: 1rem;
-  
+
   .col-auto {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
+  p {
+    color: #6B7588;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+// Primary-colored sections - use navy instead of flat teal
+.td-box--primary {
+  background: linear-gradient(135deg, #1B2A3D 0%, #1F3347 50%, #1B2A3D 100%) !important;
+}
+
+// Feature section icons
+.td-box--white .fa,
+.td-box--white .fas,
+.td-box--white .fab {
+  color: #0AADAD;
+}
+
+// Feature cards
+.td-box--white h4,
+.td-box--white .h4 {
+  color: #1B2A3D;
+  font-weight: 600;
+}
+
+// Lead/intro sections with primary color
+.td-box--primary .lead,
+.td-box--primary p {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+// Bottom CTA section
+.td-box--primary h2 {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+// Footer
+.td-footer {
+  background-color: #12202F !important;
 }
