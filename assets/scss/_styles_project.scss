@@ -216,10 +216,10 @@ a {
   }
 }
 
-// Feature section icons - chip-style with glow
-.td-box--white .fa,
-.td-box--white .fas,
-.td-box--white .fab {
+// Feature section icons - chip-style with glow (scoped to feature columns only)
+.td-box--white .row.features > [class*="col-"] .fa,
+.td-box--white .row.features > [class*="col-"] .fas,
+.td-box--white .row.features > [class*="col-"] .fab {
   color: #0AADAD;
   display: inline-flex;
   align-items: center;
@@ -235,18 +235,18 @@ a {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-// Feature cards
-.td-box--white h4,
-.td-box--white .h4 {
+// Feature card headings
+.td-box--white .row.features h4,
+.td-box--white .row.features .h4 {
   color: #1B2A3D;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 // Feature column hover lift
-.td-box--white [class*="col-"]:has(.fa),
-.td-box--white [class*="col-"]:has(.fas),
-.td-box--white [class*="col-"]:has(.fab) {
+.td-box--white .row.features > [class*="col-"]:has(.fa),
+.td-box--white .row.features > [class*="col-"]:has(.fas),
+.td-box--white .row.features > [class*="col-"]:has(.fab) {
   transition: transform 0.25s ease;
 
   &:hover {
@@ -274,8 +274,10 @@ a {
     font-weight: 700;
   }
 
-  // Icons inside primary — chip-style with brighter teal on dark
-  .fa, .fas, .fab {
+  // Icons inside primary feature columns — chip-style with brighter teal on dark
+  .row.features > [class*="col-"] .fa,
+  .row.features > [class*="col-"] .fas,
+  .row.features > [class*="col-"] .fab {
     color: #12C5C5;
     display: inline-flex;
     align-items: center;
@@ -292,9 +294,9 @@ a {
   }
 
   // Feature column hover lift on dark
-  [class*="col-"]:has(.fa),
-  [class*="col-"]:has(.fas),
-  [class*="col-"]:has(.fab) {
+  .row.features > [class*="col-"]:has(.fa),
+  .row.features > [class*="col-"]:has(.fas),
+  .row.features > [class*="col-"]:has(.fab) {
     transition: transform 0.25s ease;
 
     &:hover {
@@ -343,6 +345,36 @@ a {
 // Footer
 .td-footer {
   background-color: #12202F !important;
+}
+
+// Section "arrow" — downward chevron at the top edge of a section,
+// auto-colored to the opposite of the current section (acts like the
+// section above is dipping into this one). Enable via shortcode: arrow=true
+.td-box--arrow-top {
+  position: relative;
+  padding-top: 100px !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  // Chevron color = opposite of section background
+  &.td-box--white::before {
+    background: linear-gradient(135deg, #0F1E2D 0%, #1B2A3D 50%, #122433 100%);
+  }
+
+  &.td-box--primary::before {
+    background: #FFFFFF;
+  }
 }
 
 // "Where Privateer Fits" — techy editorial section
