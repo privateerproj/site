@@ -390,13 +390,77 @@ a {
     height: 3px;
     background: linear-gradient(90deg, #0AADAD, #12C5C5);
     border-radius: 2px;
-    margin: 0 auto 1.75rem;
+    margin: 0 auto 2rem;
   }
 
   p {
     color: #2D3748;
     line-height: 1.75;
     font-size: 1.02rem;
+    margin-bottom: 1.25rem;
+  }
+
+  // Pull-quote style callout for a key framing statement
+  .fits-callout {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #1B2A3D;
+    line-height: 1.55;
+    padding: 1rem 0 1rem 1.25rem;
+    margin: 1.5rem 0 2.5rem;
+    border-left: 3px solid #0AADAD;
+    background: linear-gradient(90deg, rgba(10, 173, 173, 0.06), transparent);
+  }
+
+  // Subsection heading — mono eyebrow glyph, tight and punchy
+  .fits-subhead {
+    font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1B2A3D;
+    letter-spacing: -0.005em;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(10, 173, 173, 0.2);
+
+    &::before {
+      content: "› ";
+      color: #0AADAD;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+  }
+
+  // Bulleted items with teal accent marker and bold labels
+  .fits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+
+    li {
+      position: relative;
+      padding: 0.5rem 0 0.5rem 1.75rem;
+      color: #2D3748;
+      line-height: 1.65;
+      font-size: 1.02rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1rem;
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        background: linear-gradient(135deg, #0AADAD, #12C5C5);
+        box-shadow: 0 0 8px rgba(10, 173, 173, 0.4);
+      }
+
+      strong {
+        color: #1B2A3D;
+        font-weight: 600;
+      }
+    }
   }
 
   a {
