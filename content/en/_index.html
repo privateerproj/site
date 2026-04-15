@@ -3,9 +3,10 @@ title = "Privateer"
 linkTitle = "Privateer"
 +++
 
-{{< blocks/cover title="Privateer" image_anchor="top" height="min" color="primary" >}}
+{{< blocks/cover image_anchor="top" height="min" color="primary" >}}
 <div class="mx-auto">
-	<span class="mono-tag">Validation Framework</span>
+	<span class="mono-tag">Evaluation Harness</span>
+	<h1 class="display-1">Privateer</h1>
 	<p class="lead mt-3" style="font-size: 1.4rem;">Streamline Your Security and Compliance Validation</p>
 	<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" class="mb-4" style="max-width: 220px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));">
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="/docs/">
@@ -14,7 +15,7 @@ linkTitle = "Privateer"
 </div>
 {{< /blocks/cover >}}
 
-{{< blocks/section color="primary" >}}
+{{< blocks/section color="white" >}}
 <div class="col-12">
 	<p class="text-center mb-3 partners-label">Trusted and Used By</p>
 	<div class="row justify-content-center align-items-center partners-row">
@@ -36,11 +37,6 @@ linkTitle = "Privateer"
 	</div>
 </div>
 {{< /blocks/section >}}
-
-{{% blocks/lead color="white" %}}
-<p>Privateer is a validation framework that simplifies infrastructure testing and compliance validation.</p>
-<p>Built for infrastructure engineers, it accelerates security and compliance validation of any software asset.</p>
-{{% /blocks/lead %}}
 
 {{< blocks/section color="primary" type="features" >}}
 {{% blocks/feature icon="fa-users" title="Community-Driven Plugins" %}}
@@ -65,44 +61,31 @@ Standardized input and output for easy automation and integration.
 	</div>
 
 	<p>
-		In a modern GRC Engineering workflow, there is often a "last mile" gap between policy definition and technical verification. Privateer functions at the
-		<a href="https://gemara.openssf.org/model/07.2-Layer-5" target="_blank" rel="noopener noreferrer">Evaluation layer</a>
-		of automated governance — the engine that executes high-level controls against live infrastructure to produce verifiable, machine-readable evidence.
-	</p>
-	<p class="fits-callout">
-		Instead of treating compliance as a manual reporting exercise, Privateer treats it as a data engineering problem.
+		Privateer bridges the gap between policy definition and technical verification, treating compliance as a data engineering problem rather than a manual reporting exercise.
 	</p>
 
 	<h3 class="fits-subhead">Automated Control Mapping</h3>
 	<p>
-		Privateer is designed to ingest established control catalogs and translate them into executable tests. This allows organizations to automate their adherence to industry-standard baselines without building custom tooling from scratch.
+		Translate industry-standard control catalogs, such as the
+		<a href="https://ccc.finos.org/" target="_blank" rel="noopener noreferrer">FINOS Common Cloud Controls</a>
+		and the
+		<a href="https://baseline.openssf.org/" target="_blank" rel="noopener noreferrer">OpenSSF OSPS Baseline</a>,
+		directly into executable validation tests.
 	</p>
-	<ul class="fits-list">
-		<li>
-			<strong>FINOS Common Cloud Controls</strong> — Privateer can automatically validate that cloud configurations meet the specific compliance requirements of the financial services sector.
-		</li>
-		<li>
-			<strong>OpenSSF OSPS Baseline</strong> — For projects prioritizing supply chain security, Privateer runs checks against the OpenSSF's security benchmarks to ensure best practices are baked into the infrastructure.
-		</li>
-	</ul>
 
-	<h3 class="fits-subhead">Engineering-First Governance</h3>
+	<h3 class="fits-subhead">Native Gemara Integration</h3>
 	<p>
-		By producing standardized outputs, Privateer eliminates the need for "human-in-the-loop" translation during an audit.
+		Privateer operates natively at the
+		<a href="https://gemara.openssf.org/model/07.2-Layer-5" target="_blank" rel="noopener noreferrer">Evaluation layer</a>
+		of automated governance. You can automatically generate executable plugins directly from Gemara Control Catalogs, and emit your results as standardized Gemara Evaluation Logs.
+		(Learn more about the GRC engineering model at
+		<a href="https://gemara.openssf.org" target="_blank" rel="noopener noreferrer">gemara.openssf.org</a>).
 	</p>
-	<ul class="fits-list">
-		<li>
-			<strong>Execution</strong> — Privateer runs validation plugins directly against your environment.
-		</li>
-		<li>
-			<strong>Standardization</strong> — Results are emitted in a schema-agnostic format that downstream audit and reporting tools can consume immediately.
-		</li>
-		<li>
-			<strong>Interoperability</strong> — Privateer integrates with wider automated governance frameworks like
-			<a href="https://gemara.openssf.org/model/04-the-model.html" target="_blank" rel="noopener noreferrer">Gemara</a>,
-			acting as a modular component in your existing CI/CD or monitoring stack.
-		</li>
-	</ul>
+
+	<h3 class="fits-subhead">Audit-Ready Execution</h3>
+	<p>
+		Run validation plugins against live infrastructure to produce machine-readable, schema-agnostic evidence that your downstream CI/CD, reporting, and monitoring tools can consume immediately.
+	</p>
 </div>
 {{< /blocks/section >}}
 
