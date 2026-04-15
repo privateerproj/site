@@ -345,9 +345,9 @@ a {
   letter-spacing: 0.005em;
 }
 
-// CTA buttons in cover and CTA blocks — subtle glow on hover
+// CTA buttons everywhere — uppercase, tracked, lift on hover
 .td-cover-block .btn-secondary,
-.td-box--primary .btn-secondary {
+.td-box .btn-secondary {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
