@@ -76,34 +76,89 @@ a {
   }
 }
 
-// Hero cover block - rich gradient from dark navy to deep teal
+// Hero cover block - rich gradient from dark navy to deep teal, with techy grid overlay
 .td-cover-block.-bg-primary {
   background: linear-gradient(
     160deg,
-    #1B2A3D 0%,
-    #153040 20%,
-    #0D5858 50%,
-    #0AADAD 85%,
+    #0B1520 0%,
+    #122433 20%,
+    #0D4D55 55%,
+    #0AADAD 90%,
     #12C5C5 100%
   ) !important;
+  position: relative;
+  overflow: hidden;
+
+  // Subtle grid overlay
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(10, 173, 173, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10, 173, 173, 0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 30%, transparent 75%);
+    pointer-events: none;
+  }
+
+  // Soft glow blob
+  &::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: -150px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(10, 173, 173, 0.35) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
 }
 
 // All text in cover block must be white
 .td-cover-block {
   color: #FFFFFF !important;
 
+  > .container,
+  > div {
+    position: relative;
+    z-index: 1;
+  }
+
   h1 {
     color: #FFFFFF !important;
     padding-bottom: 0.5rem !important;
     font-weight: 700;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 24px rgba(10, 173, 173, 0.4);
   }
 
   .lead {
     color: rgba(255, 255, 255, 0.95) !important;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     font-weight: 300;
+  }
+}
+
+// Monospace accent label — techy tag above hero title
+.mono-tag {
+  display: inline-block;
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #12C5C5;
+  background: rgba(10, 173, 173, 0.12);
+  border: 1px solid rgba(10, 173, 173, 0.4);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  margin-bottom: 1rem;
+
+  &::before {
+    content: "› ";
+    opacity: 0.7;
   }
 }
 
@@ -141,38 +196,324 @@ a {
   }
 }
 
-// Primary-colored sections - use navy instead of flat teal
+// Primary-colored sections - navy with subtle radial glow
 .td-box--primary {
-  background: linear-gradient(135deg, #1B2A3D 0%, #1F3347 50%, #1B2A3D 100%) !important;
+  background:
+    radial-gradient(ellipse at top right, rgba(10, 173, 173, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(229, 168, 32, 0.08) 0%, transparent 55%),
+    linear-gradient(135deg, #0F1E2D 0%, #1B2A3D 50%, #122433 100%) !important;
+  position: relative;
+
+  // Bottom hairline accent
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(10, 173, 173, 0.6), transparent);
+  }
 }
 
-// Feature section icons
-.td-box--white .fa,
-.td-box--white .fas,
-.td-box--white .fab {
+// Feature section icons - chip-style with glow (scoped to feature columns only)
+.td-box--white .row.features > [class*="col-"] .fa,
+.td-box--white .row.features > [class*="col-"] .fas,
+.td-box--white .row.features > [class*="col-"] .fab {
   color: #0AADAD;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(10, 173, 173, 0.08), rgba(10, 173, 173, 0.02));
+  border: 1px solid rgba(10, 173, 173, 0.25);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 24px rgba(10, 173, 173, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-// Feature cards
-.td-box--white h4,
-.td-box--white .h4 {
+// Feature card headings
+.td-box--white .row.features h4,
+.td-box--white .row.features .h4 {
   color: #1B2A3D;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-// Lead/intro sections with primary color
-.td-box--primary .lead,
-.td-box--primary p {
-  color: rgba(255, 255, 255, 0.92);
+// Feature column hover lift
+.td-box--white .row.features > [class*="col-"]:has(.fa),
+.td-box--white .row.features > [class*="col-"]:has(.fas),
+.td-box--white .row.features > [class*="col-"]:has(.fab) {
+  transition: transform 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .fa, .fas, .fab {
+      transform: scale(1.05);
+      box-shadow: 0 12px 32px rgba(10, 173, 173, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+  }
 }
 
-// Bottom CTA section
-.td-box--primary h2 {
-  color: #FFFFFF;
-  font-weight: 700;
+// Primary (dark) sections — whiten all text, headings, and icons
+.td-box--primary {
+  .lead,
+  p,
+  li,
+  .fits-subtitle {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  // Icons inside primary feature columns — chip-style with brighter teal on dark
+  .row.features > [class*="col-"] .fa,
+  .row.features > [class*="col-"] .fas,
+  .row.features > [class*="col-"] .fab {
+    color: #12C5C5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(10, 173, 173, 0.18), rgba(10, 173, 173, 0.04));
+    border: 1px solid rgba(18, 197, 197, 0.4);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 24px rgba(10, 173, 173, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  // Feature column hover lift on dark
+  .row.features > [class*="col-"]:has(.fa),
+  .row.features > [class*="col-"]:has(.fas),
+  .row.features > [class*="col-"]:has(.fab) {
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+
+      .fa, .fas, .fab {
+        transform: scale(1.05);
+        box-shadow: 0 12px 32px rgba(18, 197, 197, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+
+  // Inline links — lighten and switch underline to a brighter teal
+  a:not(.btn) {
+    color: #12C5C5;
+    border-bottom-color: rgba(18, 197, 197, 0.5);
+
+    &:hover {
+      color: #FFFFFF;
+      border-bottom-color: #FFFFFF;
+    }
+  }
+
+  // "Where Privateer Fits" eyebrow on dark
+  .fits-eyebrow {
+    color: #12C5C5;
+  }
+
+  // Partners label on dark
+  .partners-label {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  // Partner logo cards on dark — keep readable
+  .partners-row .col-auto a {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+
+    &:hover {
+      border-color: rgba(18, 197, 197, 0.5);
+      box-shadow: 0 6px 20px rgba(18, 197, 197, 0.2);
+    }
+  }
 }
 
 // Footer
 .td-footer {
   background-color: #12202F !important;
+}
+
+// Kill Docsy's built-in section arrow
+.td-arrow-down::before {
+  display: none !important;
+}
+
+// "Where Privateer Fits" — techy editorial section
+.fits-section {
+  position: relative;
+  padding: 2rem 0;
+
+  .fits-eyebrow {
+    font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #0AADAD;
+    margin-bottom: 0.75rem;
+
+    &::before {
+      content: "// ";
+      opacity: 0.6;
+    }
+  }
+
+  h2 {
+    color: #1B2A3D;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .fits-subtitle {
+    color: #6B7588;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 1.75rem;
+  }
+
+  .fits-divider {
+    width: 64px;
+    height: 3px;
+    background: linear-gradient(90deg, #0AADAD, #12C5C5);
+    border-radius: 2px;
+    margin: 0 auto 2rem;
+  }
+
+  p {
+    color: #2D3748;
+    line-height: 1.75;
+    font-size: 1.02rem;
+    margin-bottom: 1.25rem;
+  }
+
+  // Pull-quote style callout for a key framing statement
+  .fits-callout {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #1B2A3D;
+    line-height: 1.55;
+    padding: 1rem 0 1rem 1.25rem;
+    margin: 1.5rem 0 2.5rem;
+    border-left: 3px solid #0AADAD;
+    background: linear-gradient(90deg, rgba(10, 173, 173, 0.06), transparent);
+  }
+
+  // Subsection heading — mono eyebrow glyph, tight and punchy
+  .fits-subhead {
+    font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1B2A3D;
+    letter-spacing: -0.005em;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(10, 173, 173, 0.2);
+
+    &::before {
+      content: "› ";
+      color: #0AADAD;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+  }
+
+  // Bulleted items with teal accent marker and bold labels
+  .fits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+
+    li {
+      position: relative;
+      padding: 0.5rem 0 0.5rem 1.75rem;
+      color: #2D3748;
+      line-height: 1.65;
+      font-size: 1.02rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1rem;
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        background: linear-gradient(135deg, #0AADAD, #12C5C5);
+        box-shadow: 0 0 8px rgba(10, 173, 173, 0.4);
+      }
+
+      strong {
+        color: #1B2A3D;
+        font-weight: 600;
+      }
+    }
+  }
+
+  a {
+    color: #0AADAD;
+    font-weight: 500;
+    border-bottom: 1px dashed rgba(10, 173, 173, 0.5);
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #089494;
+      border-bottom-color: #089494;
+      border-bottom-style: solid;
+    }
+  }
+}
+
+// Lead block — tighten and add monospace accent
+.td-box[class*="lead"] p,
+.td-box--primary .lead {
+  font-weight: 300;
+  letter-spacing: 0.005em;
+}
+
+// CTA buttons everywhere — uppercase, tracked, lift on hover
+.td-cover-block .btn-secondary,
+.td-box .btn-secondary {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Partner row — give logos a soft container
+.partners-row .col-auto a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E2E5E9;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: rgba(10, 173, 173, 0.4);
+    box-shadow: 0 6px 20px rgba(10, 173, 173, 0.12);
+    transform: translateY(-2px);
+  }
 }
