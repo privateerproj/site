@@ -5,6 +5,7 @@ linkTitle = "Privateer"
 
 {{< blocks/cover title="Privateer" image_anchor="top" height="min" color="primary" >}}
 <div class="mx-auto">
+	<span class="mono-tag">Validation Framework</span>
 	<p class="lead mt-3" style="font-size: 1.4rem;">Streamline Your Security and Compliance Validation</p>
 	<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" class="mb-4" style="max-width: 220px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));">
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="/docs/">
@@ -53,6 +54,24 @@ Validate any number of resources against any number of standards in a single run
 {{% blocks/feature icon="fa-code" title="Machine-Readable Output" %}}
 Standardized input and output for easy automation and integration.
 {{% /blocks/feature %}}
+{{< /blocks/section >}}
+
+{{< blocks/section color="white" >}}
+<div class="col-12 mx-auto text-center fits-section" style="max-width: 900px;">
+	<div class="fits-eyebrow">Layer 5 · Evaluations</div>
+	<h2>Where Privateer Fits</h2>
+	<p class="fits-subtitle">Automated governance, at the "Evaluations" layer</p>
+	<div class="fits-divider"></div>
+	<p>
+		Privateer implements the
+		<a href="https://gemara.openssf.org/model/07.2-Layer-5" target="_blank" rel="noopener noreferrer">Evaluations layer (Layer 5)</a>
+		of the Gemara automated governance model: the stage where policies and controls defined further up the stack are executed against real systems to produce machine-readable evidence. In practice, Privateer runs validation plugins against your infrastructure and emits standardized results that downstream audit, reporting, and compliance tooling can consume without human translation.
+	</p>
+	<p>
+		Gemara provides the shared philosophies and schemas that make this interoperability possible across tools and organizations. For the broader picture of how Evaluations connect to the rest of automated governance, see the
+		<a href="https://gemara.openssf.org/model/04-the-model.html" target="_blank" rel="noopener noreferrer">Gemara model overview</a>.
+	</p>
+</div>
 {{< /blocks/section >}}
 
 {{< blocks/section color="primary" >}}
