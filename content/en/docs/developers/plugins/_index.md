@@ -8,7 +8,7 @@ description: >
 
 ## Generating a Plugin
 
-<img src="/images/map.svg" alt="Plugin" style="float: right; max-width: 120px; margin: 0 0 20px 20px;">
+<img src="/images/map.svg" alt="Plugin" class="doc-float-img">
 
 ### Prerequisites
 
@@ -70,16 +70,16 @@ After building, see [Debug a Plugin](/docs/developers/run-debug-mode/) for instr
 
 A typical Privateer plugin includes the following components, organized hierarchically:
 
-<div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; align-items: center;">
-  <div style="text-align: center;">
+<div class="icon-gallery">
+  <div class="icon-gallery-item">
     <img src="/images/map.svg" alt="Plugin" width="100">
     <p><strong>Plugin</strong></p>
   </div>
-  <div style="text-align: center;">
+  <div class="icon-gallery-item">
     <img src="/images/cannon.svg" alt="EvaluationSuite" width="100">
     <p><strong>EvaluationSuite</strong></p>
   </div>
-  <div style="text-align: center;">
+  <div class="icon-gallery-item">
     <img src="/images/match.svg" alt="Test" width="100">
     <p><strong>Test</strong></p>
   </div>
