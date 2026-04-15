@@ -333,10 +333,9 @@ a {
   // Partner logo cards on dark — keep readable
   .partners-row .col-auto a {
     background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.12);
+    border: none;
 
     &:hover {
-      border-color: rgba(18, 197, 197, 0.5);
       box-shadow: 0 6px 20px rgba(18, 197, 197, 0.2);
     }
   }
@@ -508,11 +507,10 @@ a {
   padding: 0.75rem 1.25rem;
   border-radius: 10px;
   background: #FFFFFF;
-  border: 1px solid #E2E5E9;
+  border: none;
   transition: all 0.25s ease;
 
   &:hover {
-    border-color: rgba(10, 173, 173, 0.4);
     box-shadow: 0 6px 20px rgba(10, 173, 173, 0.12);
     transform: translateY(-2px);
   }
