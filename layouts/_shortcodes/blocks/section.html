@@ -2,10 +2,8 @@
 {{ $col_id := .Get "color" | default .Ordinal }}
 {{ $height := .Get "height" | default "auto"  }}
 {{ $type   := .Get "type" | default "" }}
-{{ $arrow_raw := .Get "arrow" }}
-{{ $arrow := and $arrow_raw (ne (printf "%v" $arrow_raw) "false") }}
 <a id="td-block-{{ .Ordinal }}" class="td-offset-anchor"></a>
-<section class="row td-box td-box--{{ $col_id }} td-box--gradient td-box--height-{{ $height }}{{ if $arrow }} td-box--arrow-top{{ end }}">
+<section class="row td-box td-box--{{ $col_id }} td-box--gradient td-box--height-{{ $height }}">
 	<div class="col">
 		<div class="row{{ if $type }} {{ $type }}{{ end }}">
 			{{ if eq .Page.File.Ext "md" }}
