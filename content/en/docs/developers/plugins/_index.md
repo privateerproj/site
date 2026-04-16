@@ -26,6 +26,7 @@ To start without a catalog instead, you can simply clone the [example plugin](ht
 pvtr generate-plugin \
     --source-path ~/path/to/catalog.yaml \
     --service-name "MyService" \
+    --organization "my-github-org" \
     --output-dir my-plugin/
 ```
 
@@ -37,8 +38,9 @@ The generated plugin may still have non-functional values which you will need to
 
 The `generate-plugin` command accepts the following options:
 
-- `-p, --source-path`: The source file to generate the plugin from
-- `-n, --service-name`: The name of the service (e.g. 'ECS', 'AKS', 'GCS')
+- `-p, --source-path` (required): The source file to generate the plugin from
+- `-n, --service-name` (required): The name of the service (e.g. 'ECS', 'AKS', 'GCS')
+- `-g, --organization` (required): The GitHub organization for the plugin (e.g. 'privateerproj')
 - `-o, --output-dir`: Output directory for the generated plugin (default: "generated-plugin/")
 - `--local-templates`: Path to local templates instead of downloading latest
 

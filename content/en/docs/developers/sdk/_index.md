@@ -16,10 +16,13 @@ The Privateer SDK provides the interface and utilities needed for plugin develop
 
 ## What the SDK Provides
 
-1. **Plugin Interface**: Standard interface that allows plugins to be called by the Privateer core
-2. **Common Logic**: Shared functionality useful for any plugin
-3. **Cloud Provider Logic**: Utilities for working with various cloud providers that may benefit multiple plugins
-4. **Evaluation Framework**: Tools for running and managing evaluations
+1. **Plugin Interface**: Standard gRPC-based interface for plugin communication (HashiCorp go-plugin)
+2. **Evaluation Framework**: EvaluationOrchestrator, EvaluationSuite, assessment execution and result aggregation
+3. **Configuration Management**: Config loading, validation, and resolution
+4. **Registry Client**: HTTP client for the plugin registry at revanite.io/privateer
+5. **Manifest Management**: Plugin manifest (plugins.json) tracking installed plugins
+6. **Install Utilities**: Plugin download and installation from registry or local paths
+7. **Common Utilities**: Logging, error handling, output formatting (YAML, JSON, SARIF)
 
 ## Key SDK Components
 
@@ -35,21 +38,13 @@ The SDK includes shared functionality for plugin operations, such as:
 - Error handling
 - Data processing helpers
 
-### Cloud Provider Support
-
-The SDK includes logic for working with various cloud providers that can be reused across multiple plugins:
-- AWS utilities
-- Azure utilities
-- GCP utilities
-- Common cloud provider patterns
-
 ### Evaluation Framework
 
 The SDK provides tools for running and managing evaluations:
-- Test execution
-- Result aggregation
-- Output formatting
-- Validation logic
+- EvaluationOrchestrator for catalog matching and suite execution
+- EvaluationSuite for individual evaluation execution and summary logging
+- Result aggregation across assessments
+- Output formatting (YAML, JSON, SARIF)
 
 ## Privateer Core
 

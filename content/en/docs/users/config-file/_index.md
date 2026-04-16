@@ -12,11 +12,19 @@ Privateer uses configuration files to specify which plugins to run, how to run t
 
 ## File Location
 
-By default, Privateer looks for a configuration file named `config.yml` in the current working directory. You can specify a different file or location using the `-c` or `--config` flag:
+When Privateer needs a configuration file, it uses the following fallback chain:
+
+1. **Explicit flag** — If `--config` / `-c` is provided, that exact path is used.
+2. **Current directory** — Otherwise, Privateer looks for `./config.yml` in the working directory.
+3. **Home directory** — If no file is found in the current directory, it falls back to `~/.privateer/config.yml`.
+
+You can always bypass the search by specifying the path directly:
 
 ```bash
 pvtr run -c /path/to/my-config.yml
 ```
+
+If you want a configuration that is picked up automatically from any directory, place it at `~/.privateer/config.yml`. A `config.yml` in the current working directory will take precedence over the home-directory copy.
 
 ## Configuration Structure
 
@@ -38,6 +46,8 @@ These settings apply globally but can be overridden at the service level:
 | `write` | boolean | `true` | Whether to write output files (does not disable log files) |
 | `output` | string | `yaml` | Output format: `yaml`, `json`, or `sarif` |
 | `binaries-path` | string | `$HOME/.privateer/bin` | Path to directory containing plugin binaries |
+| `silent` | boolean | `false` | Only show essential log information |
+| `test-suites` | string | `default` | Named set of test suites to execute from the plugin |
 | `invasive` | boolean | `false` | Whether plugins are allowed to make changes to infrastructure |
 
 ### Policy Settings
@@ -82,24 +92,22 @@ The `services` section defines which plugins to run and how to configure them. E
 ```yaml
 services:
   my-service-name:
-    plugin: plugin-binary-name
-    test-suites:
-      - suite1
-      - suite2
+    plugin: owner/repo
     loglevel: debug  # Optional: overrides global loglevel
+    policy:          # Optional: service-specific policy
+      catalogs:
+        - "catalog-id"
+      applicability:
+        - "category1"
     vars:            # Optional: service-specific variables
       var1: value1
-    policy:          # Optional: service-specific policy
-      catalogs: ["catalog-id"]
-      applicability: ["category1"]
 ```
 
 ### Service Settings
 
 | Setting | Type | Required | Description |
 |---------|------|----------|-------------|
-| `plugin` | string | Yes | Name of the plugin binary (without path) |
-| `test-suites` | array | No | List of test suites to run (default: `["default"]`) |
+| `plugin` | string | Yes | Plugin identifier in `owner/repo` format |
 | `loglevel` | string | No | Override global log level for this service |
 | `vars` | object | No | Service-specific variables |
 | `policy` | object | No | Service-specific policy configuration |
@@ -111,7 +119,7 @@ Here's a complete example configuration file:
 
 ```yaml
 # Global settings
-loglevel: Debug
+loglevel: debug
 write-directory: sample_output
 write: true
 output: yaml
@@ -134,19 +142,18 @@ vars:
 services:
   # First service
   my-cloud-service1:
-    plugin: example
-    test-suites:
-      - tlp_red
-      - tlp_amber
+    plugin: privateerproj/example
+    policy:
+      catalogs:
+        - "tlp-red"
+        - "tlp-amber"
     vars:
       service_name: my-cloud-service1
       custom_setting: value1
 
   # Second service (can use a different plugin)
   my-cloud-service2:
-    plugin: raid-wireframe
-    test-suites:
-      - default
+    plugin: privateerproj/raid-wireframe
     loglevel: info  # Override global log level
     vars:
       service_name: my-cloud-service2
@@ -160,9 +167,10 @@ A minimal configuration file only requires the `services` section:
 ```yaml
 services:
   my-service:
-    plugin: example
-    test-suites:
-      - tlp_red
+    plugin: privateerproj/example
+    policy:
+      catalogs:
+        - "default"
 ```
 
 All other settings will use their default values.
@@ -248,9 +256,9 @@ Privateer's roadmap includes plans for integrating with external configuration m
 
 If Privateer can't find your configuration file:
 
-- Check the file path and name
-- Use the `-c` flag to specify the full path
-- Ensure the file has the correct extension (`.yml`, `.yaml`, or `.json`)
+- Remember the search order: `--config` flag first, then `./config.yml`, then `~/.privateer/config.yml`. Make sure your file is in one of these locations.
+- Use the `-c` flag to specify the full path if the file is elsewhere.
+- Ensure the file has the correct extension (`.yml`, `.yaml`, or `.json`).
 
 ### Invalid Configuration
 

@@ -25,7 +25,7 @@ Privateer plugins are community-driven validation modules that can be developed 
 
 ## What you'll need
 
-- **Go 1.19 or later** - Required for plugin development
+- **Go 1.26 or later** - Required for plugin development
 - Access to the infrastructure or services you want to validate
 - A working Privateer CLI (see [For Users](/docs/users/) if you need to install)
 

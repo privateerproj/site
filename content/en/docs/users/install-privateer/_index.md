@@ -18,83 +18,81 @@ Before installing Privateer, ensure you have:
 - Appropriate permissions to install binaries and create directories
 - Network access to download the installation files
 
-## Installation Methods
+## Installation
 
-### Option 1: Install via Script (Recommended)
+### macOS
 
-The easiest way to install Privateer is using the provided installation script:
+**Homebrew (Recommended)**
 
 ```bash
-/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/privateer/03ced90caae9f3c9203eb7f82f2c46ccf2ff15fc/install.sh)"
+brew install privateerproj/tap/pvtr
 ```
 
-This script will:
-- Download the latest Privateer release
-- Install it to the appropriate location
-- Set up the necessary directories
-- Add Privateer to your PATH (if configured)
+This installs the latest release and makes the `pvtr` command available immediately.
 
-_**NOTE:** The installation script uses a specific commit hash. For the latest version, check the [Privateer repository](https://github.com/privateerproj/privateer) for the most recent install script._
+**Install Script**
 
-### Option 2: Download from Releases
+Alternatively, you can use the install script:
 
-You can manually download and install Privateer from GitHub Releases:
+```bash
+/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/privateer/main/install.sh)"
+```
 
-1. **Visit the Releases Page**: Go to [GitHub Releases](https://github.com/privateerproj/privateer/releases)
+The script automatically downloads the latest release, verifies the checksum, installs the binary to `~/.privateer/bin`, and adds it to your PATH.
 
-2. **Download the Archive**: Download the appropriate archive for your operating system and architecture:
-   - Linux (x86_64): `privateer_Linux_x86_64.tar.gz`
-   - Linux (arm64): `privateer_Linux_arm64.tar.gz`
-   - macOS (universal): `privateer_Darwin_all.tar.gz`
-   - Windows (x86_64): `privateer_Windows_x86_64.zip`
+### Linux
 
-3. **Extract and Install the Binary**:
+**Install Script (Recommended)**
 
-   **Linux/macOS:**
-   ```bash
-   # Extract the archive
-   tar xzf privateer_*.tar.gz
-   # Move the binary to a directory in your PATH
-   mv pvtr /usr/local/bin/pvtr
-   chmod +x /usr/local/bin/pvtr
-   ```
+```bash
+/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/privateer/main/install.sh)"
+```
 
-   **Windows:**
-   - Extract the zip and move `pvtr.exe` to a directory in your PATH, or add the directory to your system PATH
+The script automatically detects your architecture (x86_64 or arm64), downloads the latest release, verifies the checksum, installs the binary to `~/.privateer/bin`, and adds it to your PATH.
 
-4. **Create Privateer Directories** (if needed):
-   ```bash
-   mkdir -p $HOME/.privateer/bin
-   ```
+**Manual Download**
 
-### Option 3: Build from Source
+Download the archive for your architecture from [GitHub Releases](https://github.com/privateerproj/privateer/releases):
 
-If you want to build Privateer from source or need a custom build:
+- x86_64: `privateer_Linux_x86_64.tar.gz`
+- arm64: `privateer_Linux_arm64.tar.gz`
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/privateerproj/privateer.git
-   cd privateer
-   ```
+Then extract and install:
 
-2. **Install Dependencies**:
-   ```bash
-   go mod tidy
-   ```
+```bash
+tar xzf privateer_Linux_*.tar.gz
+mv pvtr /usr/local/bin/pvtr
+chmod +x /usr/local/bin/pvtr
+mkdir -p $HOME/.privateer/bin
+```
 
-3. **Build Privateer**:
-   ```bash
-   make release
-   ```
+### Windows
 
-   This will create the Privateer binary in the repository directory.
+**Install Script (Recommended)**
 
-4. **Install the Binary**:
-   ```bash
-   # Copy to a directory in your PATH
-   # The default `make binary` target produces a `pvtr` binary
-   cp pvtr /usr/local/bin/pvtr
-   ```
+Using Git Bash, MSYS2, or Cygwin:
+
+```bash
+/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/privateer/main/install.sh)"
+```
+
+The script automatically downloads the latest release, verifies the checksum, and installs the binary.
+
+**Manual Download**
+
+Download `privateer_Windows_x86_64.zip` from [GitHub Releases](https://github.com/privateerproj/privateer/releases), extract it, and move `pvtr.exe` to a directory in your system PATH.
+
+### Build from Source
+
+For any platform, if you need the latest development version:
+
+```bash
+git clone https://github.com/privateerproj/privateer.git
+cd privateer
+make build
+```
+
+`make build` runs tests and produces the `pvtr` binary. Requires Go 1.26 or later. Copy the binary to a directory in your PATH (e.g. `/usr/local/bin/pvtr` on macOS/Linux).
 
 ## Verify Installation
 
@@ -117,29 +115,10 @@ If you see an error, check that:
 
 ## Post-Installation Setup
 
-### Create Required Directories
+The install script handles directory creation and PATH setup automatically. If you installed manually, ensure:
 
-Privateer uses a default directory structure for plugins and configuration:
-
-```bash
-mkdir -p $HOME/.privateer/bin
-```
-
-This directory is where plugins will be installed by default.
-
-### Configure Your PATH
-
-If Privateer isn't found after installation, you may need to add it to your PATH:
-
-**Linux/macOS:**
-Add to your `~/.bashrc`, `~/.zshrc`, or equivalent:
-
-```bash
-export PATH="$PATH:/usr/local/bin"
-```
-
-**Windows:**
-Add the directory containing the Privateer executable to your system PATH through System Properties.
+1. The plugin directory exists: `mkdir -p $HOME/.privateer/bin`
+2. The `pvtr` binary is in your PATH
 
 ## Troubleshooting
 

@@ -10,57 +10,66 @@ description: >
 
 Privateer plugins are community-built tools that validate infrastructure resources according to specific control frameworks and standards. Plugins are distributed as standalone binaries that you install to your Privateer binaries path.
 
-## Finding Plugins
+The fastest way to get a plugin is with `pvtr install`, which fetches a vetted binary from the Privateer registry. You can also copy a binary into place manually if you prefer.
 
-Plugins are built and maintained by the community. You can find available plugins through:
+## Installing a Plugin
 
-- **Community Repositories**: Check the Privateer community for published plugins
-- **GitHub**: Search for Privateer plugins on GitHub
-- **FINOS Projects**: Plugins developed for projects like Compliant Financial Infrastructure and Common Cloud Controls
+### From the Registry (Recommended)
 
-## Installation Methods
+Use `pvtr install` to download a vetted plugin binary from the registry in one step:
 
-### Default Installation Path
-
-By default, Privateer looks for plugins in:
-
-```
-$HOME/.privateer/bin
+```bash
+pvtr install <owner/repo>
 ```
 
-### Installing a Plugin
+For example:
 
-To install a plugin:
+```bash
+pvtr install privateerproj/raid-wireframe
+```
 
-1. **Download or build the plugin binary**: Obtain the plugin binary file (e.g., `example`, `raid-wireframe`)
+If the plugin lives under the `privateerproj` organization, you can use the bare name:
 
-2. **Copy to the binaries path**: Copy the plugin binary to your Privateer binaries directory:
+```bash
+pvtr install raid-wireframe
+```
+
+The command resolves the plugin name against the registry, downloads the correct binary for your platform, and places it in your binaries path (`$HOME/.privateer/bin` by default).
+
+### Manual Installation
+
+If you have a plugin binary from another source—your own build, a colleague, or an external download—you can install it by hand:
+
+1. **Copy the binary to the binaries path**:
 
    ```bash
    cp plugin-binary $HOME/.privateer/bin
    ```
 
-_**NOTE:** If the `$HOME/.privateer/bin` directory doesn't exist, it should have been created during Privateer installation. If it's missing, create it with `mkdir -p $HOME/.privateer/bin` or refer to the [Install Privateer](/docs/users/install-privateer/#post-installation-setup) guide._
-
-3. **Make it executable** (if needed):
+2. **Make it executable** (if needed):
 
    ```bash
    chmod +x $HOME/.privateer/bin/plugin-binary
    ```
 
-### Custom Binaries Path
+_**NOTE:** If the `$HOME/.privateer/bin` directory doesn't exist, it should have been created during Privateer installation. If it's missing, create it with `mkdir -p $HOME/.privateer/bin` or refer to the [Install Privateer](/docs/users/install-privateer/#post-installation-setup) guide._
+
+## Custom Binaries Path
 
 You can customize where Privateer looks for plugins in two ways:
 
-#### Via Command Line Flag
+### Via Command Line Flag
 
 Use the `--binaries-path` flag when running Privateer:
 
 ```bash
+pvtr install raid-wireframe --binaries-path /custom/path/to/binaries
 pvtr run --binaries-path /custom/path/to/binaries
 ```
 
-#### Via Configuration File
+_**NOTE:** Both `pvtr install` and `pvtr run` must use the same binaries path for a plugin to be found at run time._
+
+### Via Configuration File
 
 Specify a custom binaries path in your `config.yml`:
 
@@ -71,43 +80,65 @@ write-directory: sample_output
 services:
   my-cloud-service1:
     plugin: example
-    test-suite:
-      - tlp_red
+    policy:
+      catalogs:
+        - tlp_red
 ```
 
-## Verifying Installation
+## Listing Plugins
 
-### Check Installed Plugins
+Use the `list` command to see what plugins are available and what state they're in.
 
-Use the `list` command to see which plugins are installed:
+### Plugins from Current Config
+
+Running `pvtr list` with no flags shows the plugins referenced by your current configuration and whether each one is installed:
 
 ```bash
 pvtr list
 ```
 
-This shows plugins requested by your configuration and whether they're installed.
+### All Known Plugins
 
-To see all plugins (installed or requested):
+The `-a` (or `--all`) flag combines installed, configured, and registry plugins into a single view:
 
 ```bash
 pvtr list -a
 ```
 
-### Verify Plugin Works
+### Only Installed Plugins
 
-After installing a plugin, you can verify it works by:
+Show just the plugins that are present on disk:
 
-1. **Including it in your configuration**:
+```bash
+pvtr list --installed
+```
+
+### Installable Plugins
+
+Show vetted plugins from the registry that are available to install:
+
+```bash
+pvtr list --installable
+```
+
+_**NOTE:** The `-a`, `--installed`, and `--installable` flags are mutually exclusive._
+
+## Verifying a Plugin Works
+
+After installing a plugin, verify it by including it in your configuration and running Privateer:
+
+1. **Add the plugin to your configuration**:
 
    ```yaml
    services:
      my-service:
        plugin: your-plugin-name
-       test-suite:
-         - default
+       policy:
+         catalogs:
+           - default
    ```
 
-2. **Running Privateer**:
+2. **Run Privateer**:
 
    ```bash
    pvtr run -c config.yml
@@ -151,4 +182,3 @@ If you need to manage multiple versions of a plugin:
 - Learn how to [configure and run plugins](/docs/users/) in your Privateer setup
 - Explore [available plugins](/docs/users/) in the community
 - Check out the [Privateer SDK documentation](https://pkg.go.dev/github.com/privateerproj/privateer-sdk) if you want to develop your own plugins
-

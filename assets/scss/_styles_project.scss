@@ -518,6 +518,11 @@ a {
   object-fit: contain;
 }
 
+// Doc page headings — slightly smaller h3
+.td-content h3 {
+  font-size: 1.35rem;
+}
+
 // Floating doc image — used in markdown pages for sidebar illustrations
 .doc-float-img {
   float: right;

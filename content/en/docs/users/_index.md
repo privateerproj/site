@@ -1,23 +1,20 @@
 ---
-title: "For Users"
+title: "Getting Started with Privateer"
 linkTitle: "For Users"
 weight: 2
 description: >
   Learn how to install and use Privateer to validate your infrastructure resources.
 ---
 
-## Getting Started with Privateer
-
-This section covers everything you need to know to use Privateer for infrastructure validation.
-
-## Installation
+## Prerequisites
 
 ### Install Privateer CLI
 
 For detailed installation instructions, see [Install Privateer](/docs/users/install-privateer/).
 
 **Quick Reference:**
-- **Install via Script**: Use the provided installation script (recommended)
+- **Homebrew (macOS)**: `brew install privateerproj/tap/pvtr`
+- **Install via Script**: Use the provided installation script (recommended for Linux)
 - **Download from Releases**: Get the binary from [GitHub Releases](https://github.com/privateerproj/privateer/releases)
 - **Build from Source**: Clone and build from the repository
 
@@ -36,7 +33,7 @@ For detailed instructions on finding and installing plugins, see [Install Plugin
 
 ### 1. Create a Configuration File
 
-For detailed configuration file documentation, see [Configuration File](/docs/users/config-file/).
+Save a `config.yml` file in your working directory. For detailed configuration options, see [Configuration File](/docs/users/config-file/).
 
 **Quick Example:**
 
@@ -44,29 +41,44 @@ For detailed configuration file documentation, see [Configuration File](/docs/us
 loglevel: Debug
 write-directory: sample_output
 services:
-  my-cloud-service1:
-    plugin: example
-    test-suites:
-      - tlp_red
+  myStorageService:
+    plugin: privateerproj/example
+    policy:
+      catalogs:
+        - <catalog-id>
+      applicability:
+        - <maturity-level>
+  myComputeService:
+    plugin: privateerproj/example
+    policy:
+      catalogs:
+        - <catalog-id>
+      applicability:
+        - <maturity-level>
 ```
 
 _**NOTE:** If your configuration file is stored in a non-default location, specify its file path using the `-c` or `--config` flag._
 
 ### 2. Run Privateer
 
-Execute Privateer with your configuration:
+Run all services defined in your configuration:
 
 ```bash
-pvtr run -c config.yml
+pvtr run
+```
+
+Or run a single service by name:
+
+```bash
+pvtr run --service myStorageService
 ```
 
 ### 3. Review Results
 
-Privateer generates logs and results files in the output directory:
+Privateer generates logs and results files in the output directory (default `./evaluation_results/`):
 
 - **Log Results**: `<write-directory>/<plugin_name>/<plugin_name>.log`
 - **Plugin Results**: `<write-directory>/<plugin_name>/results.yaml` (available in both JSON and YAML formats)
-- **Default Directory**: `evaluation_results`
 
 ## Common Commands
 
@@ -74,27 +86,15 @@ Here are some common commands you can use with Privateer:
 
 - `help` / `-h` / `--help`: Display help information about Privateer and its commands
 - `run`: Execute the specified plugin(s)
+- `env` (alias `info`): Display runtime environment details (binary path, config, plugins, version, build info)
+- `install <owner/repo>`: Install a vetted plugin from the registry
 - `generate-plugin`: Generate a new plugin based on a Gemara Layer 2 schema catalog
 - `list`: Show plugins requested by your configuration and whether they're installed
   - `list -a`: Show all plugins that have been installed or requested in the current config
-- `version`: Display version details
+  - `list --installed`: Show only installed plugins
+  - `list --installable`: Show only plugins available for installation
+- `version`: Display version details (use `-v` for verbose output including commit hash and build time)
 - `completion`: Generate autocompletion scripts for bash, fish, powershell, or zsh
-
-## Command Line Options
-
-### Global Flags
-
-All commands support these global flags:
-
-- `-b, --binaries-path`: Path to the directory where plugins are installed (default: `$HOME/.privateer/bin`)
-- `-c, --config`: Configuration file, JSON or YAML (default: `config.yml`)
-- `-h, --help`: Display help information
-- `-l, --loglevel`: Log level - trace, debug, info, warn, error, off (default: "error")
-- `-s, --service`: Named service to execute from the config
-- `--silent`: Only show essential log information
-- `-t, --test-suites`: Named set of test sets to execute from the plugin (default: "default")
-- `--write`: Keep detailed result outputs in files (default: true)
-- `-w, --write-directory`: Directory to write evaluation results to (default: "evaluation_results")
 
 ### Log Levels
 
