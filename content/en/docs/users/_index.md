@@ -8,26 +8,8 @@ description: >
 
 ## Prerequisites
 
-### Install Privateer CLI
-
-For detailed installation instructions, see [Install Privateer](/docs/users/install-privateer/).
-
-**Quick Reference:**
-- **Homebrew (macOS)**: `brew install privateerproj/tap/pvtr`
-- **Install via Script**: Use the provided installation script (recommended for Linux)
-- **Download from Releases**: Get the binary from [GitHub Releases](https://github.com/privateerproj/privateer/releases)
-- **Build from Source**: Clone and build from the repository
-
-After installation, verify with `pvtr version`.
-
-### Install Privateer Plugins
-
-For detailed instructions on finding and installing plugins, see [Install Plugins](/docs/users/install-plugins/).
-
-**Quick Reference:**
-- **Default Path**: `$HOME/.privateer/bin`
-- **Customize via CLI**: Use `--binaries-path` in your CLI command to change the path to your binaries
-- **Customize via config**: Specify a custom binaries path in your config via the top level value `binaries-path: your/bin/path`
+1. [Install Privateer](/docs/users/install-privateer/)
+2. [Install Plugins](/docs/users/install-plugins/)
 
 ## Quick Start
 
