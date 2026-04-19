@@ -52,7 +52,7 @@ If you have a plugin binary from another source—your own build, a colleague, o
    chmod +x $HOME/.privateer/bin/plugin-binary
    ```
 
-_**NOTE:** If the `$HOME/.privateer/bin` directory doesn't exist, it should have been created during Privateer installation. If it's missing, create it with `mkdir -p $HOME/.privateer/bin` or refer to the [Install Privateer](/docs/users/install-privateer/#post-installation-setup) guide._
+_**NOTE:** If the `$HOME/.privateer/bin` directory doesn't exist, it should have been created during Privateer installation. If it's missing, create it with `mkdir -p $HOME/.privateer/bin` or refer to the [Install Privateer](/docs/users/install-privateer) guide._
 
 ## Custom Binaries Path
 
