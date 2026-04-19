@@ -20,7 +20,9 @@ Before installing Privateer, ensure you have:
 
 ## Installation
 
-### macOS
+{{< tabpane text=true >}}
+
+{{% tab header="macOS" %}}
 
 **Homebrew (Recommended)**
 
@@ -40,7 +42,22 @@ Alternatively, you can use the install script:
 
 The script automatically downloads the latest release, verifies the checksum, installs the binary to `~/.privateer/bin`, and adds it to your PATH.
 
-### Linux
+**Build from Source**
+
+If you need the latest development version:
+
+```bash
+git clone https://github.com/privateerproj/privateer.git
+cd privateer
+make build
+cp pvtr /usr/local/bin/pvtr
+```
+
+`make build` runs tests and produces the `pvtr` binary. Requires Go 1.26 or later.
+
+{{% /tab %}}
+
+{{% tab header="Linux" %}}
 
 **Install Script (Recommended)**
 
@@ -66,7 +83,24 @@ chmod +x /usr/local/bin/pvtr
 mkdir -p $HOME/.privateer/bin
 ```
 
-### Windows
+Make sure `/usr/local/bin` is in your PATH.
+
+**Build from Source**
+
+If you need the latest development version:
+
+```bash
+git clone https://github.com/privateerproj/privateer.git
+cd privateer
+make build
+cp pvtr /usr/local/bin/pvtr
+```
+
+`make build` runs tests and produces the `pvtr` binary. Requires Go 1.26 or later.
+
+{{% /tab %}}
+
+{{% tab header="Windows" %}}
 
 **Install Script (Recommended)**
 
@@ -80,11 +114,11 @@ The script automatically downloads the latest release, verifies the checksum, an
 
 **Manual Download**
 
-Download `privateer_Windows_x86_64.zip` from [GitHub Releases](https://github.com/privateerproj/privateer/releases), extract it, and move `pvtr.exe` to a directory in your system PATH.
+Download `privateer_Windows_x86_64.zip` from [GitHub Releases](https://github.com/privateerproj/privateer/releases), extract it, and move `pvtr.exe` to a directory in your system PATH. Create the plugin directory if it doesn't exist: `mkdir -p %USERPROFILE%\.privateer\bin`.
 
-### Build from Source
+**Build from Source**
 
-For any platform, if you need the latest development version:
+If you need the latest development version:
 
 ```bash
 git clone https://github.com/privateerproj/privateer.git
@@ -92,7 +126,11 @@ cd privateer
 make build
 ```
 
-`make build` runs tests and produces the `pvtr` binary. Requires Go 1.26 or later. Copy the binary to a directory in your PATH (e.g. `/usr/local/bin/pvtr` on macOS/Linux).
+Move the resulting `pvtr.exe` to a directory in your PATH. Requires Go 1.26 or later.
+
+{{% /tab %}}
+
+{{< /tabpane >}}
 
 ## Verify Installation
 
@@ -105,20 +143,26 @@ pvtr version
 You should see version information displayed, for example:
 
 ```
-0.0.0
+v0.15.0
 ```
 
-If you see an error, check that:
-- The Privateer binary is in a directory that's in your PATH
-- The binary has execute permissions (on Linux/macOS)
-- You're using the correct command name
+For a full view of your installation, use `pvtr info`:
 
-## Post-Installation Setup
+```bash
+pvtr info
+```
 
-The install script handles directory creation and PATH setup automatically. If you installed manually, ensure:
-
-1. The plugin directory exists: `mkdir -p $HOME/.privateer/bin`
-2. The `pvtr` binary is in your PATH
+```
+Binary:      /usr/local/bin/pvtr
+Config:      ./config.yml (found)
+Plugins Dir: /home/user/.privateer/bin
+Plugins:     (none)
+Version:     v0.15.0
+Commit:      09a57e5
+Build Time:  2026-04-15T12:17:46-0500
+Go Version:  go1.26.2
+OS/Arch:     linux/amd64
+```
 
 ## Troubleshooting
 
