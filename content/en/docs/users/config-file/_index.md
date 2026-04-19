@@ -18,13 +18,13 @@ When Privateer needs a configuration file, it uses the following fallback chain:
 2. **Current directory** — Otherwise, Privateer looks for `./config.yml` in the working directory.
 3. **Home directory** — If no file is found in the current directory, it falls back to `~/.privateer/config.yml`.
 
-You can always bypass the search by specifying the path directly:
+### When to use each approach
 
-```bash
-pvtr run -c /path/to/my-config.yml
-```
+If you want a configuration that is picked up automatically from any directory, place it at `~/.privateer/config.yml`. This is useful for situations where you'd like to call pvtr from any working directory.
 
-If you want a configuration that is picked up automatically from any directory, place it at `~/.privateer/config.yml`. A `config.yml` in the current working directory will take precedence over the home-directory copy.
+If you are making iterative development, or need to override the global settings create a `config.yml` in the current working directory. This take precedence over the home-directory copy.
+
+If you are using a config file that has a unique name, such as `dev-config.yml`. or it is located in another working directory outside of your present location, 
 
 ## Configuration Structure
 
@@ -41,7 +41,7 @@ These settings apply globally but can be overridden at the service level:
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| `loglevel` | string | `error` | Log verbosity: `trace`, `debug`, `info`, `warn`, `error`, `off` |
+| `loglevel` | string | `error` | Log verbosity: `trace` > `debug` > `info` > `warn` > `error` > `off` |
 | `write-directory` | string | `evaluation_results` | Directory where results and logs are written |
 | `write` | boolean | `true` | Whether to write output files (does not disable log files) |
 | `output` | string | `yaml` | Output format: `yaml`, `json`, or `sarif` |
@@ -66,8 +66,8 @@ policy:
 
 | Setting | Type | Required | Description |
 |---------|------|----------|-------------|
-| `policy.catalogs` | array | Yes* | List of control catalog IDs to use |
-| `policy.applicability` | array | Yes* | List of applicability categories |
+| `policy.catalogs` | array | Yes* | List of one or more control catalog IDs to use |
+| `policy.applicability` | array | Yes* | List of one or more applicability categories from the selected catalogs |
 
 \* Required when running via Privateer (not in debug mode)
 
