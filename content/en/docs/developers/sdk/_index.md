@@ -6,9 +6,9 @@ description: >
   Learn about the Privateer SDK and how to use it in your plugins.
 ---
 
-## Privateer SDK
+<img src="/images/anvil.svg" alt="Privateer SDK" class="doc-icon-img">
 
-<img src="/images/anvil.svg" alt="Privateer SDK" class="doc-float-img">
+## Privateer SDK
 
 The Privateer SDK provides the interface and utilities needed for plugin development:
 

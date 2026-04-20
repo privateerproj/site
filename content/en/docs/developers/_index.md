@@ -6,11 +6,7 @@ description: >
   Learn how to develop plugins and use the Privateer SDK.
 ---
 
-## Welcome, Developers
-
-<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" class="doc-float-img">
-
-This page orients you to the developer documentation. Start here, then dive into the SDK and plugin guides.
+<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" class="doc-icon-img">
 
 ## Plugin Development Overview
 

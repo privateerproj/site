@@ -6,9 +6,9 @@ description: >
   Learn how to create and maintain Privateer plugins.
 ---
 
-## Generating a Plugin
+<img src="/images/map.svg" alt="Plugin" class="doc-icon-img">
 
-<img src="/images/map.svg" alt="Plugin" class="doc-float-img">
+## Generating a Plugin
 
 ### Prerequisites
 

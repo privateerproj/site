@@ -6,9 +6,9 @@ description: >
   Complete documentation for the Privateer validation framework.
 ---
 
-## What is Privateer?
+<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" class="doc-icon-img">
 
-<img src="/images/patches-small.png" alt="Patches the Privateer Pointer" class="doc-float-img--lg">
+## What is Privateer?
 
 Privateer is a validation framework that simplifies infrastructure testing and compliance validation. Built with infrastructure engineers in mind, Privateer helps you validate resources against regulations, taxonomies, and standards.
 

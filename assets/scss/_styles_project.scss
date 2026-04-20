@@ -523,17 +523,32 @@ a {
   font-size: 1.35rem;
 }
 
+// Inline doc icon — displayed in flow above headings or text
+.td-content img.doc-icon-img {
+  display: block;
+  height: 100px;
+  max-width: 100px;
+  object-fit: contain;
+  margin: 0 0 0.5rem;
+}
+
 // Floating doc image — used in markdown pages for sidebar illustrations
-.doc-float-img {
+// Docsy applies .img-fluid (max-width:100%; height:auto) to .td-content img,
+// so we scope under .td-content to win specificity.
+.td-content img.doc-float-img {
   float: right;
+  height: 120px;
   max-width: 120px;
+  object-fit: contain;
   margin: 0 0 20px 20px;
 }
 
 // Larger variant for top-level docs page
-.doc-float-img--lg {
+.td-content img.doc-float-img--lg {
   float: right;
+  height: 150px;
   max-width: 150px;
+  object-fit: contain;
   margin: 0 0 20px 20px;
 }
 
