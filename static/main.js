@@ -31,6 +31,10 @@
   if (backdrop) backdrop.addEventListener('click', closeDrawer);
 
   /* ---------- Search ---------- */
+  var isMac = /Mac|iPod|iPhone|iPad/.test(window.navigator.platform || navigator.userAgent);
+  document.querySelectorAll('.search-kbd-mod').forEach(function (el) {
+    el.textContent = isMac ? '\u2318' : 'Ctrl';
+  });
   var overlay = document.querySelector('.search-overlay');
   var input = document.getElementById('search-input');
   var resultsEl = document.getElementById('search-results');
