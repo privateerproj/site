@@ -1,0 +1,12 @@
+{{- $pages := where .Site.RegularPages "Type" "in" (slice "docs" "library") -}}
+{{- $items := slice -}}
+{{- range $pages -}}
+  {{- $group := .CurrentSection.Title -}}
+  {{- if eq .Type "library" -}}{{- $group = "Library" -}}{{- end -}}
+  {{- $body := .Plain -}}
+  {{- $body = strings.Trim $body " \t\r\n" -}}
+  {{- $body = strings.Truncate 600 $body -}}
+  {{- $entry := dict "title" .Title "group" $group "url" .RelPermalink "body" $body -}}
+  {{- $items = $items | append $entry -}}
+{{- end -}}
+{{- $items | jsonify -}}
