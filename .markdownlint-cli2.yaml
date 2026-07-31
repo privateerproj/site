@@ -1,0 +1,6 @@
+config:
+  MD013: false   # line-length
+  MD060: false   # table-column-style
+  MD012: false   # no-multiple-blanks
+  MD034: false   # no-bare-urls
+  MD029: false   # ordered list numbering
