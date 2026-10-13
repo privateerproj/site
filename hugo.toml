@@ -42,33 +42,33 @@ disableKinds = ["RSS"]
 
   [[params.fits]]
     icon = "branch"
-    title = "CI/CD Pipelines"
-    desc = "Validate infrastructure automatically within GitHub Actions, GitLab CI, and Jenkins."
+    title = "Automated pipelines"
+    desc = "Run checks on every change in GitHub Actions, GitLab CI, or Jenkins, with no manual steps."
 
   [[params.fits]]
     icon = "filecode"
-    title = "Infrastructure as Code"
-    desc = "Ensure Terraform, Kubernetes, and cloud configurations meet compliance standards."
+    title = "Infrastructure as code"
+    desc = "Check that Terraform, Kubernetes, and cloud configurations meet the standards you have adopted."
 
   [[params.fits]]
     icon = "shield"
-    title = "Policy-as-Code & Compliance"
-    desc = "Enforce governance using automated, policy-driven validation."
+    title = "Compliance evidence"
+    desc = "Turn written requirements into automated checks, and keep a record of every result."
 
   [[params.fits]]
     icon = "workflow"
-    title = "DevSecOps Workflows"
-    desc = "Embed security and compliance throughout the software delivery lifecycle."
+    title = "Security reviews"
+    desc = "Catch security and compliance gaps while software is being built, not after it ships."
 
   [[params.fits]]
     icon = "cloud"
-    title = "Cloud-Native Ecosystem"
-    desc = "Integrate seamlessly with modern cloud and containerized environments."
+    title = "Cloud and containers"
+    desc = "Works with modern cloud services and containerized systems."
 
   [[params.fits]]
     icon = "puzzle"
-    title = "Open-Source Plugin Framework"
-    desc = "Extend capabilities through community-driven validation plugins."
+    title = "Open-source plugins"
+    desc = "Add new checks through plugins built by the community, or write your own."
 
 [menu]
   [[menu.getting_started]]
@@ -95,6 +95,10 @@ disableKinds = ["RSS"]
     name = "Upgrading Privateer"
     url = "/getting-started/upgrading/"
     weight = 6
+  [[menu.getting_started]]
+    name = "Glossary"
+    url = "/getting-started/glossary/"
+    weight = 7
 
   [[menu.developer_reference]]
     name = "CLI reference"

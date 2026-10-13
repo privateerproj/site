@@ -4,3 +4,5 @@ config:
   MD012: false   # no-multiple-blanks
   MD034: false   # no-bare-urls
   MD029: false   # ordered list numbering
+  MD033:         # no-inline-html: the glossary uses collapsible entries
+    allowed_elements: [details, summary]

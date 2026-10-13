@@ -26,10 +26,12 @@
   <main class="doc-main">
     <article class="doc-column">
       <div class="crumbs">{{ $section }}<span class="sep">/</span>{{ .Title }}</div>
-      <h1 class="page-title">{{ .Title }}</h1>
+      <div class="page-head">
+        <h1 class="page-title">{{ .Title }}</h1>
+        {{ with .File }}<a class="edit-link" href="https://github.com/privateerproj/site/edit/main/content/{{ .Path }}" target="_blank" rel="noopener">Edit on GitHub &#8599;</a>{{ end }}
+      </div>
       {{ with .Params.description }}<p class="page-desc">{{ . }}</p>{{ end }}
       <div class="prose">{{ .Content }}</div>
-      <a class="edit-link" href="https://github.com/privateerproj/site" target="_blank" rel="noopener">Edit this page on GitHub &#8599;</a>
 
       {{ if gt (len $allPages) 0 }}
       <div class="prev-next">

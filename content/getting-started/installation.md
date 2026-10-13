@@ -5,7 +5,11 @@ weight: 3
 description: Install Privateer on Windows, Linux, or macOS, and verify the install.
 ---
 
-Choose the option that matches your platform. **The install script (Option 1) is for macOS and Linux only**, Windows users should use Option 2 (release ZIP) or Option 3 (build from source).
+Choose the option that matches your platform:
+
+* **macOS, Linux, or WSL:** use [Option 1, the install script](#option-1-install-via-script-macos--linux--wsl). On macOS you can use [Option 4, Homebrew](#option-4-homebrew-macos) instead.
+* **Windows:** use [Option 2, the release ZIP](#option-2-download-from-github-releases) or [Option 3, build from source](#option-3-build-from-source). The install script does not run in PowerShell.
+* **Contributors, or anyone who wants unreleased code:** use [Option 3, build from source](#option-3-build-from-source) on any platform.
 
 ## Option 1: Install via script (macOS / Linux / WSL)
 

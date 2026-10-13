@@ -5,10 +5,10 @@ weight: 2
 description: Run your first validation test in five minutes.
 ---
 
-This guide helps you run your first validation test. Before you start, make sure you have:
+This guide helps you run your first validation test. If a term is unfamiliar, the [glossary](/getting-started/glossary/) defines it. Before you start, make sure you have:
 
 * A terminal: macOS/Linux shell, or **PowerShell on Windows**
-* Internet access to download the binary and plugin
+* Internet access to download the [binary](#1-install-privateer) and [plugin](#3-install-a-plugin)
 * A GitHub personal access token with read scope (for the example below)
 
 ## 1. Install Privateer
@@ -93,11 +93,21 @@ $env:TOKEN = "your_github_token"
 pvtr run -c config.yml
 ```
 
-A non-zero exit code means one or more controls failed; check the results file for details.
+An exit code of `0` means every control passed. Anything else means at least one control did not pass, or the run itself hit an error. See [Did it work?](#did-it-work) below.
 
 ## 6. Review results
 
 ```text
 sample_output/<service-name>/<service-name>.log
-sample_output/<service-name>/results.yaml
+sample_output/<service-name>/<service-name>.yaml
 ```
+
+### Did it work?
+
+A run can finish successfully and still report failing controls. Read these three signals together:
+
+* **The exit code** tells you whether everything passed. `0` means every control passed. Any other value means at least one control was `Failed`, `NeedsReview`, or `Unknown`, or the run itself hit an error such as a missing plugin or an invalid config file.
+* **The log file** (`<service-name>.log`) confirms the plugin actually ran and shows what it did. Read it first if the run exited with an error or wrote no results file.
+* **The results file** (`<service-name>.yaml`) lists every control that was checked, its result, and a message explaining why.
+
+In short: exit code `0` and a results file means validation passed. A non-zero exit code with a results file means the run worked but some controls need attention. A non-zero exit code and no results file means the run itself did not complete, so start with the log.
