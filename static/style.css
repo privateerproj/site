@@ -95,11 +95,11 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .brand .docs { font-family: var(--font-sans); font-weight: 400; font-size: 13.5px; color: var(--muted); }
 .header-search { flex: 1; display: flex; justify-content: center; min-width: 0; }
 .search-trigger {
-  display: flex; align-items: center; gap: 8px; width: 100%; max-width: 440px;
-  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
-  border-radius: 9px; padding: 7px 12px; font: inherit; font-size: 13.5px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
 }
-.search-trigger:hover { border-color: var(--accent); }
+.search-trigger:hover { border-color: var(--accent); color: var(--accent-strong); }
 .search-trigger kbd {
   margin-left: auto; font-family: var(--font-mono); font-size: 11px;
   border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; background: var(--bg);
@@ -193,6 +193,8 @@ body.drawer-open .drawer-backdrop { display: block; }
 /* breadcrumb + page head */
 .crumbs { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
 .crumbs .sep { margin: 0 7px; opacity: 0.5; }
+.page-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+.page-head .page-title { margin: 0; }
 .page-title {
   margin: 0 0 8px; font-family: var(--font-display); font-weight: 700;
   font-size: 32px; line-height: 1.15; letter-spacing: -0.01em;
@@ -245,6 +247,9 @@ body.drawer-open .drawer-backdrop { display: block; }
 }
 .prose tr:hover td { background: color-mix(in srgb, var(--surface) 55%, transparent); }
 .prose hr { border: none; border-top: 1px solid var(--border); margin: 34px 0; }
+.prose details { margin: 10px 0; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); }
+.prose summary { cursor: pointer; font-weight: 600; }
+.prose details[open] summary { margin-bottom: 6px; }
 
 /* result chips inside prose tables */
 .chip {
@@ -255,22 +260,23 @@ body.drawer-open .drawer-backdrop { display: block; }
 .chip.fail  { color: var(--fail);  background: var(--fail-bg);  border-color: color-mix(in srgb, var(--fail) 30%, transparent); }
 .chip.skip  { color: var(--skip);  background: var(--skip-bg);  border-color: color-mix(in srgb, var(--skip) 30%, transparent); }
 .chip.error { color: var(--error); background: var(--error-bg); border-color: color-mix(in srgb, var(--error) 30%, transparent); }
+.chip.none  { color: var(--muted); background: var(--surface); border-color: var(--border); }
 
 /* prev / next */
 .prev-next {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 54px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 44px;
 }
 .prev-next a {
-  display: block; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px;
+  display: block; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px;
   background: var(--card);
 }
 .prev-next a:hover { text-decoration: none; border-color: var(--accent); }
-.prev-next .dir { font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
-.prev-next .name { display: block; margin-top: 3px; font-weight: 500; color: var(--fg); font-size: 14px; }
+.prev-next .dir { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.prev-next .name { display: block; margin-top: 2px; font-weight: 600; color: var(--fg); font-size: 15.5px; }
 .prev-next .next { text-align: right; grid-column: 2; }
 @media (max-width: 560px) { .prev-next { grid-template-columns: 1fr; } .prev-next .next { grid-column: 1; } }
 
-.edit-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 30px; font-size: 13px; color: var(--muted); }
+.edit-link { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; font-size: 13px; color: var(--muted); }
 .edit-link:hover { color: var(--accent-strong); }
 
 /* ---------- Footer ---------- */
@@ -380,6 +386,7 @@ html.dark .btn-primary { color: #07211d; }
 .card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
 
 .signal-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+.hero p.signal-legend { margin: 10px 0 0; font-size: 13px; line-height: 1.5; }
 
 /* ================= Home page ================= */
 .brand .logo { height: 26px; width: auto; display: block; }
