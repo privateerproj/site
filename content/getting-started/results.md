@@ -24,7 +24,7 @@ The format of the results file is set in your config:
 output: yaml    # yaml (default) | json | sarif
 ```
 
-Setting `output: json` or `output: sarif` produces `<service-name>.json` or `<service-name>.sarif` in place of the default `<service-name>.yaml`. SARIF output is compatible with the GitHub Security tab, check the [GitHub Actions Integration](github-actions.html) section for how to upload it.
+Setting `output: json` or `output: sarif` produces `<service-name>.json` or `<service-name>.sarif` in place of the default `<service-name>.yaml`. SARIF output is compatible with the GitHub Security tab, see [SARIF upload for the GitHub Security tab](/developer-reference/github-actions/#sarif-upload-for-the-github-security-tab) for how to upload it.
 
 Config settings that affect output:
 

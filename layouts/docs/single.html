@@ -48,6 +48,11 @@
             <span class="dir">Next &rarr;</span>
             <span class="name">{{ $next.Title }}</span>
           </a>
+        {{ else }}
+          <a class="next" href="{{ "library/" | relURL }}">
+            <span class="dir">End of the docs &rarr;</span>
+            <span class="name">Back to the Library</span>
+          </a>
         {{ end }}
       </div>
       {{ end }}

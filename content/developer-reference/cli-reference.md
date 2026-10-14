@@ -5,7 +5,7 @@ weight: 1
 description: Every pvtr subcommand, its flags, and usage examples.
 ---
 
-> **Note:** The developer reference is for plugin authors, contributors, and engineers integrating Privateer into automated pipelines. It assumes familiarity with Go, gRPC, and CI/CD tooling. For end-user installation and quickstart, see the [User Guide](quickstart.html).
+> **Note:** The developer reference is for plugin authors, contributors, and engineers integrating Privateer into automated pipelines. It assumes familiarity with Go, gRPC, and CI/CD tooling. For end-user installation and quickstart, see the [Getting started guide](/getting-started/quickstart/).
 
 The Privateer CLI is the `pvtr` binary. Every subcommand accepts the global flags below, plus its own options.
 
@@ -97,7 +97,7 @@ pvtr generate-plugin \
 | `--output-dir` | `-o` | `generated-plugin/` | Output directory |
 | `--local-templates` |  |  | Use a local templates directory instead of fetching latest |
 
-The generated plugin compiles as emitted, with every requirement bound to a `NotImplemented` placeholder step. See [Build your first plugin](build-a-plugin.html).
+The generated plugin compiles as emitted, with every requirement bound to a `NotImplemented` placeholder step. See [Build your first plugin](/developer-reference/build-a-plugin/).
 
 ## pvtr completion
 

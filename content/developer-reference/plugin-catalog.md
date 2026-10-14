@@ -10,17 +10,15 @@ Plugins are standalone binaries distributed independently from Core. There is no
 **Finding plugins:**
 
 * GitHub: search repositories prefixed with `pvtr-` or `privateer-`
-* OpenSSF: [github.com/revanite-io/pvtr-github-repo](https://github.com/revanite-io/pvtr-github-repo) for OSPS Baseline validation
+* OpenSSF: [github.com/ossf/pvtr-github-repo-scanner](https://github.com/ossf/pvtr-github-repo-scanner) for OSPS Baseline validation
 * FINOS: plugins for Common Cloud Controls and Compliant Financial Infrastructure validation
 
 A formal hosted registry is on the roadmap.
 
 ## Featured plugins
 
-> The source documentation does not yet include a curated plugin list. The entries below are placeholders.
-
 | Plugin | Target | Catalog |
 | --- | --- | --- |
-| Lorem ipsum dolor | Lorem ipsum | Lorem ipsum |
-| Sit amet consectetur | Lorem ipsum | Lorem ipsum |
-| Adipiscing elit sed | Lorem ipsum | Lorem ipsum |
+| [pvtr-github-repo-scanner](https://github.com/ossf/pvtr-github-repo-scanner) | GitHub repositories | [OpenSSF OSPS Baseline](https://baseline.openssf.org/) |
+
+Maintain a plugin you'd like listed here? Open a pull request against [this page](https://github.com/privateerproj/site/edit/main/content/developer-reference/plugin-catalog.md).

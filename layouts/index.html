@@ -10,7 +10,8 @@
       <h1>Check your systems against <span class="accent">published security standards</span></h1>
       <p class="sub">Privateer runs automated checks against your infrastructure, compares what it finds to standards like the OpenSSF Baseline, and writes a report that people and tools can both read. The checks come from plugins built by the community, or by you.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="{{ .Site.Params.repoURL }}" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+        <a class="btn btn-primary" href="{{ "getting-started/introduction/" | relURL }}">Get started &rarr;</a>
+        <a class="btn btn-ghost" href="{{ .Site.Params.repoURL }}" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
     <div class="hero-mascot"><div class="glow"><img src="{{ .Site.Params.mascot | relURL }}" alt="Privateer mascot"></div></div>
@@ -37,11 +38,12 @@
   </div>
   <div class="card-grid cols-3">
     {{ range .Site.Params.fits }}
-    <div class="card fit-card">
+    <a class="card fit-card" href="{{ .url | relURL }}">
       <div class="fit-icon">{{ partial "fit-icon.html" .icon }}</div>
       <h3>{{ .title }}</h3>
       <p>{{ .desc }}</p>
-    </div>
+      {{ partial "icons/chevron.html" }}
+    </a>
     {{ end }}
   </div>
   <div class="fits-cta"><a class="btn btn-primary" href="{{ "library/" | relURL }}">Explore Documentation &rarr;</a></div>

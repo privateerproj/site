@@ -39,7 +39,7 @@
       {{ if eq .Name "Introduction to Privateer" }}<span class="badge">Recommended</span>{{ end }}
       <h3>{{ .Name }}</h3>
       <p>{{ with site.GetPage .URL }}{{ .Params.description }}{{ end }}</p>
-      {{ partial "icons/arrow.html" }}
+      {{ partial "icons/chevron.html" }}
     </a>
     {{ end }}
   </div>
@@ -51,7 +51,7 @@
     <a class="card" href="{{ .URL | relURL }}">
       <h3>{{ .Name }}</h3>
       <p>{{ with site.GetPage .URL }}{{ .Params.description }}{{ end }}</p>
-      {{ partial "icons/arrow.html" }}
+      {{ partial "icons/chevron.html" }}
     </a>
     {{ end }}
   </div>
