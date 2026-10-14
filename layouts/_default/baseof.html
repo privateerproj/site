@@ -11,7 +11,10 @@
 <body>
 {{ partial "header.html" . }}
 <div class="drawer-backdrop"></div>
-<aside class="drawer">{{ partial "sidebar.html" . }}</aside>
+<aside class="drawer" id="drawer" aria-label="Documentation navigation">
+  <div class="drawer-head"><span>Docs</span><button id="drawer-close" class="icon-btn" aria-label="Close navigation">{{ partial "icons/close.html" }}</button></div>
+  {{ partial "sidebar.html" . }}
+</aside>
 
 {{ block "main" . }}{{ end }}
 {{ block "footer" . }}{{ end }}

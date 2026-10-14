@@ -18,17 +18,34 @@
   })();
   var themeBtn = document.getElementById('theme-btn');
   if (themeBtn) themeBtn.addEventListener('click', function () {
-    applyTheme(root.classList.contains('dark') ? 'light' : 'dark');
+    var next = root.classList.contains('dark') ? 'light' : 'dark';
+    // switch every element in the same frame (no lagging filter transitions), cross-faded where supported
+    root.classList.add('theme-switching');
+    var done = function () { requestAnimationFrame(function () { root.classList.remove('theme-switching'); }); };
+    if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.startViewTransition(function () { applyTheme(next); }).finished.then(done, done);
+    } else { applyTheme(next); done(); }
   });
 
   /* ---------- Mobile drawer ---------- */
   var menuBtn = document.getElementById('menu-btn');
+  var drawerClose = document.getElementById('drawer-close');
   var backdrop = document.querySelector('.drawer-backdrop');
-  function closeDrawer() { document.body.classList.remove('drawer-open'); }
-  if (menuBtn) menuBtn.addEventListener('click', function () {
-    document.body.classList.toggle('drawer-open');
-  });
+  function setDrawer(open) {
+    var wasOpen = document.body.classList.contains('drawer-open');
+    document.body.classList.toggle('drawer-open', open);
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open && drawerClose) drawerClose.focus();
+    else if (wasOpen && !open && menuBtn && !document.body.classList.contains('search-open')) menuBtn.focus();
+  }
+  function closeDrawer() { setDrawer(false); }
+  if (menuBtn) menuBtn.addEventListener('click', function () { setDrawer(true); });
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
   if (backdrop) backdrop.addEventListener('click', closeDrawer);
+  // the link for the page already open does nothing (no reload, no scroll jump); it only closes the drawer
+  document.querySelectorAll('.nav-group a[aria-current="page"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); closeDrawer(); });
+  });
 
   /* ---------- Search ---------- */
   var isMac = /Mac|iPod|iPhone|iPad/.test(window.navigator.platform || navigator.userAgent);
@@ -42,6 +59,7 @@
   var selected = -1;
 
   function openSearch() {
+    closeDrawer();
     document.body.classList.add('search-open');
     if (input) { input.value = ''; input.focus(); }
     render([]);

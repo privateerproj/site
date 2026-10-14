@@ -43,31 +43,37 @@ disableKinds = ["RSS"]
   [[params.fits]]
     icon = "branch"
     title = "Automated pipelines"
+    url = "developer-reference/github-actions/"
     desc = "Run checks on every change in GitHub Actions, GitLab CI, or Jenkins, with no manual steps."
 
   [[params.fits]]
     icon = "filecode"
     title = "Infrastructure as code"
+    url = "developer-reference/configuration/"
     desc = "Check that Terraform, Kubernetes, and cloud configurations meet the standards you have adopted."
 
   [[params.fits]]
     icon = "shield"
     title = "Compliance evidence"
+    url = "getting-started/results/"
     desc = "Turn written requirements into automated checks, and keep a record of every result."
 
   [[params.fits]]
     icon = "workflow"
     title = "Security reviews"
+    url = "getting-started/introduction/"
     desc = "Catch security and compliance gaps while software is being built, not after it ships."
 
   [[params.fits]]
     icon = "cloud"
     title = "Cloud and containers"
+    url = "developer-reference/plugin-catalog/"
     desc = "Works with modern cloud services and containerized systems."
 
   [[params.fits]]
     icon = "puzzle"
     title = "Open-source plugins"
+    url = "developer-reference/plugin-catalog/"
     desc = "Add new checks through plugins built by the community, or write your own."
 
 [menu]
