@@ -1,0 +1,87 @@
+{{ define "main" }}
+{{ .Scratch.Set "brandSuffix" "tl;dr" }}
+<main class="landing tldr">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">TL;DR</div>
+      <h1>The software <span class="accent">check-up</span>.</h1>
+      <p>Five pieces work together to check whether an open source project is safe. Here they are as a trip to the doctor.</p>
+    </div>
+  </section>
+
+  <h2 class="section-label">Meet the cast</h2>
+  <p class="section-sub">Each card links to the real thing.</p>
+  <div class="card-grid cols-3">
+    <a class="card tldr-who" style="--c: var(--accent)" href="https://baseline.openssf.org" target="_blank" rel="noopener">
+      <div class="tldr-pic" aria-hidden="true">📋</div>
+      <h3>The checklist</h3>
+      <code class="tldr-real">OSPS Baseline</code>
+      <p>A list of things every healthy project should do. "Lock the front door. Tell people how to report a problem."</p>
+      {{ partial "icons/chevron.html" }}
+    </a>
+    <a class="card tldr-who" style="--c: var(--pass)" href="https://github.com/ossf/pvtr-github-repo-scanner" target="_blank" rel="noopener">
+      <div class="tldr-pic" aria-hidden="true">🩺</div>
+      <h3>The nurse</h3>
+      <code class="tldr-real">pvtr-github-repo-scanner</code>
+      <p>Knows the checklist by heart. Looks at a GitHub project and marks every item on the list.</p>
+      {{ partial "icons/chevron.html" }}
+    </a>
+    <a class="card tldr-who" style="--c: var(--brass)" href="https://github.com/privateerproj/pvtr" target="_blank" rel="noopener">
+      <div class="tldr-pic" aria-hidden="true">🏥</div>
+      <h3>The clinic</h3>
+      <code class="tldr-real">privateer (the pvtr command)</code>
+      <p>The building where nurses work. You walk in, and it calls the right nurse for you.</p>
+      {{ partial "icons/chevron.html" }}
+    </a>
+    <a class="card tldr-who" style="--c: var(--error)" href="https://github.com/privateerproj/privateer-sdk" target="_blank" rel="noopener">
+      <div class="tldr-pic" aria-hidden="true">🧰</div>
+      <h3>The training kit</h3>
+      <code class="tldr-real">privateer-sdk</code>
+      <p>Everything you need to train a new nurse. The clinic is built from it too.</p>
+      {{ partial "icons/chevron.html" }}
+    </a>
+    <a class="card tldr-who" style="--c: var(--fail)" href="https://grc.store" target="_blank" rel="noopener">
+      <div class="tldr-pic" aria-hidden="true">🏆</div>
+      <h3>The scoreboard</h3>
+      <code class="tldr-real">grc.store</code>
+      <p>A public wall where results get pinned. Anyone can walk by and see who's healthy.</p>
+      {{ partial "icons/chevron.html" }}
+    </a>
+  </div>
+
+  <h2 class="section-label">What a check-up looks like</h2>
+  <p class="section-sub">Run it once by hand, or let a GitHub Action run it on a schedule.</p>
+  <ol class="tldr-flow">
+    <li class="tldr-step" style="--c: var(--brass)"><div class="tldr-pic" aria-hidden="true">🏥</div><b>Open the clinic</b><span>run <code>pvtr run</code></span></li>
+    <li class="tldr-step" style="--c: var(--pass)"><div class="tldr-pic" aria-hidden="true">🩺</div><b>The nurse checks</b><span>every item on 📋</span></li>
+    <li class="tldr-step" style="--c: var(--accent)"><div class="tldr-pic" aria-hidden="true">📝</div><b>A report card</b>
+      <span class="tldr-chips"><span class="chip pass">Passed</span><span class="chip fail">Failed</span><span class="chip skip">NeedsReview</span></span></li>
+    <li class="tldr-step" style="--c: var(--fail)"><div class="tldr-pic" aria-hidden="true">🏆</div><b>Pin it up</b><span>on grc.store</span></li>
+  </ol>
+
+  <h2 class="section-label">How they lean on each other</h2>
+  <p class="section-sub">The kit builds the clinic and the nurse. The nurse reads the checklist. The grades go to the scoreboard.</p>
+  <ol class="tldr-flow">
+    <li class="tldr-step" style="--c: var(--error)"><div class="tldr-pic" aria-hidden="true">🧰</div><b>Kit</b><span>builds</span></li>
+    <li class="tldr-step" style="--c: var(--brass)"><div class="tldr-pic" aria-hidden="true">🏥</div><b>Clinic</b><span>and</span></li>
+    <li class="tldr-step" style="--c: var(--pass)"><div class="tldr-pic" aria-hidden="true">🩺</div><b>Nurse</b><span>who reads</span></li>
+    <li class="tldr-step" style="--c: var(--accent)"><div class="tldr-pic" aria-hidden="true">📋</div><b>Checklist</b><span>and sends grades to</span></li>
+    <li class="tldr-step" style="--c: var(--fail)"><div class="tldr-pic" aria-hidden="true">🏆</div><b>Scoreboard</b><span>&nbsp;</span></li>
+  </ol>
+
+  <h2 class="section-label">The funny part</h2>
+  <div class="tldr-twist">
+    <div class="tldr-pic" aria-hidden="true">🪞</div>
+    <div>
+      <h3>The clinic gets a check-up too.</h3>
+      <p>Every week the nurse checks <code>pvtr</code> and <code>privateer-sdk</code>, the very clinic it works in. Their report cards hang on the
+        <a href="https://grc.store/targets/privateer/pvtr" target="_blank" rel="noopener">scoreboard</a> like everyone else's.</p>
+    </div>
+  </div>
+
+  <div class="hero-ctas tldr-next">
+    <a class="btn btn-primary" href="{{ "getting-started/quickstart/" | relURL }}">Try it in 5 minutes &rarr;</a>
+    <a class="btn btn-ghost" href="{{ "getting-started/introduction/" | relURL }}">Read the full introduction</a>
+  </div>
+</main>
+{{ end }}

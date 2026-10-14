@@ -695,3 +695,45 @@ body.chat-open .chat-panel { display: flex; }
   background: #d64545; border-color: #d64545; color: #fff; animation: chat-pulse 1s ease-in-out infinite;
 }
 .chat-stop-btn { background: #d64545; border-color: #d64545; color: #fff; }
+
+/* ================= TL;DR page ================= */
+.tldr .tldr-pic { font-size: 56px; line-height: 1; margin-bottom: 12px; }
+.tldr .tldr-who { border-top: 4px solid var(--c); }
+.tldr .tldr-who:hover { border-color: var(--c); }
+.tldr .tldr-who h3 { font-size: 19px; font-weight: 600; color: var(--c); margin: 0; }
+.tldr .tldr-real { display: block; margin: 2px 0 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.tldr .tldr-who p { font-size: 15px; color: var(--fg); }
+
+.tldr-flow {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 28px; grid-template-columns: 1fr;
+}
+@media (min-width: 960px) { .tldr-flow { grid-auto-flow: column; grid-auto-columns: 1fr; } }
+.tldr-step {
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 18px 12px; border: 1px solid var(--border); border-top: 4px solid var(--c);
+  border-radius: 14px; background: var(--card);
+}
+.tldr-step b { font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--c); }
+.tldr-step > span { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+.tldr-step code { font-family: var(--font-mono); font-size: 12px; }
+.tldr-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-top: 8px; }
+/* steps stack with a down arrow, then sit in one row with a right arrow once all five fit */
+.tldr-step:not(:last-child)::after {
+  content: '↓'; position: absolute; left: 50%; bottom: -25px; transform: translateX(-50%);
+  font-size: 20px; color: var(--muted);
+}
+@media (min-width: 960px) {
+  .tldr-step:not(:last-child)::after { content: '→'; left: auto; bottom: auto; right: -24px; top: 50%; transform: translateY(-50%); }
+}
+
+.tldr-twist {
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: center;
+  padding: 26px; border: 1px dashed var(--border); border-radius: 14px; background: var(--accent-soft);
+}
+.tldr-twist .tldr-pic { font-size: 84px; margin: 0; }
+.tldr-twist > div:last-child { flex: 1 1 320px; }
+.tldr-twist h3 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 19px; }
+.tldr-twist p { margin: 0; font-size: 15px; line-height: 1.6; }
+.tldr-twist code { font-family: var(--font-mono); font-size: 13px; }
+.tldr-next { margin-top: 40px; }
