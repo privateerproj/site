@@ -5,6 +5,8 @@ weight: 1
 description: What Privateer is, why it exists, and how a validation run works.
 ---
 
+**TL;DR:** New to all of this? [See Privateer and the projects around it in pictures](/tldr/).
+
 **Privateer** checks your systems against published security and compliance standards and writes a report that both people and other tools can read. Instead of proving compliance by hand, with spreadsheets and screenshots, you run one command and get a control-by-control record of what was checked and what was found.
 
 It does this by running automated checks called **plugins**, collecting their results, and writing them out in a structured, machine-readable format.
