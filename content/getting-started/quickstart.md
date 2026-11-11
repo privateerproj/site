@@ -19,11 +19,12 @@ This guide helps you run your first validation test. If a term is unfamiliar, th
 /bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/pvtr/main/install.sh)"
 ```
 
-*Windows:* the script above won't run in PowerShell. Download `pvtr_Windows_x86_64.zip` from the [releases page](https://github.com/privateerproj/pvtr/releases), then:
+*Windows:* the script above won't run in PowerShell. Download `pvtr_Windows_x86_64.zip` from the [releases page](https://github.com/privateerproj/pvtr/releases), then run the commands below. They assume the ZIP is in your `Downloads` folder; if not, change the path in the first line. The archive holds `pvtr.exe` at its top level, so it extracts to `$HOME\Downloads\pvtr\pvtr.exe`.
 
 ```powershell
+Expand-Archive "$HOME\Downloads\pvtr_Windows_x86_64.zip" -DestinationPath "$HOME\Downloads\pvtr" -Force
 mkdir $HOME\bin -Force
-Move-Item .\pvtr.exe $HOME\bin\
+Move-Item "$HOME\Downloads\pvtr\pvtr.exe" $HOME\bin\
 [Environment]::SetEnvironmentVariable("Path",
     [Environment]::GetEnvironmentVariable("Path","User") + ";$HOME\bin", "User")
 mkdir $HOME\.privateer\bin -Force
