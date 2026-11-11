@@ -44,7 +44,7 @@ If you see `command not found`, the binary isn't on your PATH. On macOS/Linux: `
 
 ## 3. Install a plugin
 
-Plugins are an essential component of Privateer as they contain the validation logic. To test how they work you can install the GitHub repo scanner using its full `owner/repo` name:
+Plugins are an essential component of Privateer as they contain the validation logic. To test how they work you can install the GitHub repo scanner using its full grc.store `<namespace>/<plugin_id>` coordinate:
 
 ```bash
 pvtr install openssf/github-repo

@@ -49,4 +49,4 @@ If you installed via Homebrew, upgrade through Homebrew:
 brew upgrade privateerproj/tap/pvtr
 ```
 
-**Note:** Upgrading Privateer does not affect your installed plugins. Plugins are separate binaries and must be upgraded independently. Re-run `pvtr install <owner>/<plugin-name>` for each plugin to get the latest version, for example, `pvtr install ossf/pvtr-github-repo-scanner`. Use the full `owner/repo` name; a bare name defaults to the wrong owner and won't be found in the vetted list.
+**Note:** Upgrading Privateer does not affect your installed plugins. Plugins are separate binaries and must be upgraded independently. Re-run `pvtr install <namespace>/<plugin_id>` for each plugin to get the latest version, for example, `pvtr install openssf/github-repo`. Use the full grc.store coordinate; a bare name without a namespace is rejected.
