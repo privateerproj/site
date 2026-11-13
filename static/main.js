@@ -132,6 +132,45 @@
     render(search(input.value.trim()), input.value.trim());
   });
 
+  /* ---------- Copy buttons on code blocks and install commands ---------- */
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    // plain-http fallback (e.g. `hugo server` opened from a phone on the LAN)
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) resolve(); else reject();
+    });
+  }
+  function addCopyButton(host, getText) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'copy-btn'; btn.textContent = 'Copy';
+    btn.setAttribute('aria-live', 'polite'); // announces "Copied"
+    btn.addEventListener('click', function () {
+      copyText(getText()).then(function () { btn.textContent = 'Copied'; }, function () { btn.textContent = 'Copy failed'; });
+      clearTimeout(btn._t); btn._t = setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+    });
+    host.appendChild(btn);
+  }
+  document.querySelectorAll('.prose pre').forEach(function (pre) {
+    // wrap so the button stays put while a long line scrolls sideways
+    var wrap = document.createElement('div');
+    wrap.className = 'code-block';
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+    // trailing newline dropped so a pasted command does not run on its own
+    addCopyButton(wrap, function () { return pre.textContent.replace(/\n+$/, ''); });
+  });
+  document.querySelectorAll('.hero-install').forEach(function (el) {
+    var cmd = el.cloneNode(true);
+    cmd.querySelectorAll('.dollar').forEach(function (d) { d.remove(); });
+    var text = cmd.textContent.trim();
+    addCopyButton(el, function () { return text; });
+  });
+
   /* ---------- TOC scroll spy ---------- */
   var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
   if (tocLinks.length) {

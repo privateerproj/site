@@ -49,25 +49,33 @@ mkdir -p $HOME/.privateer/bin
 
 **Windows (PowerShell):**
 
-1. Download `pvtr_Windows_x86_64.zip` from the [releases page](https://github.com/privateerproj/pvtr/releases) and extract it.
-2. From the extracted folder, create a `bin` directory, move `pvtr.exe` into it, and add it to your PATH:
+1. Download `pvtr_Windows_x86_64.zip` from the [releases page](https://github.com/privateerproj/pvtr/releases). These steps assume your browser saved it to your `Downloads` folder. If it went somewhere else, change the path in the first command.
+2. Extract the ZIP. `pvtr.exe` sits at the top level of the archive, next to `LICENSE` and `README.md`, so after this command it is at `$HOME\Downloads\pvtr\pvtr.exe`:
+
+```powershell
+Expand-Archive "$HOME\Downloads\pvtr_Windows_x86_64.zip" -DestinationPath "$HOME\Downloads\pvtr" -Force
+```
+
+If you used File Explorer's **Extract All** instead, `pvtr.exe` is in the folder Explorer created (by default `$HOME\Downloads\pvtr_Windows_x86_64\`). Use that path in the `Move-Item` command below.
+
+3. Create a `bin` directory, move `pvtr.exe` into it, and add it to your PATH:
 
 ```powershell
 mkdir $HOME\bin -Force
-Move-Item .\pvtr.exe $HOME\bin\
+Move-Item "$HOME\Downloads\pvtr\pvtr.exe" $HOME\bin\
 [Environment]::SetEnvironmentVariable(
     "Path",
     [Environment]::GetEnvironmentVariable("Path", "User") + ";$HOME\bin",
     "User")
 ```
 
-3. Create the default plugin directory:
+4. Create the default plugin directory:
 
 ```powershell
 mkdir $HOME\.privateer\bin -Force
 ```
 
-4. **Close and reopen PowerShell** (so the new PATH takes effect), then verify:
+5. **Close and reopen PowerShell** (so the new PATH takes effect), then verify:
 
 ```powershell
 pvtr version

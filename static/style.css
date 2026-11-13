@@ -259,6 +259,17 @@ body.drawer-open, body.search-open { overflow: hidden; }
   font-size: 13px; line-height: 1.6;
 }
 .prose pre code { background: none; border: none; padding: 0; white-space: pre; font-size: inherit; }
+.code-block { position: relative; margin: 18px 0; }
+.code-block > pre { margin: 0; padding-right: 76px; }
+.copy-btn {
+  font: 500 11.5px var(--font-sans); color: var(--muted); cursor: pointer;
+  background: var(--bg); border: 1px solid var(--code-border); border-radius: 7px;
+  padding: 4px 9px; min-height: 28px; flex-shrink: 0;
+}
+.copy-btn:hover, .copy-btn:focus-visible { color: var(--accent); border-color: var(--accent); }
+.code-block > .copy-btn { position: absolute; top: 8px; right: 8px; }
+/* sticks to the right edge, over the padding, so it stays in view while the command scrolls */
+.hero-install .copy-btn { margin-left: auto; position: sticky; right: -14px; box-shadow: -10px 0 8px var(--code-bg); }
 .prose table {
   width: 100%; margin: 18px 0; border-collapse: collapse; font-size: 13.5px;
   display: block; overflow-x: auto;

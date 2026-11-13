@@ -27,7 +27,7 @@ jobs:
           /bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/pvtr/main/install.sh)"
 
       - name: Install plugin
-        run: pvtr install pvtr-github-repo
+        run: pvtr install openssf/github-repo
 
       - name: Run validation
         env:

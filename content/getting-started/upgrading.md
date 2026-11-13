@@ -32,13 +32,14 @@ mv pvtr /usr/local/bin/pvtr
 chmod +x /usr/local/bin/pvtr
 ```
 
-*Windows (PowerShell)* extract `pvtr_Windows_x86_64.zip` and overwrite the existing `pvtr.exe` on your PATH:
+*Windows (PowerShell)* extract `pvtr_Windows_x86_64.zip` and overwrite the existing `pvtr.exe` on your PATH. `pvtr.exe` is at the top level of the archive, so these commands (which assume the ZIP is in your `Downloads` folder) extract it to `$HOME\Downloads\pvtr\pvtr.exe` and move it from there:
 
 ```powershell
-Move-Item .\pvtr.exe $HOME\bin\pvtr.exe -Force
+Expand-Archive "$HOME\Downloads\pvtr_Windows_x86_64.zip" -DestinationPath "$HOME\Downloads\pvtr" -Force
+Move-Item "$HOME\Downloads\pvtr\pvtr.exe" $HOME\bin\pvtr.exe -Force
 ```
 
-(Replace `$HOME\bin` with wherever you originally placed it.)
+(Replace `$HOME\Downloads` with where you saved the ZIP, and `$HOME\bin` with wherever you originally placed `pvtr.exe`.)
 
 ## Option 3: Homebrew (macOS)
 
@@ -48,4 +49,4 @@ If you installed via Homebrew, upgrade through Homebrew:
 brew upgrade privateerproj/tap/pvtr
 ```
 
-**Note:** Upgrading Privateer does not affect your installed plugins. Plugins are separate binaries and must be upgraded independently. Re-run `pvtr install <owner>/<plugin-name>` for each plugin to get the latest version, for example, `pvtr install ossf/pvtr-github-repo-scanner`. Use the full `owner/repo` name; a bare name defaults to the wrong owner and won't be found in the vetted list.
+**Note:** Upgrading Privateer does not affect your installed plugins. Plugins are separate binaries and must be upgraded independently. Re-run `pvtr install <namespace>/<plugin_id>` for each plugin to get the latest version, for example, `pvtr install openssf/github-repo`. Use the full grc.store coordinate; a bare name without a namespace is rejected.

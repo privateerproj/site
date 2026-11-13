@@ -10,16 +10,15 @@ The simplest thing you can do with Privateer is run a validation against a GitHu
 Before you run this, make sure you have:
 
 * Privateer installed (`pvtr version` should return a version string)
-* The **pvtr-github-repo** plugin installed
+* The **openssf/github-repo** plugin installed
 * A GitHub personal access token with **read** scope
 
 ## Step 1. Install a plugin
 
-Download a plugin binary (e.g., the OpenSSF [pvtr-github-repo](https://github.com/revanite-io/pvtr-github-repo) plugin) and place it in the default plugin directory:
+Install the OpenSSF GitHub repository scanner ([source](https://github.com/ossf/pvtr-github-repo-scanner)) from grc.store:
 
 ```bash
-cp your-plugin-binary $HOME/.privateer/bin/
-chmod +x $HOME/.privateer/bin/your-plugin-binary
+pvtr install openssf/github-repo
 ```
 
 ## Step 2.  Check installed plugins
@@ -31,7 +30,8 @@ pvtr list -a
 Expected output:
 
 ```text
-pvtr-github-repo   installed
+| Plugin                | Version   | Installed  | In Current Config  |
+| openssf/github-repo   | 0.33.2    | true       | false              |
 ```
 
 ## Step 3.  Create your config (config.yml)

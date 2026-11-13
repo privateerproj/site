@@ -36,11 +36,11 @@ pvtr run --loglevel debug -w ./results
 
 ## pvtr install
 
-Downloads a vetted plugin from the Privateer plugin registry and places the binary in the configured binaries path. Takes exactly one argument.
+Downloads a vetted plugin from the Privateer plugin registry and places the binary in the configured binaries path. Takes exactly one argument: the plugin's grc.store `<namespace>/<plugin_id>` coordinate, optionally pinned with `@<version>`.
 
 ```bash
-pvtr install pvtr-github-repo-scanner
-pvtr install pvtr-github-repo-scanner --binaries-path /opt/pvtr-plugins
+pvtr install openssf/github-repo
+pvtr install openssf/github-repo --binaries-path /opt/pvtr-plugins
 ```
 
 For plugins not in the registry, place the binary manually and verify with `pvtr list -a`.
