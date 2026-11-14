@@ -44,18 +44,18 @@ disableKinds = ["RSS"]
     icon = "branch"
     title = "Automated pipelines"
     url = "how-to/run-in-github-actions/"
-    desc = "Run checks on every change in GitHub Actions, GitLab CI, or Jenkins, with no manual steps."
+    desc = "Run checks on every change in GitHub Actions and send the results to the Security tab."
 
   [[params.fits]]
     icon = "filecode"
-    title = "Infrastructure as code"
+    title = "Configuration as code"
     url = "reference/configuration/"
-    desc = "Check that Terraform, Kubernetes, and cloud configurations meet the standards you have adopted."
+    desc = "Declare what to check, which plugin checks it, and the policy to apply in one file you keep under version control."
 
   [[params.fits]]
     icon = "shield"
     title = "Compliance evidence"
-    url = "how-to/control-output/"
+    url = "reference/output-schema/"
     desc = "Turn written requirements into automated checks, and keep a record of every result."
 
   [[params.fits]]
@@ -66,9 +66,9 @@ disableKinds = ["RSS"]
 
   [[params.fits]]
     icon = "cloud"
-    title = "Cloud and containers"
+    title = "Cloud services"
     url = "reference/plugin-catalog/"
-    desc = "Works with modern cloud services and containerized systems."
+    desc = "Check cloud services against FINOS Common Cloud Controls with community plugins."
 
   [[params.fits]]
     icon = "puzzle"
