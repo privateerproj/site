@@ -204,13 +204,40 @@ discovered.
 is a successful run from the plugin's point of view. Every code is listed in the
 [CLI reference](/reference/cli/#exit-codes).
 
-## Step 8: Publish
+## Step 8: Publish to grc.store
 
-1. Push to a public GitHub repository with the `pvtr-` prefix.
-2. Set `Publisher` and `License` on the orchestrator in `main.go`; both are
-   required to publish and inert at run time.
-3. Tag a release so users can download a compiled binary.
-4. Document required vars and an example `config.yml` in the README.
+Users install plugins from [grc.store](https://hub.grc.store) with
+`pvtr install <namespace>/<plugin_id>`. To publish there:
+
+1. Set `Publisher` and `License` on the orchestrator in `main.go`. `Publisher`
+   is your grc.store namespace, and with the plugin name it forms the coordinate
+   `<publisher>/<plugin-name>`; `License` is an SPDX expression such as
+   `Apache-2.0`. Both are required to publish and inert at run time.
+2. Create or claim that namespace on grc.store. Publishing to a namespace you
+   do not own is refused.
+3. Push the plugin to GitHub and tag a release.
+4. Run the scaffold's `.github/workflows/publish-plugin.yaml` from the Actions
+   tab, giving it the tag. It builds the tag with GoReleaser and runs
+   `pvtr publish`, which reads the coordinate, license and catalogs from the
+   built binary, pushes the plugin as a signed OCI artifact, and asks the hub to
+   verify it. Before the first run, have the hub list your repository as a
+   trusted publisher for your namespace.
+
+   To publish from your own machine instead, build and publish directly.
+   Signing opens a second browser sign-in, separate from `pvtr login`:
+
+   ```bash
+   goreleaser build --clean
+   pvtr login
+   pvtr publish
+   ```
+
+   The first successful publish pins the signer identity for the coordinate,
+   so choose one path and keep publishing from it.
+5. Document required vars and an example `config.yml` in the README.
+
+The [CLI reference](/reference/cli/#pvtr-publish) lists the `login` and
+`publish` flags.
 
 ## Using an AI agent
 

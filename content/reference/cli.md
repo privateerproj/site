@@ -162,6 +162,59 @@ my-plugin/
 
 Running `generate-plugin` over an existing plugin overwrites every file.
 
+## pvtr benchmark
+
+Runs a compiled plugin once with timing instrumentation and prints where the time went: payload retrieval (the loader) separately from each assessment step.
+
+```bash
+go build -o my-plugin .
+pvtr benchmark ./my-plugin --target my-target -c config.yml
+pvtr benchmark ./my-plugin --target my-target --payload-only
+pvtr benchmark ./my-plugin --target my-target --json > bench.json
+```
+
+Takes the path to a plugin binary, not an installed coordinate. The target must exist in the config so the plugin has its vars and policy.
+
+| Flag | Short | Default | Description |
+| --- | --- | --- | --- |
+| `--target` | `-s`, `--service` |  | Target from the config to evaluate (required). `-s` and `--service` are legacy aliases |
+| `--payload-only` |  | `false` | Time only the loader and skip the assessment steps |
+| `--json` |  | `false` | Print the report as JSON, for comparing runs in CI |
+| `--write-directory` | `-w` | a temporary directory | Directory for the run's results and report |
+
+## pvtr publish
+
+Publishes a plugin to grc.store. It reads a GoReleaser `dist` directory, checks that every binary is a Privateer plugin, assembles a multi-platform OCI index, pushes it to the registry the hub advertises, signs it with Sigstore keyless signing, and asks the hub to ingest and verify it.
+
+```bash
+goreleaser build --clean
+pvtr login
+pvtr publish
+```
+
+The coordinate, license and catalogs come from the built binary, not from flags: the coordinate is `<Publisher>/<PluginName>` from the plugin's orchestrator, and `License` must be a valid SPDX expression. Publishing to the hub requires ownership of the namespace.
+
+Two identities are involved. The push uses the grc.store token from `pvtr login`, or `PVTR_TOKEN` in CI. The signature uses a separate OIDC identity trusted by public Sigstore: the GitHub Actions OIDC token in CI, or a second browser sign-in on a workstation. [Build your first plugin](/how-to/build-a-plugin/#step-8-publish-to-grcstore) walks through both.
+
+| Flag | Default | Description |
+| --- | --- | --- |
+| `--dist` | `dist` | GoReleaser dist directory (holds `artifacts.json` and `metadata.json`) |
+| `--registry` |  | Push to another registry for testing, with scheme (for example `http://localhost:5000`). Anonymous; skips signing and the hub sync |
+| `--no-sync` | `false` | Push only: skip signing and the hub sync |
+
+## pvtr login and pvtr logout
+
+`pvtr login` signs in to grc.store so `pvtr publish` can push. It runs an OAuth 2.0 device-authorization flow against the sign-in server the hub advertises: it prints a URL and a code to enter in a browser. The hub is the global `--hub-url`, or `PVTR_HUB_URL`. Credentials are stored in `${XDG_DATA_HOME:-~/.local/share}/pvtr/credentials.json`.
+
+`pvtr logout` forgets the stored credentials.
+
+```bash
+pvtr login
+pvtr logout
+```
+
+In CI, do not log in; set `PVTR_TOKEN` instead. Installing plugins needs no login.
+
 ## pvtr completion
 
 Generates shell autocompletion scripts.
