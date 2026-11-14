@@ -92,15 +92,15 @@ A single check. It is a function inside a plugin that looks at the data collecte
 </details>
 
 <details id="results">
-<summary>Results (Passed, Failed, NeedsReview, NotApplicable, NotRun, Unknown)</summary>
+<summary>Results (Passed, Failed, Needs Review, Not Applicable, Not Run, Unknown)</summary>
 
 Every control in a report ends with one of six results:
 
 * **Passed**: the requirement was observed to be met.
 * **Failed**: the requirement was observed not to be met.
-* **NeedsReview**: the data was missing or ambiguous, so a person needs to decide.
-* **NotApplicable**: the requirement does not apply to this target.
-* **NotRun**: the check was never executed, usually because an earlier step stopped the chain.
+* **Needs Review**: the data was missing or ambiguous, so a person needs to decide.
+* **Not Applicable**: the requirement does not apply to this target.
+* **Not Run**: no check produced a result, because every step for the requirement reported Not Run, as a plugin's placeholder steps do. A step skipped after an earlier `Failed` or `Not Applicable` does not cause it: the requirement keeps that earlier result.
 * **Unknown**: the check could not run, usually because the collected data was unusable.
 
 </details>
@@ -108,7 +108,7 @@ Every control in a report ends with one of six results:
 <details>
 <summary>Non-zero exit code</summary>
 
-When a command finishes, it hands the shell a number called the exit code. Zero means success. For `pvtr run`, zero means every control passed. Any other number means at least one control was Failed, NeedsReview, or Unknown, or the run itself hit an error such as a missing plugin or an invalid config file. Automated pipelines use this number to decide whether to stop.
+When a command finishes, it hands the shell a number called the exit code. Zero means success. For `pvtr run`, zero means every control passed. Any other number means at least one control was Failed, Needs Review, or Unknown, or the run itself hit an error such as a missing plugin or an invalid config file. Automated pipelines use this number to decide whether to stop.
 
 </details>
 

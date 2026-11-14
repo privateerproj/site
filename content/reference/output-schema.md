@@ -71,7 +71,7 @@ Suites, controls and requirements each carry one of the six Gemara results. The 
 | `Failed` | `gemara.Failed` | The requirement was checked and not met | yes |
 | `Needs Review` | `gemara.NeedsReview` | The check could not decide: the data was absent or ambiguous, or only a heuristic could judge it; a person has to look | no |
 | `Not Applicable` | `gemara.NotApplicable` | The requirement does not apply under the selected applicability, or to this target | yes |
-| `Not Run` | `gemara.NotRun` | The check was skipped; plugin authors use it only for placeholders | no |
+| `Not Run` | `gemara.NotRun` | No step produced a result; plugin authors return it only from placeholder steps | no |
 | `Unknown` | `gemara.Unknown` | The check could not run, or no step was defined for the requirement; from a step, almost always a loader bug | no |
 
 The Go name is what a plugin's assessment step returns. A requirement's steps
