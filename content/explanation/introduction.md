@@ -11,25 +11,13 @@ aliases: [/getting-started/introduction/]
 
 It does this by running automated checks called **plugins**, collecting their results, and writing them out in a structured, machine-readable format.
 
-## Key concepts overview
-
-Privateer is built on several components that work together:
-
-| Component | Role |
-| --- | --- |
-| **Privateer SDK** | Provides common logic shared by Privateer and all plugins |
-| **Privateer Core** (pvtr) | The main executable that runs plugins based on user configuration |
-| **Plugin** | Executes validation tests and returns results to Privateer Core |
-| **EvaluationSuite** | A set of related data mapping control IDs and requirements to one or more assessment steps |
-| **AssessmentStep** | A specialized function that analyzes a data payload provided at runtime |
-
-Unfamiliar with any of these? The [glossary](/reference/glossary/) defines each one in plain language.
+The terms used on this page, such as plugin, control catalog and EvaluationSuite, are defined in plain language in the [glossary](/reference/glossary/).
 
 **Key features:**
 
 * **Community-driven plugins**: crafted and maintained collaboratively by the community, or privately within your organization
 * **Comprehensive resource validation**: validate any number of resources against any number of standards in a single run
-* **Consistent machine-readable output**: standardized output (YAML, JSON, or SARIF) simplifies automation and integration
+* **Consistent machine-readable output**: standardized output in [several formats](/reference/cli/#output-formats), including SARIF and native Gemara Evaluation Logs, simplifies automation and integration
 * **Plugin generation**: generate plugin scaffolding from [Gemara](https://gemara.openssf.org/) Layer 2 schema catalogs with a single command
 
 ## How Privateer is structured
@@ -65,7 +53,7 @@ When you run `pvtr run`, here is what happens under the hood:
 2. For each target, Core locates the corresponding plugin binary in the binaries directory.
 3. Core launches the plugin as a separate subprocess and communicates with it over a local gRPC connection. This isolation means a plugin crash cannot bring down the entire run.
 4. The plugin connects to its target, for example, the GitHub API, and collects the data it needs.
-5. The plugin runs its **EvaluationSuites**, which are groups of related checks. Each individual check is called an **AssessmentStep**, a function that looks at the collected data and returns one of six results: `Passed`, `Failed`, `NeedsReview`, `NotApplicable`, `NotRun`, or `Unknown`. The [glossary](/reference/glossary/#results) explains each one.
+5. The plugin runs its **EvaluationSuites**, which are groups of related checks. Each individual check is called an **AssessmentStep**, a function that looks at the collected data and returns one of six [results](/reference/output-schema/#result-values), such as `Passed` or `Failed`.
 6. The plugin sends its results back to Core.
 7. Core writes the results to your output directory in the [format you choose](/reference/cli/#output-formats), and exits with a [code](/reference/cli/#exit-codes) that reflects whether everything passed.
 
@@ -75,6 +63,4 @@ Privateer does not invent its own rules. It validates against **control catalogs
 
 ## What the output looks like
 
-After a run, Privateer writes results into a directory (default: `evaluation_results/`). For each target, you get a log file and a results file. The results file lists every control that was evaluated, its result, and the specific AssessmentStep messages that explain why.
-
-Results can be written in three formats, which include YAML, JSON and SARIF.
+After a run, Privateer writes a log file and a results file for each target. The results file is a control-by-control record: every control that was evaluated, its result, and the messages from the AssessmentSteps that explain why. The [output schema](/reference/output-schema/) describes where the files go and what they contain, and [Your first validation run](/tutorials/first-run/) walks through reading one.
