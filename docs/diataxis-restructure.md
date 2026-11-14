@@ -118,7 +118,8 @@ Alias table (freeze before the move PR):
 ## 4. Phase 0: factual contradictions
 
 Each fact gets one reference home; every other page links to it. Answers below were read
-from source on 2026-11-09 at `privateer` 77a7c30 and `privateer-sdk` fff7364. Items marked
+from source on 2026-11-09 at `privateer` 77a7c30 and `privateer-sdk` fff7364, and updated
+2026-11-13 for pvtr v0.24.3 / SDK v1.35.0. Items marked
 "confirm with a run" are settled by source but worth one real `pvtr run` before publishing.
 
 | Fact | Docs today | Answer from source | Owner page |
@@ -126,9 +127,9 @@ from source on 2026-11-09 at `privateer` 77a7c30 and `privateer-sdk` fff7364. It
 | Result values | six Gemara results vs `pass/fail/skip/error` (output-schema, troubleshooting) | Six Gemara results. `pass/fail/skip/error` is stale. (`pluginkit/exitcode.go`, `evaluation_suite.go`) | reference/output-schema |
 | Results file path | `<service-name>.yaml` vs `results.yaml` | `<write-directory>/<service>/<service>.<ext>`; write-directory defaults to `evaluation_results`. `gemara` output also writes `.yaml`. (`evaluation_orchestrator.go` `writeResultsToFile`) Confirm with a run. | reference/output-schema |
 | Output formats | yaml, json, sarif | yaml (default), json, sarif, **gemara** (native EvaluationLog list). (`command/base.go`) | reference/cli |
-| Exit codes | "non-zero means failed" vs 0 to 5 table (build-a-plugin only) | build-a-plugin table is correct: 0 pass, 1 fail, 2 aborted, 3 internal error, 4 bad usage, 5 no tests. Code 1 is returned for any suite that is Failed, NeedsReview or Unknown. Multi-plugin runs report the most severe. (`shared/exitcodes.go`, `command/run.go`) | reference/cli |
-| Plugin install identifier | five variants | `pvtr install <namespace>/<plugin_id>[@<version>]` from grc.store. The scanner is `openssf/github-repo` (its publish workflow identity; #26 already fixed the quickstart). `ossf/pvtr-github-repo-scanner` is the GitHub repo, not an install coordinate. Bare names are rejected. Also `--local <path>` and `--from-config`. (`command/install.go`) | reference/cli |
-| Token injection (see privateer-sdk#343) | `{{TOKEN}}` "injected at runtime" via `TOKEN=... pvtr run` (quickstart) vs "no env interpolation, use sed" (configuration) | configuration.md is right. `vars` are read verbatim from the config file; nothing substitutes `{{...}}`. `PVTR_*` env overrides exist for top-level keys but not for entries in the `vars` map. The quickstart instruction does not work, and the GitHub Actions `GITHUB_TOKEN` env is never read. (`config/config.go` `NewConfig`; reproduced in privateer-sdk#343) | reference/configuration |
+| Exit codes | "non-zero means failed" vs 0 to 5 table (build-a-plugin only) | build-a-plugin table is correct: 0 pass, 1 fail, 2 aborted, 3 internal error, 4 bad usage, 5 no tests. Code 1 is returned for any suite that is Failed, NeedsReview or Unknown. Multi-plugin runs report the most severe. Since pvtr v0.24.3, a config that requests no plugins (empty or missing file) exits 5, not 0 (privateer-sdk#360, verified 2026-11-13). (`shared/exitcodes.go`, `command/run.go`) | reference/cli |
+| Plugin install identifier | five variants | `pvtr install <namespace>/<plugin_id>[@<version>]` from grc.store. The scanner is `openssf/github-repo` (its publish workflow identity; #26 and #28 already fixed the install commands). `ossf/pvtr-github-repo-scanner` is the GitHub repo, not an install coordinate. Bare names are rejected. Also `--local <path>` and `--from-config`. (`command/install.go`) | reference/cli |
+| Token injection | `{{TOKEN}}` "injected at runtime" via `TOKEN=... pvtr run` (quickstart) vs "no env interpolation, use sed" (configuration) | Both wrong as of pvtr v0.24.3 (SDK v1.35.0, privateer-sdk#344 fixing #343). Nothing substitutes `{{...}}`. Plugin vars are read from env and override the config file, in this order (last wins): config file (global `vars` < target `vars`), `PVTR_VARS_<KEY>`, `PVTR_SERVICES_<TARGET>_VARS_<KEY>` (legacy), `PVTR_TARGETS_<TARGET>_VARS_<KEY>`. Hyphens in keys map to underscores (`api-key` → `API_KEY`). So a required `token` var can be omitted from the file and set with `PVTR_VARS_TOKEN`. Requires pvtr ≥ 0.24.3. The `sed` recipe is removed. (`config/config.go` `overlayEnvVars`) Confirm with a run. | reference/configuration |
 | Policy required | required outside debug (configuration) vs omitted (first-run) | Required whenever a target is named: both `policy.catalogs` and `policy.applicability` must resolve (per-target, falling back to top level) or config is invalid. (`config/config.go`) | reference/configuration |
 | Config key for targets | all examples use `services:` | `targets:` is current; `services:` is a legacy alias, ignored when `targets:` is present. (`config/config.go` `targetsKey`) | reference/configuration |
 | `pvtr list` flags | `-a` vs `--installed` | Both exist: `-a/--all` (installed or requested in config), `--installed`, `--installable` (published on grc.store). (`command/list.go`) | reference/cli |
@@ -155,12 +156,14 @@ Undocumented flags found while checking (CLI reference gaps, fix in the same PR)
 
 ## 6. Phases
 
-Each is one PR and independently shippable. Diátaxis: change structure from the inside, small
-published steps, no empty shells.
+All phases ship in **one PR** from one branch, `docs/diataxis-restructure`, with at least one
+commit per phase so each stays reviewable on its own (maintainer ruling 2026-11-13: one review
+for all doc and site changes). Each phase must still leave the site building and correct, so
+the commits stay in order. Diátaxis: change structure from the inside, no empty shells.
 
 1. **Phase 0, accuracy.** Fix section 4 in place. No moves, no nav change. Acceptance: every
-   fact in section 4 appears once as reference and is linked everywhere else; one real run
-   confirms the results file path and that `{{TOKEN}}` is not substituted. Phase 0 also
+   fact in section 4 appears once as reference and is linked everywhere else; one real run on
+   pvtr v0.24.3 confirms the results file path and that `PVTR_VARS_TOKEN` supplies the token. Phase 0 also
    deletes `getting-started/first-run.md`, removes its `[[menu.getting_started]]` entry from
    `hugo.toml`, and adds `aliases: [/getting-started/first-run/]` to the quickstart.
 2. **Phase 1, mechanics with zero URL change.** Add `cascade`, `description`, `linkTitle` to
@@ -173,12 +176,12 @@ published steps, no empty shells.
    `public/<old>/index.html`, and `grep -r 'getting-started\|developer-reference' content layouts hugo.toml`
    matches only `aliases:` lines.
 4. **Phase 3, content.** Rewrite the merged tutorial (D5). Trim reference tables out of
-   `introduction.md` and `build-a-plugin.md` into their reference homes. One page per PR.
+   `introduction.md` and `build-a-plugin.md` into their reference homes. One commit per page.
 
 ### Working notes for implementers
 
-- **Branches and pushing.** One branch and one PR per phase, cut from `main`. Commit with
-  `-s`. Do not push or open PRs: this repo is outside the agent push exceptions, so the
+- **Branches and pushing.** One branch, `docs/diataxis-restructure`, for every phase. Commit
+  with `-s`. Do not push or open PRs: this repo is outside the agent push exceptions, so the
   maintainer pushes.
 - **Build.** `hugo --minify` (local Hugo is v0.160.1 extended; CI deploys from
   `.github/workflows/deploy.yml`). `hugo server` to preview at `http://localhost:1313`.
@@ -188,8 +191,9 @@ published steps, no empty shells.
   one deleted in #17 described the old Docsy site and does not apply.
 - **Source of truth for facts.** The top-level `../privateer`, `../privateer-sdk` and
   `../pvtr-github-repo-scanner` checkouts, never the copies under `../sandbox/`.
-- **Real run for Phase 0.** `pvtr` v0.24.1 is installed. It needs
-  `pvtr install openssf/github-repo` and a GitHub token rendered into the config with `sed`.
+- **Real run for Phase 0.** Use pvtr v0.24.3 or later (the `pvtr` on `PATH` may be older;
+  check `pvtr version`). It needs `pvtr install openssf/github-repo` and a GitHub token in
+  `PVTR_VARS_TOKEN`.
 
 ## 7. Backlog (not in this project, write on demand, never as stubs)
 
@@ -206,15 +210,14 @@ catalog (plugin-generator-templates or the site). Unblocks promoting `build-a-pl
 
 Reference: plugin SDK page that links pkg.go.dev rather than hand-maintaining the API.
 
-## 8. Maintainer rulings (2026-11-09)
+## 8. Maintainer rulings (2026-11-09, revised 2026-11-13)
 
 - **Header tabs**: Home / Docs, with Docs pointing at `/library/`. A third Library tab would duplicate it.
 - **Sidebar order**: Tutorials, How-to guides, Reference, Explanation (Diátaxis convention). Set by `weight` on each `_index.md`.
 - **D6**: accepted as written. `build-a-plugin` is a How-to guide now; the sample catalog stays in the backlog until an owner is named.
-- **Token injection**: Phase 0 changes the quickstart and GitHub Actions page to render the
-  config with `sed`, as the configuration reference already does. Env support for plugin vars
-  is tracked in privateerproj/privateer-sdk#343; when it ships, the quickstart can switch to
-  `PVTR_VARS_TOKEN`.
+- **Token injection** (revised 2026-11-13): env var only. The quickstart, GitHub Actions page
+  and configuration reference pass the token as `PVTR_VARS_TOKEN` and state that pvtr ≥ 0.24.3
+  is required. The `sed` recipe is removed everywhere. Supersedes the 2026-11-09 sed ruling.
 - **`targets:` key**: Phase 0 switches every config example from `services:` to `targets:`.
   The configuration reference notes that `services:` still works as a legacy alias and is
   ignored when `targets:` is present.
