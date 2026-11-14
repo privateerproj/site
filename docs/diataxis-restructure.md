@@ -129,7 +129,7 @@ from source on 2026-11-09 at `privateer` 77a7c30 and `privateer-sdk` fff7364, an
 | Output formats | yaml, json, sarif | yaml (default), json, sarif, **gemara** (native EvaluationLog list). (`command/base.go`) | reference/cli |
 | Exit codes | "non-zero means failed" vs 0 to 5 table (build-a-plugin only) | build-a-plugin table is correct: 0 pass, 1 fail, 2 aborted, 3 internal error, 4 bad usage, 5 no tests. Code 1 is returned for any suite that is Failed, NeedsReview or Unknown. Multi-plugin runs report the most severe. Since pvtr v0.24.3, a config that requests no plugins (empty or missing file) exits 5, not 0 (privateer-sdk#360, verified 2026-11-13). Run 2026-11-13: a missing required var or missing policy exits 3 (the plugin rejects its config); a catalog the plugin lacks exits 4; an unknown applicability value exits **0** with every requirement `Not Applicable`, so the old "5 = catalog or applicability mismatch" gloss is wrong. (`shared/exitcodes.go`, `command/run.go`) | reference/cli |
 | Plugin install identifier | five variants | `pvtr install <namespace>/<plugin_id>[@<version>]` from grc.store. The scanner is `openssf/github-repo` (its publish workflow identity; #26 and #28 already fixed the install commands). `ossf/pvtr-github-repo-scanner` is the GitHub repo, not an install coordinate. Bare names are rejected. Also `--local <path>` (installs as `local/<binary name>`) and `--from-config`. The config `plugin:` value is the same coordinate; a bare binary name is "not installed", and a binary copied into the binaries path by hand is not discovered (run 2026-11-13). (`command/install.go`) | reference/cli |
-| Token injection | `{{TOKEN}}` "injected at runtime" via `TOKEN=... pvtr run` (quickstart) vs "no env interpolation, use sed" (configuration) | Both wrong as of pvtr v0.24.3 (SDK v1.35.0, privateer-sdk#344 fixing #343). Nothing substitutes `{{...}}`. Plugin vars are read from env and override the config file, in this order (last wins): config file (global `vars` < target `vars`), `PVTR_VARS_<KEY>`, `PVTR_SERVICES_<TARGET>_VARS_<KEY>` (legacy), `PVTR_TARGETS_<TARGET>_VARS_<KEY>`. Hyphens in keys map to underscores (`api-key` → `API_KEY`). Dots map to underscores too. So a required `token` var can be omitted from the file and set with `PVTR_VARS_TOKEN`. **Run 2026-11-13 corrects the requirement:** the overlay runs inside the plugin process (`config.NewConfig`), so it needs the *plugin* built with privateer-sdk ≥ v1.35.0; pvtr's version does not matter. The published scanner, `openssf/github-repo` v0.33.2, links SDK v1.34.1 and fails with "missing required variables: [token]" (exit 3). Rebuilt against v1.35.0 (ossf/pvtr-github-repo-scanner#536, open) the env token is accepted. (`config/config.go` `overlayEnvVars`) | reference/configuration |
+| Token injection | `{{TOKEN}}` "injected at runtime" via `TOKEN=... pvtr run` (quickstart) vs "no env interpolation, use sed" (configuration) | Both wrong as of pvtr v0.24.3 (SDK v1.35.0, privateer-sdk#344 fixing #343). Nothing substitutes `{{...}}`. Plugin vars are read from env and override the config file, in this order (last wins): config file (global `vars` < target `vars`), `PVTR_VARS_<KEY>`, `PVTR_SERVICES_<TARGET>_VARS_<KEY>` (legacy), `PVTR_TARGETS_<TARGET>_VARS_<KEY>`. Hyphens in keys map to underscores (`api-key` → `API_KEY`). Dots map to underscores too. So a required `token` var can be omitted from the file and set with `PVTR_VARS_TOKEN`. **Run 2026-11-13 corrects the requirement:** the overlay runs inside the plugin process (`config.NewConfig`), so what matters is the *plugin's* SDK version: it must be built with privateer-sdk ≥ v1.35.0. pvtr ≥ 0.24.3 alone is not enough; the docs state both. The published scanner, `openssf/github-repo` v0.33.2, links SDK v1.34.1 and fails with "missing required variables: [token]" (exit 3). Rebuilt against v1.35.0 (ossf/pvtr-github-repo-scanner#536, open) and installed with `--local`, the env token is accepted (exit 1, results written). (`config/config.go` `overlayEnvVars`) | reference/configuration |
 | Policy required | required outside debug (configuration) vs omitted (first-run) | Required whenever a target is named: both `policy.catalogs` and `policy.applicability` must resolve (per-target, falling back to top level) or config is invalid; the plugin rejects it at startup and the run exits 3 (run 2026-11-13). (`config/config.go`) | reference/configuration |
 | Config key for targets | all examples use `services:` | `targets:` is current; `services:` is a legacy alias, ignored when `targets:` is present. (`config/config.go` `targetsKey`) | reference/configuration |
 | `pvtr list` flags | `-a` vs `--installed` | Both exist: no flag (installed plus requested in config), `-a/--all` (that plus every plugin published on grc.store, despite its help text), `--installed`, `--installable` (published, not installed). Mutually exclusive. (`command/list.go`) | reference/cli |
@@ -193,7 +193,10 @@ the commits stay in order. Diátaxis: change structure from the inside, no empty
   `../pvtr-github-repo-scanner` checkouts, never the copies under `../sandbox/`.
 - **Real run for Phase 0.** Use pvtr v0.24.3 or later (the `pvtr` on `PATH` may be older;
   check `pvtr version`). It needs `pvtr install openssf/github-repo` and a GitHub token in
-  `PVTR_VARS_TOKEN`.
+  `PVTR_VARS_TOKEN`, and the scanner must be built on privateer-sdk ≥ v1.35.0.
+- **Merge gate.** Do not merge the site PR until ossf/pvtr-github-repo-scanner#536 is merged
+  and a scanner release built on SDK v1.35.0 is on grc.store; then re-run the quickstart with
+  the published scanner.
 
 ## 7. Backlog (not in this project, write on demand, never as stubs)
 
@@ -216,8 +219,13 @@ Reference: plugin SDK page that links pkg.go.dev rather than hand-maintaining th
 - **Sidebar order**: Tutorials, How-to guides, Reference, Explanation (Diátaxis convention). Set by `weight` on each `_index.md`.
 - **D6**: accepted as written. `build-a-plugin` is a How-to guide now; the sample catalog stays in the backlog until an owner is named.
 - **Token injection** (revised 2026-11-13): env var only. The quickstart, GitHub Actions page
-  and configuration reference pass the token as `PVTR_VARS_TOKEN` and state that pvtr ≥ 0.24.3
-  is required. The `sed` recipe is removed everywhere. Supersedes the 2026-11-09 sed ruling.
+  and configuration reference pass the token as `PVTR_VARS_TOKEN` and state that it needs
+  pvtr ≥ 0.24.3 **and** a plugin built on privateer-sdk ≥ v1.35.0 (for the GitHub scanner, a
+  release after v0.33.2). Corrected 2026-11-13 after the Phase 0 run: the env overlay runs in
+  the plugin, so the plugin's SDK version is what matters; scanner v0.33.2 (SDK v1.34.1)
+  rejected the env token, a v1.35.0 rebuild accepted it (section 4). The `sed` recipe is
+  removed everywhere. Supersedes the 2026-11-09 sed ruling. Ships behind the merge gate in
+  section 6's working notes.
 - **`targets:` key**: Phase 0 switches every config example from `services:` to `targets:`.
   The configuration reference notes that `services:` still works as a legacy alias and is
   ignored when `targets:` is present.

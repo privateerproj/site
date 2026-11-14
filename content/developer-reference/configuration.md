@@ -39,7 +39,7 @@ targets:
     vars:
       owner: my-org
       repo: my-repo
-      token: "{{TOKEN}}"           # inject at runtime; never commit real values
+      # token: set PVTR_VARS_TOKEN instead; never commit real values
     policy:
       catalogs:
         - osps-baseline
@@ -80,18 +80,25 @@ Each key under `targets` is a unique target name, matched against the `--target`
 
 ## Variable resolution
 
-Variables are merged at runtime with the following precedence (highest wins):
+Each var is resolved from these sources, lowest to highest precedence (the last one set wins):
 
-```text
-service vars  >  global vars
-```
+1. Global `vars` in the config file
+2. The target's `vars` in the config file
+3. `PVTR_VARS_<KEY>`
+4. `PVTR_SERVICES_<TARGET>_VARS_<KEY>` (only when the config uses the legacy `services` key)
+5. `PVTR_TARGETS_<TARGET>_VARS_<KEY>`
 
-There is no environment variable interpolation built into Core. To inject secrets, render the config before running:
+Nothing substitutes placeholders such as `{{TOKEN}}`; a value in the file is passed to the plugin as written.
+
+### Variables from the environment
+
+`<KEY>` and `<TARGET>` are upper-cased, with hyphens and dots turned into underscores: var `api-key` on target `my-repo` is `PVTR_TARGETS_MY_REPO_VARS_API_KEY`. A var set this way does not need to appear in the file at all, so keep secrets out of the config and set them in the environment:
 
 ```bash
-sed "s/{{TOKEN}}/$MY_SECRET_TOKEN/g" config.template.yml > config.yml
-pvtr run -c config.yml
+PVTR_VARS_TOKEN="$MY_SECRET_TOKEN" pvtr run -c config.yml
 ```
+
+The plugin, not pvtr, reads these variables. It needs pvtr 0.24.3 or later and a plugin built on privateer-sdk v1.35.0 or later; for the GitHub repo scanner that is a release after v0.33.2. An older plugin ignores them and reports the var as missing (exit code `3`).
 
 ## Policy
 

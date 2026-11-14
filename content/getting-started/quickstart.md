@@ -72,7 +72,7 @@ targets:
     vars:
       owner: my-org      # your GitHub org or username
       repo: my-repo      # your repository name
-      token: "{{TOKEN}}" # injected at runtime
+      # token is read from PVTR_VARS_TOKEN in step 5; keep it out of this file
     policy:
       catalogs:
         - osps-baseline
@@ -82,16 +82,18 @@ targets:
 
 ## 5. Run
 
+Pass your GitHub token in the `PVTR_VARS_TOKEN` environment variable. This needs pvtr 0.24.3 or later and a plugin built on privateer-sdk v1.35.0 or later; for the GitHub repo scanner that is a release after v0.33.2. The [configuration reference](/developer-reference/configuration/#variables-from-the-environment) explains how environment variables map to plugin vars.
+
 *macOS / Linux:*
 
 ```bash
-TOKEN=your_github_token pvtr run -c config.yml
+PVTR_VARS_TOKEN=your_github_token pvtr run -c config.yml
 ```
 
 *Windows (PowerShell):*
 
 ```powershell
-$env:TOKEN = "your_github_token"
+$env:PVTR_VARS_TOKEN = "your_github_token"
 pvtr run -c config.yml
 ```
 
