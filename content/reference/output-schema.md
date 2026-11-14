@@ -65,14 +65,18 @@ With `output: gemara`, the file is a YAML list of the Gemara Evaluation Logs alo
 
 Suites, controls and requirements each carry one of the six Gemara results. The file spells them as shown here:
 
-| Value | Meaning |
-| --- | --- |
-| `Passed` | The requirement was checked and met |
-| `Failed` | The requirement was checked and not met |
-| `Needs Review` | The check could not decide; a person has to look |
-| `Not Applicable` | The requirement does not apply under the selected applicability |
-| `Not Run` | The check was skipped |
-| `Unknown` | The check could not run, or no step was defined for the requirement |
+| Value | Go name | Meaning | Halts a step chain |
+| --- | --- | --- | --- |
+| `Passed` | `gemara.Passed` | The requirement was checked and met | no |
+| `Failed` | `gemara.Failed` | The requirement was checked and not met | yes |
+| `Needs Review` | `gemara.NeedsReview` | The check could not decide: the data was absent or ambiguous, or only a heuristic could judge it; a person has to look | no |
+| `Not Applicable` | `gemara.NotApplicable` | The requirement does not apply under the selected applicability, or to this target | yes |
+| `Not Run` | `gemara.NotRun` | The check was skipped; plugin authors use it only for placeholders | no |
+| `Unknown` | `gemara.Unknown` | The check could not run, or no step was defined for the requirement; from a step, almost always a loader bug | no |
+
+The Go name is what a plugin's assessment step returns. A requirement's steps
+run in order and stop at the first `Failed` or `Not Applicable`; every other
+result is folded into the requirement's result and the next step runs.
 
 A suite with any `Failed`, `Needs Review` or `Unknown` result makes `pvtr run` exit `1`; see [exit codes](/reference/cli/#exit-codes).
 

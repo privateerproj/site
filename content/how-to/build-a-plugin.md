@@ -41,21 +41,8 @@ every file.
 
 ## Step 2: Review the generated structure
 
-```text
-my-plugin/
-  main.go                          # orchestrator wiring
-  go.mod                           # pins privateer-sdk and go-gemara
-  data/
-    data_collection.go             # Payload and Loader
-    catalogs/catalog_<id>_<ver>.yaml  # your catalog, vendored in the binary
-  evaluation_plans/
-    evaluation_plans.go            # TypedStep, and Suite_<id>: requirement id -> step chain
-    reusable_steps/steps.go        # NotImplemented placeholder
-  example-config.yml
-  Makefile
-```
-
-Every requirement id in the catalog is already in `Suite_<id>`, bound to
+The [CLI reference](/reference/cli/#generated-layout) lists every generated
+file. Every requirement id in the catalog is already in `Suite_<id>`, bound to
 `reusable_steps.NotImplemented`. Replacing those bindings is the work.
 
 The scaffold vendors the catalog with `AddReferenceCatalogs`, so the binary is
@@ -139,21 +126,11 @@ Suite_my_catalog = map[string][]TypedStep{
 }
 ```
 
-### Results
-
-| Result | Return when | Halts the chain |
-| --- | --- | --- |
-| `Passed` | You observed the requirement being met. | no |
-| `Failed` | You observed it not being met. | yes |
-| `NotApplicable` | The requirement does not apply to this target. | yes |
-| `NeedsReview` | The data is absent or ambiguous, or only a heuristic could judge it. | no |
-| `Unknown` | The payload was unusable; almost always a loader bug. | no |
-| `NotRun` | Placeholders only. | no |
-
-Steps in a chain run in order. The chain stops at the first `Failed` or
-`NotApplicable`; every other result is folded in and the next step runs. Put
-scope guards first so an inapplicable target stops before a substantive step
-fails it for the wrong reason.
+The [result values](/reference/output-schema/#result-values) table lists the
+six results a step can return and which ones halt the chain. Because a chain
+stops at the first `Failed` or `NotApplicable`, put scope guards first so an
+inapplicable target stops before a substantive step fails it for the wrong
+reason.
 
 Three things to get right in every step:
 

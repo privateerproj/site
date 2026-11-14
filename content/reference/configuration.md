@@ -110,7 +110,7 @@ policy:
     - Maturity Level 1    # applicability tier filter
 ```
 
-Policy is required for every target: after fallback, both `catalogs` and `applicability` must be non-empty, or the plugin rejects the config at startup and `pvtr run` exits `3`. Each field falls back independently: a target that sets only `catalogs` still inherits the global `applicability`, and vice versa. Within a field, the target value fully replaces the global list; lists are never merged. A catalog the plugin does not provide stops the run with exit code `4`. An applicability value the plugin does not recognise is not an error: every requirement is reported `Not Applicable` and the run exits `0`,, so check the plugin's documentation for its exact values.
+Policy is required for every target: after fallback, both `catalogs` and `applicability` must be non-empty, or the plugin rejects the config at startup and `pvtr run` exits `3`. Each field falls back independently: a target that sets only `catalogs` still inherits the global `applicability`, and vice versa. Within a field, the target value fully replaces the global list; lists are never merged. A catalog the plugin does not provide stops the run with exit code `4`. An applicability value the plugin does not recognise is not an error: every requirement is reported `Not Applicable` and the run exits `0`, so check the plugin's documentation for its exact values.
 
 ## invasive flag
 

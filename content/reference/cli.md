@@ -139,6 +139,29 @@ pvtr generate-plugin \
 
 The generated plugin compiles as emitted, with every requirement bound to a `NotImplemented` placeholder step. See [Build your first plugin](/how-to/build-a-plugin/).
 
+### Generated layout
+
+```text
+my-plugin/
+  main.go                          # orchestrator wiring; Publisher and License are set here
+  go.mod                           # pins privateer-sdk and go-gemara; no go.sum, so run go mod tidy first
+  data/
+    data_collection.go             # Payload and Loader
+    catalogs/catalog_<id>_<ver>.yaml  # the source catalog, vendored in the binary
+  evaluation_plans/
+    evaluation_plans.go            # TypedStep, and Suite_<id>: requirement id -> step chain
+    reusable_steps/steps.go        # NotImplemented placeholder
+  example-config.yml
+  Makefile
+  README.md
+  TESTING.md
+  .gitignore
+  .goreleaser.yaml                 # release build; pvtr publish reads its dist directory
+  .github/workflows/               # build, lint, CodeQL, release, and grc.store publish workflows
+```
+
+Running `generate-plugin` over an existing plugin overwrites every file.
+
 ## pvtr completion
 
 Generates shell autocompletion scripts.
