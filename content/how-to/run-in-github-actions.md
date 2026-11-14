@@ -1,8 +1,8 @@
 ---
 title: GitHub Actions integration
-type: docs
-weight: 5
 description: Run Privateer in CI, inject secrets, and upload SARIF to the Security tab.
+weight: 4
+aliases: [/developer-reference/github-actions/]
 ---
 
 ## Basic pipeline
@@ -55,7 +55,7 @@ Commit `config.yml` without secrets and pass each one as a `PVTR_VARS_<KEY>` env
   run: pvtr run -c config.yml
 ```
 
-This needs pvtr 0.24.3 or later and a plugin built on privateer-sdk v1.35.0 or later; for the GitHub repo scanner that is a release after v0.33.2. The [configuration reference](/developer-reference/configuration/#variables-from-the-environment) has the naming rules and precedence.
+This needs pvtr 0.24.3 or later and a plugin built on privateer-sdk v1.35.0 or later; for the GitHub repo scanner that is a release after v0.33.2. The [configuration reference](/reference/configuration/#variables-from-the-environment) has the naming rules and precedence.
 
 ## Skipping on documentation-only changes
 

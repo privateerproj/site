@@ -1,8 +1,8 @@
 ---
 title: Installation
-type: docs
-weight: 3
 description: Install Privateer on Windows, Linux, or macOS, and verify the install.
+weight: 1
+aliases: [/getting-started/installation/]
 ---
 
 Choose the option that matches your platform:

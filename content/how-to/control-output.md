@@ -1,11 +1,11 @@
 ---
 title: Understanding results
-type: docs
-weight: 5
 description: Where output files land, how to control the format, and how to suppress terminal output.
+weight: 3
+aliases: [/getting-started/results/]
 ---
 
-After a run, Privateer writes a log file and a results file for each target. With the default settings they land in `evaluation_results/<target>/`; the [output schema](/developer-reference/output-schema/#file-locations) has the exact paths.
+After a run, Privateer writes a log file and a results file for each target. With the default settings they land in `evaluation_results/<target>/`; the [output schema](/reference/output-schema/#file-locations) has the exact paths.
 
 ```text
 evaluation_results/
@@ -24,7 +24,7 @@ The format of the results file is set in your config:
 output: json
 ```
 
-This writes `my-github-repo.json` in place of `my-github-repo.yaml`. The [CLI reference](/developer-reference/cli-reference/#output-formats) lists every format and the file each one writes; `pvtr run -o <format>` overrides the config for one run. SARIF output is compatible with the GitHub Security tab, see [SARIF upload for the GitHub Security tab](/developer-reference/github-actions/#sarif-upload-for-the-github-security-tab) for how to upload it.
+This writes `my-github-repo.json` in place of `my-github-repo.yaml`. The [CLI reference](/reference/cli/#output-formats) lists every format and the file each one writes; `pvtr run -o <format>` overrides the config for one run. SARIF output is compatible with the GitHub Security tab, see [SARIF upload for the GitHub Security tab](/how-to/run-in-github-actions/#sarif-upload-for-the-github-security-tab) for how to upload it.
 
 Config settings that affect output:
 
@@ -32,7 +32,7 @@ Config settings that affect output:
 | --- | --- | --- |
 | `write-directory` | `evaluation_results` | Where result files are written |
 | `write` | `true` | Whether to write output files at all |
-| `output` | `yaml` | Results format; see [output formats](/developer-reference/cli-reference/#output-formats) |
+| `output` | `yaml` | Results format; see [output formats](/reference/cli/#output-formats) |
 | `loglevel` | `error` | Log verbosity: `trace`, `debug`, `info`, `warn`, `error`, `off` |
 
 ## Suppressing terminal output

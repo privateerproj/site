@@ -1,11 +1,9 @@
 ---
 title: CLI reference
-type: docs
-weight: 1
 description: Every pvtr subcommand, its flags, and usage examples.
+weight: 1
+aliases: [/developer-reference/cli-reference/]
 ---
-
-> **Note:** The developer reference is for plugin authors, contributors, and engineers integrating Privateer into automated pipelines. It assumes familiarity with Go, gRPC, and CI/CD tooling. For end-user installation and quickstart, see the [Getting started guide](/getting-started/quickstart/).
 
 The Privateer CLI is the `pvtr` binary. Every subcommand accepts the global flags below, plus its own options.
 
@@ -51,7 +49,7 @@ pvtr run --loglevel debug -w ./results -o json
 | `sarif` | `<target>.sarif` | SARIF 2.1.0, for the GitHub Security tab |
 | `gemara` | `<target>.yaml` | A list of native Gemara Evaluation Logs |
 
-File locations and structure are in the [output schema](/developer-reference/output-schema/).
+File locations and structure are in the [output schema](/reference/output-schema/).
 
 ### Exit codes
 
@@ -64,11 +62,11 @@ File locations and structure are in the [output schema](/developer-reference/out
 | 4 | Bad config or flags, including a policy catalog the plugin does not provide |
 | 5 | No assessments ran, for example a config that requests no plugins |
 
-A run over several plugins exits with the most severe code among them. An applicability value the plugin does not recognise is not caught: every requirement is `Not Applicable` and the run exits `0` (see [policy](/developer-reference/configuration/#policy)). `1` is a successful run from the plugin's point of view; read the log, not just the code.
+A run over several plugins exits with the most severe code among them. An applicability value the plugin does not recognise is not caught: every requirement is `Not Applicable` and the run exits `0` (see [policy](/reference/configuration/#policy)). `1` is a successful run from the plugin's point of view; read the log, not just the code.
 
 ## pvtr install
 
-Pulls a plugin from [grc.store](https://hub.grc.store) as a signed OCI artifact, verifies its signature, signer identity and digests, and only then writes it to the binaries path. Takes the plugin's `<namespace>/<plugin_id>` coordinate, optionally pinned with `@<version>` (default: latest). A bare name without a namespace is rejected. The coordinate is also the value of `plugin` in the [config](/developer-reference/configuration/#target-settings).
+Pulls a plugin from [grc.store](https://hub.grc.store) as a signed OCI artifact, verifies its signature, signer identity and digests, and only then writes it to the binaries path. Takes the plugin's `<namespace>/<plugin_id>` coordinate, optionally pinned with `@<version>` (default: latest). A bare name without a namespace is rejected. The coordinate is also the value of `plugin` in the [config](/reference/configuration/#target-settings).
 
 ```bash
 pvtr install openssf/github-repo
@@ -139,7 +137,7 @@ pvtr generate-plugin \
 | `--output-dir` | `-o` | `generated-plugin/` | Output directory |
 | `--local-templates` |  |  | Use a local templates directory instead of fetching latest |
 
-The generated plugin compiles as emitted, with every requirement bound to a `NotImplemented` placeholder step. See [Build your first plugin](/developer-reference/build-a-plugin/).
+The generated plugin compiles as emitted, with every requirement bound to a `NotImplemented` placeholder step. See [Build your first plugin](/how-to/build-a-plugin/).
 
 ## pvtr completion
 

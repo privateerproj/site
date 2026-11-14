@@ -1,12 +1,12 @@
 ---
-title: Quickstart (5 minutes)
-type: docs
-weight: 2
+title: Your first validation run
+featured: true
 description: Run your first validation test in five minutes.
-aliases: [/getting-started/first-run/]
+weight: 1
+aliases: [/getting-started/quickstart/, /getting-started/first-run/]
 ---
 
-This guide helps you run your first validation test. If a term is unfamiliar, the [glossary](/getting-started/glossary/) defines it. Before you start, make sure you have:
+This guide helps you run your first validation test. If a term is unfamiliar, the [glossary](/reference/glossary/) defines it. Before you start, make sure you have:
 
 * A terminal: macOS/Linux shell, or **PowerShell on Windows**
 * Internet access to download the [binary](#1-install-privateer) and [plugin](#3-install-a-plugin)
@@ -82,7 +82,7 @@ targets:
 
 ## 5. Run
 
-Pass your GitHub token in the `PVTR_VARS_TOKEN` environment variable. This needs pvtr 0.24.3 or later and a plugin built on privateer-sdk v1.35.0 or later; for the GitHub repo scanner that is a release after v0.33.2. The [configuration reference](/developer-reference/configuration/#variables-from-the-environment) explains how environment variables map to plugin vars.
+Pass your GitHub token in the `PVTR_VARS_TOKEN` environment variable. This needs pvtr 0.24.3 or later and a plugin built on privateer-sdk v1.35.0 or later; for the GitHub repo scanner that is a release after v0.33.2. The [configuration reference](/reference/configuration/#variables-from-the-environment) explains how environment variables map to plugin vars.
 
 *macOS / Linux:*
 
@@ -97,11 +97,11 @@ $env:PVTR_VARS_TOKEN = "your_github_token"
 pvtr run -c config.yml
 ```
 
-An exit code of `0` means every control passed. Anything else means at least one control did not pass, or the run itself hit an error. See [Did it work?](#did-it-work) below, and the [exit code table](/developer-reference/cli-reference/#exit-codes) for each value.
+An exit code of `0` means every control passed. Anything else means at least one control did not pass, or the run itself hit an error. See [Did it work?](#did-it-work) below, and the [exit code table](/reference/cli/#exit-codes) for each value.
 
 ## 6. Review results
 
-Results go in the folder set by `write-directory`, under the target's name ([file locations](/developer-reference/output-schema/#file-locations)):
+Results go in the folder set by `write-directory`, under the target's name ([file locations](/reference/output-schema/#file-locations)):
 
 ```text
 sample_output/my-github-repo/my-github-repo.log

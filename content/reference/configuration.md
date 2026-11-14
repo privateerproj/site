@@ -1,8 +1,8 @@
 ---
 title: Configuration reference
-type: docs
-weight: 2
 description: Every config key, variable resolution rules, and the policy block.
+weight: 2
+aliases: [/developer-reference/configuration/]
 ---
 
 Privateer reads YAML or JSON. It looks for `config.yml` in the current working directory by default.
@@ -54,7 +54,7 @@ targets:
 | `loglevel` | string | `error` | `trace`, `debug`, `info`, `warn`, `error`, `off` |
 | `write-directory` | string | `evaluation_results` | Output directory for result files |
 | `write` | boolean | `true` | Write result files to disk |
-| `output` | string | `yaml` | Results format; see [output formats](/developer-reference/cli-reference/#output-formats) |
+| `output` | string | `yaml` | Results format; see [output formats](/reference/cli/#output-formats) |
 | `binaries-path` | string | `$HOME/.privateer/bin` | Plugin binary directory |
 | `invasive` | boolean | `false` | Permit plugins to modify infrastructure |
 | `policy` | object |  | Global policy; overridable per target |
@@ -64,7 +64,7 @@ targets:
 
 ## Target settings
 
-Each key under `targets` is a unique target name, matched against the `--target` flag and used to name the [result files](/developer-reference/output-schema/#file-locations).
+Each key under `targets` is a unique target name, matched against the `--target` flag and used to name the [result files](/reference/output-schema/#file-locations).
 
 `services` is the legacy name for `targets` and still works. If a config has both keys, `services` is ignored.
 

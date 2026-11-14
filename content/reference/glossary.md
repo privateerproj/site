@@ -1,8 +1,8 @@
 ---
 title: Glossary
-type: docs
-weight: 7
 description: Plain-language definitions of the terms used across the Privateer docs.
+weight: 5
+aliases: [/getting-started/glossary/]
 ---
 
 Click a term to expand its definition.

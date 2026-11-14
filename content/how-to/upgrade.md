@@ -1,8 +1,8 @@
 ---
 title: Upgrading Privateer
-type: docs
-weight: 6
 description: Keep the pvtr binary and your plugins up to date.
+weight: 2
+aliases: [/getting-started/upgrading/]
 ---
 
 ## Option 1: Re-run the install script (macOS / Linux / WSL)

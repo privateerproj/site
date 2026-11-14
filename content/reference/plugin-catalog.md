@@ -1,11 +1,11 @@
 ---
 title: Plugin catalog
-type: docs
-weight: 6
 description: Where to find community plugins for OSPS Baseline, FINOS CCC, and more.
+weight: 4
+aliases: [/developer-reference/plugin-catalog/]
 ---
 
-Plugins are standalone binaries distributed independently from Core. Published plugins live on [grc.store](https://hub.grc.store), which serves each one as a signed OCI artifact; `pvtr install <namespace>/<plugin_id>` verifies the signature before installing. Run `pvtr list --installable` to see what is published. Install details are in the [CLI reference](/developer-reference/cli-reference/#pvtr-install).
+Plugins are standalone binaries distributed independently from Core. Published plugins live on [grc.store](https://hub.grc.store), which serves each one as a signed OCI artifact; `pvtr install <namespace>/<plugin_id>` verifies the signature before installing. Run `pvtr list --installable` to see what is published. Install details are in the [CLI reference](/reference/cli/#pvtr-install).
 
 **Finding plugins:**
 
@@ -19,4 +19,4 @@ Plugins are standalone binaries distributed independently from Core. Published p
 | --- | --- | --- |
 | [pvtr-github-repo-scanner](https://github.com/ossf/pvtr-github-repo-scanner) | GitHub repositories | [OpenSSF OSPS Baseline](https://baseline.openssf.org/) |
 
-Maintain a plugin you'd like listed here? Open a pull request against [this page](https://github.com/privateerproj/site/edit/main/content/developer-reference/plugin-catalog.md).
+Maintain a plugin you'd like listed here? Open a pull request against [this page](https://github.com/privateerproj/site/edit/main/content/reference/plugin-catalog.md).

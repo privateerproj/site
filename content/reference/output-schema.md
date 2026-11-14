@@ -1,8 +1,8 @@
 ---
 title: Output schema
-type: docs
-weight: 3
 description: File locations, the results file structure, result values, and SARIF.
+weight: 3
+aliases: [/developer-reference/output-schema/]
 ---
 
 ## File locations
@@ -16,7 +16,7 @@ For each target, Core writes two files:
     <target>.yaml     # results; .json or .sarif when output is json or sarif
 ```
 
-`<write-directory>` defaults to `evaluation_results`. `<target>` is the target's name under `targets:` in the config. The `gemara` output format also writes `<target>.yaml`. The output formats are listed in the [CLI reference](/developer-reference/cli-reference/#output-formats).
+`<write-directory>` defaults to `evaluation_results`. `<target>` is the target's name under `targets:` in the config. The `gemara` output format also writes `<target>.yaml`. The output formats are listed in the [CLI reference](/reference/cli/#output-formats).
 
 ## Results file structure
 
@@ -74,7 +74,7 @@ Suites, controls and requirements each carry one of the six Gemara results. The 
 | `Not Run` | The check was skipped |
 | `Unknown` | The check could not run, or no step was defined for the requirement |
 
-A suite with any `Failed`, `Needs Review` or `Unknown` result makes `pvtr run` exit `1`; see [exit codes](/developer-reference/cli-reference/#exit-codes).
+A suite with any `Failed`, `Needs Review` or `Unknown` result makes `pvtr run` exit `1`; see [exit codes](/reference/cli/#exit-codes).
 
 ## SARIF output
 

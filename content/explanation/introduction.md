@@ -1,9 +1,8 @@
 ---
 title: Introduction to Privateer
-type: docs
-weight: 1
-featured: true
 description: What Privateer is, why it exists, and how a validation run works.
+weight: 2
+aliases: [/getting-started/introduction/]
 ---
 
 **TL;DR:** New to all of this? [See Privateer and the projects around it in pictures](/tldr/).
@@ -24,7 +23,7 @@ Privateer is built on several components that work together:
 | **EvaluationSuite** | A set of related data mapping control IDs and requirements to one or more assessment steps |
 | **AssessmentStep** | A specialized function that analyzes a data payload provided at runtime |
 
-Unfamiliar with any of these? The [glossary](/getting-started/glossary/) defines each one in plain language.
+Unfamiliar with any of these? The [glossary](/reference/glossary/) defines each one in plain language.
 
 **Key features:**
 
@@ -56,7 +55,7 @@ Privateer exists to close that gap, addressing three specific problems:
 
 **Fitting into the Gemara model.** Privateer operates at the [Evaluation layer](https://gemara.openssf.org/model/07.2-Layer-5) of the Gemara GRC engineering model. You can generate plugin scaffolding directly from a Gemara Layer 2 control catalog, run it, and emit results as standardized Gemara Evaluation Logs.
 
-**Producing evidence that travels.** Privateer writes structured results in [machine-readable formats](/developer-reference/cli-reference/#output-formats), including native Gemara Evaluation Logs. Pipelines, security dashboards, and GRC platforms can read them without any conversion. Every run produces a timestamped, control-by-control record of what was checked and what the result was.
+**Producing evidence that travels.** Privateer writes structured results in [machine-readable formats](/reference/cli/#output-formats), including native Gemara Evaluation Logs. Pipelines, security dashboards, and GRC platforms can read them without any conversion. Every run produces a timestamped, control-by-control record of what was checked and what the result was.
 
 ## How a validation run works
 
@@ -66,9 +65,9 @@ When you run `pvtr run`, here is what happens under the hood:
 2. For each target, Core locates the corresponding plugin binary in the binaries directory.
 3. Core launches the plugin as a separate subprocess and communicates with it over a local gRPC connection. This isolation means a plugin crash cannot bring down the entire run.
 4. The plugin connects to its target, for example, the GitHub API, and collects the data it needs.
-5. The plugin runs its **EvaluationSuites**, which are groups of related checks. Each individual check is called an **AssessmentStep**, a function that looks at the collected data and returns one of six results: `Passed`, `Failed`, `NeedsReview`, `NotApplicable`, `NotRun`, or `Unknown`. The [glossary](/getting-started/glossary/#results) explains each one.
+5. The plugin runs its **EvaluationSuites**, which are groups of related checks. Each individual check is called an **AssessmentStep**, a function that looks at the collected data and returns one of six results: `Passed`, `Failed`, `NeedsReview`, `NotApplicable`, `NotRun`, or `Unknown`. The [glossary](/reference/glossary/#results) explains each one.
 6. The plugin sends its results back to Core.
-7. Core writes the results to your output directory in the [format you choose](/developer-reference/cli-reference/#output-formats), and exits with a [code](/developer-reference/cli-reference/#exit-codes) that reflects whether everything passed.
+7. Core writes the results to your output directory in the [format you choose](/reference/cli/#output-formats), and exits with a [code](/reference/cli/#exit-codes) that reflects whether everything passed.
 
 ## What Privateer validates against
 

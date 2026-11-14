@@ -1,8 +1,8 @@
 ---
 title: Build your first plugin
-type: docs
-weight: 4
 description: Generate a scaffold, write a loader and typed assessment steps, test in debug mode, and run under pvtr.
+weight: 6
+aliases: [/developer-reference/build-a-plugin/]
 ---
 
 A plugin is a Go binary that evaluates one kind of target against a Gemara
@@ -225,7 +225,7 @@ discovered.
 
 `pvtr run` exits `1` when the run completed and some assessments failed; that
 is a successful run from the plugin's point of view. Every code is listed in the
-[CLI reference](/developer-reference/cli-reference/#exit-codes).
+[CLI reference](/reference/cli/#exit-codes).
 
 ## Step 8: Publish
 
