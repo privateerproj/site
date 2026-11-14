@@ -55,19 +55,19 @@ Privateer exists to close that gap, addressing three specific problems:
 
 **Fitting into the Gemara model.** Privateer operates at the [Evaluation layer](https://gemara.openssf.org/model/07.2-Layer-5) of the Gemara GRC engineering model. You can generate plugin scaffolding directly from a Gemara Layer 2 control catalog, run it, and emit results as standardized Gemara Evaluation Logs.
 
-**Producing evidence that travels.** Privateer writes structured results in YAML, JSON, or SARIF. Pipelines, security dashboards, and GRC platforms can read them without any conversion. Every run produces a timestamped, control-by-control record of what was checked and what the result was.
+**Producing evidence that travels.** Privateer writes structured results in [machine-readable formats](/developer-reference/cli-reference/#output-formats), including native Gemara Evaluation Logs. Pipelines, security dashboards, and GRC platforms can read them without any conversion. Every run produces a timestamped, control-by-control record of what was checked and what the result was.
 
 ## How a validation run works
 
 When you run `pvtr run`, here is what happens under the hood:
 
-1. Core reads your `config.yml`, which tells it which services to validate and which plugin to use for each one.
-2. For each service, Core locates the corresponding plugin binary in the binaries directory.
+1. Core reads your `config.yml`, which tells it which targets to validate and which plugin to use for each one.
+2. For each target, Core locates the corresponding plugin binary in the binaries directory.
 3. Core launches the plugin as a separate subprocess and communicates with it over a local gRPC connection. This isolation means a plugin crash cannot bring down the entire run.
 4. The plugin connects to its target, for example, the GitHub API, and collects the data it needs.
 5. The plugin runs its **EvaluationSuites**, which are groups of related checks. Each individual check is called an **AssessmentStep**, a function that looks at the collected data and returns one of six results: `Passed`, `Failed`, `NeedsReview`, `NotApplicable`, `NotRun`, or `Unknown`. The [glossary](/getting-started/glossary/#results) explains each one.
 6. The plugin sends its results back to Core.
-7. Core writes the results to your output directory in YAML, JSON, or SARIF format, and exits with a code that reflects whether everything passed.
+7. Core writes the results to your output directory in the [format you choose](/developer-reference/cli-reference/#output-formats), and exits with a [code](/developer-reference/cli-reference/#exit-codes) that reflects whether everything passed.
 
 ## What Privateer validates against
 
@@ -75,6 +75,6 @@ Privateer does not invent its own rules. It validates against **control catalogs
 
 ## What the output looks like
 
-After a run, Privateer writes results into a directory (default: `evaluation_results/`). For each service, you get a log file and a results file. The results file lists every control that was evaluated, its result, and the specific AssessmentStep messages that explain why.
+After a run, Privateer writes results into a directory (default: `evaluation_results/`). For each target, you get a log file and a results file. The results file lists every control that was evaluated, its result, and the specific AssessmentStep messages that explain why.
 
 Results can be written in three formats, which include YAML, JSON and SARIF.

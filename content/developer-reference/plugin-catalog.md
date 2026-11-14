@@ -5,15 +5,13 @@ weight: 6
 description: Where to find community plugins for OSPS Baseline, FINOS CCC, and more.
 ---
 
-Plugins are standalone binaries distributed independently from Core. There is no single authoritative registry.
+Plugins are standalone binaries distributed independently from Core. Published plugins live on [grc.store](https://hub.grc.store), which serves each one as a signed OCI artifact; `pvtr install <namespace>/<plugin_id>` verifies the signature before installing. Run `pvtr list --installable` to see what is published. Install details are in the [CLI reference](/developer-reference/cli-reference/#pvtr-install).
 
 **Finding plugins:**
 
 * GitHub: search repositories prefixed with `pvtr-` or `privateer-`
-* OpenSSF: [github.com/ossf/pvtr-github-repo-scanner](https://github.com/ossf/pvtr-github-repo-scanner) for OSPS Baseline validation
+* OpenSSF: the GitHub repo scanner, `openssf/github-repo` ([source](https://github.com/ossf/pvtr-github-repo-scanner)), for OSPS Baseline validation
 * FINOS: plugins for Common Cloud Controls and Compliant Financial Infrastructure validation
-
-A formal hosted registry is on the roadmap.
 
 ## Featured plugins
 

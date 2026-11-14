@@ -33,11 +33,10 @@ On macOS, approve the binary through Gatekeeper: System Settings → Privacy and
 ## Plugin not discovered
 
 ```bash
-pvtr list -a    # check what Core can see
-ls $HOME/.privateer/bin/
+pvtr list --installed    # check what Core can see
 ```
 
-The `plugin` value in config must match the binary filename exactly (case-sensitive, no path prefix, no file extension). If using a custom binaries path, pass it consistently:
+The `plugin` value in config must be the installed coordinate exactly as `pvtr list` shows it, such as `openssf/github-repo` (see [target settings](/developer-reference/configuration/#target-settings)). A plugin binary copied into the binaries path by hand is not discovered; install it with `pvtr install --local <path>`. If using a custom binaries path, pass it consistently:
 
 ```bash
 pvtr run --binaries-path /opt/pvtr-plugins
@@ -66,14 +65,14 @@ pvtr run -c config.yml --loglevel debug
 
 ## Policy validation error at startup
 
-If Core exits immediately with a policy-related error, the `catalogs` or `applicability` values in your config are not recognized by the plugin. Check the plugin's documentation for valid catalog IDs and applicability tiers. This error fires before any plugin subprocess is launched.
+A missing `policy`, an unknown catalog, or an applicability value that matches nothing each fail differently; the [policy reference](/developer-reference/configuration/#policy) lists the symptom and exit code for each. Check the plugin's documentation for valid catalog IDs and applicability values.
 
-## Plugin crash recorded as error
+## Plugin crash
 
-A plugin that panics or exits unexpectedly is recorded as `error` for all its controls. Core does not retry. Check `<service-name>.log` for the subprocess output. Run the plugin in debug mode to reproduce the failure outside the gRPC boundary:
+A plugin that panics or exits unexpectedly ends with an internal error ([exit code](/developer-reference/cli-reference/#exit-codes) `3`); other targets are unaffected. Core does not retry. Check `<target>.log` for the subprocess output. Run the plugin in debug mode to reproduce the failure outside the gRPC boundary:
 
 ```bash
-./my-plugin debug --service my-service
+./my-plugin debug --target my-target -c config.yml
 ```
 
 ## version returns "edge"

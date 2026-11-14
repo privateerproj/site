@@ -18,24 +18,24 @@ output: yaml
 binaries-path: $HOME/.privateer/bin
 invasive: false
 
-# Global policy: applied to all services unless overridden at the service level
+# Global policy: applied to all targets unless overridden at the target level
 policy:
   catalogs:
     - osps-baseline
   applicability:
     - Maturity Level 1
 
-# Global variables: available to all services
+# Global variables: available to all targets
 vars:
   environment: production
   region: us-east-1
 
-services:
+targets:
   my-github-repo:
-    plugin: pvtr-github-repo       # must match binary filename exactly
+    plugin: openssf/github-repo    # the installed plugin's grc.store coordinate
     test-suites:
       - default
-    loglevel: info                 # overrides global loglevel for this service
+    loglevel: info                 # overrides global loglevel for this target
     vars:
       owner: my-org
       repo: my-repo
@@ -54,27 +54,29 @@ services:
 | `loglevel` | string | `error` | `trace`, `debug`, `info`, `warn`, `error`, `off` |
 | `write-directory` | string | `evaluation_results` | Output directory for result files |
 | `write` | boolean | `true` | Write result files to disk |
-| `output` | string | `yaml` | `yaml`, `json`, or `sarif` |
+| `output` | string | `yaml` | Results format; see [output formats](/developer-reference/cli-reference/#output-formats) |
 | `binaries-path` | string | `$HOME/.privateer/bin` | Plugin binary directory |
 | `invasive` | boolean | `false` | Permit plugins to modify infrastructure |
-| `policy` | object |  | Global policy; overridable per service |
-| `vars` | object |  | Global variables; overridable per service |
-| `plugin` | string |  | Global plugin name; used by any service that does not set its own |
-| `version` | string |  | Global plugin version pin; used by any service that does not set its own |
+| `policy` | object |  | Global policy; overridable per target |
+| `vars` | object |  | Global variables; overridable per target |
+| `plugin` | string |  | Global plugin coordinate; used by any target that does not set its own |
+| `version` | string |  | Global plugin version pin; used by any target that does not set its own |
 
-## Service settings
+## Target settings
 
-Each key under `services` is a unique service name matched against the `--service` flag.
+Each key under `targets` is a unique target name, matched against the `--target` flag and used to name the [result files](/developer-reference/output-schema/#file-locations).
+
+`services` is the legacy name for `targets` and still works. If a config has both keys, `services` is ignored.
 
 | Key | Type | Required | Description |
 | --- | --- | --- | --- |
-| `plugin` | string | Yes, unless set globally | Binary filename, case-sensitive, no path, no extension |
+| `plugin` | string | Yes, unless set globally | The installed plugin's coordinate, as shown by `pvtr list`: `<namespace>/<plugin_id>` from grc.store, or `local/<binary name>` after `pvtr install --local`. A bare name such as `github-repo` is not found |
 | `version` | string | No | Plugin version pin; overrides global `version` |
 | `test-suites` | array | No | Suites to run (default: `["default"]`) |
-| `loglevel` | string | No | Per-service log verbosity override |
-| `vars` | object | No | Service-specific variables |
-| `policy` | object | No | Service-specific policy; overrides global |
-| `invasive` | boolean | No | Per-service invasive override |
+| `loglevel` | string | No | Per-target log verbosity override |
+| `vars` | object | No | Target-specific variables |
+| `policy` | object | No | Target-specific policy; overrides global |
+| `invasive` | boolean | No | Per-target invasive override |
 
 ## Variable resolution
 
@@ -101,7 +103,7 @@ policy:
     - Maturity Level 1    # applicability tier filter
 ```
 
-Each policy field falls back independently: a service that sets only `catalogs` still inherits the global `applicability`, and vice versa. Within a field, the service value fully replaces the global list; lists are never merged. Policy is required when running via Core outside of plugin debug mode. Invalid catalog or applicability values produce an error at startup, not at evaluation time.
+Policy is required for every target: after fallback, both `catalogs` and `applicability` must be non-empty, or the plugin rejects the config at startup and `pvtr run` exits `3`. Each field falls back independently: a target that sets only `catalogs` still inherits the global `applicability`, and vice versa. Within a field, the target value fully replaces the global list; lists are never merged. A catalog the plugin does not provide stops the run with exit code `4`. An applicability value the plugin does not recognise is not an error: every requirement is reported `Not Applicable` and the run exits `0`,, so check the plugin's documentation for its exact values.
 
 ## invasive flag
 

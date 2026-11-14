@@ -7,7 +7,7 @@ description: Generate a scaffold, write a loader and typed assessment steps, tes
 
 A plugin is a Go binary that evaluates one kind of target against a Gemara
 Layer 2 control catalog and emits a Gemara EvaluationLog. `pvtr run` launches
-it, hands it the config for a service, and collects the log. This page walks
+it, hands it the config for a target, and collects the log. This page walks
 the scaffold as `pvtr generate-plugin` emits it today. The maintained reference
 plugin is [pvtr-github-repo-scanner](https://github.com/ossf/pvtr-github-repo-scanner);
 when this page and that repo disagree, the repo is current.
@@ -214,24 +214,18 @@ with a message naming the id.
 ## Step 7: Run under pvtr
 
 ```bash
-cp my-plugin ~/.privateer/bin/
+pvtr install --local ./my-plugin     # installs as local/my-plugin
 pvtr list --installed                # confirm it is discovered
 pvtr run -c config.yml
 ```
 
-Exit codes:
+Under `pvtr`, the target's `plugin` value is the installed coordinate,
+`local/my-plugin`. A binary copied into the binaries path by hand is not
+discovered.
 
-| Code | Meaning |
-| --- | --- |
-| 0 | Everything passed |
-| 1 | The run completed and some assessments failed |
-| 2 | Aborted (signal) |
-| 3 | Internal error in pvtr or the plugin |
-| 4 | Bad config or flags |
-| 5 | No assessments ran; usually a catalog id or applicability mismatch |
-
-`1` is a successful run from the plugin's point of view. Read the log, not
-just the code.
+`pvtr run` exits `1` when the run completed and some assessments failed; that
+is a successful run from the plugin's point of view. Every code is listed in the
+[CLI reference](/developer-reference/cli-reference/#exit-codes).
 
 ## Step 8: Publish
 

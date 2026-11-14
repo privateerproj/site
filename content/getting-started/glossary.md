@@ -52,7 +52,7 @@ An OpenSSF model for governance, risk and compliance (GRC) engineering. It split
 <details>
 <summary>Policy</summary>
 
-The block in your config file that says what to check against. It names one or more control catalogs and an applicability filter. A policy can be set once for all services or separately per service.
+The block in your config file that says what to check against. It names one or more control catalogs and an applicability filter. A policy can be set once for all targets or separately per target.
 
 </details>
 
@@ -66,7 +66,14 @@ A filter inside the policy that selects which controls from a catalog apply to y
 <details>
 <summary>Service</summary>
 
-One named entry under `services:` in your config file. It is a single target for Privateer to check, such as one GitHub repository, and says which plugin to run, which test suites to use and what values that plugin needs.
+The older name for a target. Configs written before `targets` existed list them under the legacy `services` key, which still works.
+
+</details>
+
+<details>
+<summary>Target</summary>
+
+One named entry under `targets:` in your config file. It is a single thing for Privateer to check, such as one GitHub repository, and says which plugin to run, which test suites to use and what values that plugin needs.
 
 </details>
 

@@ -3,6 +3,7 @@ title: Quickstart (5 minutes)
 type: docs
 weight: 2
 description: Run your first validation test in five minutes.
+aliases: [/getting-started/first-run/]
 ---
 
 This guide helps you run your first validation test. If a term is unfamiliar, the [glossary](/getting-started/glossary/) defines it. Before you start, make sure you have:
@@ -38,7 +39,7 @@ Then close and reopen PowerShell.
 pvtr version
 ```
 
-Expected output: a version string such as `v0.x.y` (or `edge-dev` for a source build).
+Expected output: a version string such as `0.24.3` (or `edge-dev` for a source build).
 
 If you see `command not found`, the binary isn't on your PATH. On macOS/Linux: `export PATH="$PATH:/usr/local/bin"`. On Windows, confirm the folder you placed `pvtr.exe` in is on your user PATH, then reopen PowerShell.
 
@@ -63,9 +64,9 @@ The plugin should appear with `Installed = true`.
 ```yaml
 loglevel: debug
 write-directory: sample_output
-services:
+targets:
   my-github-repo:
-    plugin: pvtr-github-repo-scanner   # must match the installed binary name exactly
+    plugin: openssf/github-repo   # the coordinate you installed in step 3
     test-suites:
       - default
     vars:
@@ -94,13 +95,15 @@ $env:TOKEN = "your_github_token"
 pvtr run -c config.yml
 ```
 
-An exit code of `0` means every control passed. Anything else means at least one control did not pass, or the run itself hit an error. See [Did it work?](#did-it-work) below.
+An exit code of `0` means every control passed. Anything else means at least one control did not pass, or the run itself hit an error. See [Did it work?](#did-it-work) below, and the [exit code table](/developer-reference/cli-reference/#exit-codes) for each value.
 
 ## 6. Review results
 
+Results go in the folder set by `write-directory`, under the target's name ([file locations](/developer-reference/output-schema/#file-locations)):
+
 ```text
-sample_output/<service-name>/<service-name>.log
-sample_output/<service-name>/<service-name>.yaml
+sample_output/my-github-repo/my-github-repo.log
+sample_output/my-github-repo/my-github-repo.yaml
 ```
 
 ### Did it work?
@@ -108,7 +111,7 @@ sample_output/<service-name>/<service-name>.yaml
 A run can finish successfully and still report failing controls. Read these three signals together:
 
 * **The exit code** tells you whether everything passed. `0` means every control passed. Any other value means at least one control was `Failed`, `NeedsReview`, or `Unknown`, or the run itself hit an error such as a missing plugin or an invalid config file.
-* **The log file** (`<service-name>.log`) confirms the plugin actually ran and shows what it did. Read it first if the run exited with an error or wrote no results file.
-* **The results file** (`<service-name>.yaml`) lists every control that was checked, its result, and a message explaining why.
+* **The log file** (`my-github-repo.log`) confirms the plugin actually ran and shows what it did. Read it first if the run exited with an error or wrote no results file.
+* **The results file** (`my-github-repo.yaml`) lists every control that was checked, its result, and a message explaining why.
 
 In short: exit code `0` and a results file means validation passed. A non-zero exit code with a results file means the run worked but some controls need attention. A non-zero exit code and no results file means the run itself did not complete, so start with the log.

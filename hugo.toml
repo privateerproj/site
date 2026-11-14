@@ -90,10 +90,6 @@ disableKinds = ["RSS"]
     url = "/getting-started/installation/"
     weight = 3
   [[menu.getting_started]]
-    name = "Your first validation run"
-    url = "/getting-started/first-run/"
-    weight = 4
-  [[menu.getting_started]]
     name = "Understanding results"
     url = "/getting-started/results/"
     weight = 5
