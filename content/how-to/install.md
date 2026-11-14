@@ -1,8 +1,8 @@
 ---
 title: Installation
-type: docs
-weight: 3
 description: Install Privateer on Windows, Linux, or macOS, and verify the install.
+weight: 1
+aliases: [/getting-started/installation/]
 ---
 
 Choose the option that matches your platform:
@@ -148,7 +148,7 @@ pvtr version
 
 **Expected output** depends on how you installed:
 
-* A **released binary** (install script, GitHub release, or Homebrew) prints a version tag, e.g. `v0.15.0`.
+* A **released binary** (install script, GitHub release, or Homebrew) prints its release version, e.g. `0.24.3`.
 * A **source build** prints `edge` (or `edge-dev` if you have uncommitted local changes). This is expected as source builds aren't stamped with a release number.
 
 For a full view of your installation, use `pvtr info`:

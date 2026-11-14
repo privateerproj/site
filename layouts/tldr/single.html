@@ -1,5 +1,4 @@
 {{ define "main" }}
-{{ .Scratch.Set "brandSuffix" "tl;dr" }}
 <main class="landing tldr">
   <section class="hero">
     <div class="hero-inner">
@@ -55,7 +54,7 @@
     <li class="tldr-step" style="--c: var(--brass)"><div class="tldr-pic" aria-hidden="true">🏥</div><b>Open the clinic</b><span>run <code>pvtr run</code></span></li>
     <li class="tldr-step" style="--c: var(--pass)"><div class="tldr-pic" aria-hidden="true">🩺</div><b>The nurse checks</b><span>every item on 📋</span></li>
     <li class="tldr-step" style="--c: var(--accent)"><div class="tldr-pic" aria-hidden="true">📝</div><b>A report card</b>
-      <span class="tldr-chips"><span class="chip pass">Passed</span><span class="chip fail">Failed</span><span class="chip skip">NeedsReview</span></span></li>
+      <span class="tldr-chips"><span class="chip pass">Passed</span><span class="chip fail">Failed</span><span class="chip skip">Needs Review</span></span></li>
     <li class="tldr-step" style="--c: var(--fail)"><div class="tldr-pic" aria-hidden="true">🏆</div><b>Pin it up</b><span>on grc.store</span></li>
   </ol>
 
@@ -80,8 +79,8 @@
   </div>
 
   <div class="hero-ctas tldr-next">
-    <a class="btn btn-primary" href="{{ "getting-started/quickstart/" | relURL }}">Try it in 5 minutes &rarr;</a>
-    <a class="btn btn-ghost" href="{{ "getting-started/introduction/" | relURL }}">Read the full introduction</a>
+    <a class="btn btn-primary" href="{{ (site.GetPage "/tutorials/first-run").RelPermalink }}">Try your first run &rarr;</a>
+    <a class="btn btn-ghost" href="{{ (site.GetPage "/explanation/introduction").RelPermalink }}">Read the full introduction</a>
   </div>
 </main>
 {{ end }}

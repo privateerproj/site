@@ -1,17 +1,11 @@
 {{ $currentURL := .RelPermalink }}
+{{ range (where site.Sections "Type" "docs").ByWeight }}
 <div class="nav-group">
-  <h4>Getting started</h4>
+  <h4>{{ .LinkTitle }}</h4>
   <ul>
-    {{ range .Site.Menus.getting_started }}
-    <li><a href="{{ .URL | relURL }}"{{ if eq (urls.Parse (.URL | relURL)).Path $currentURL }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a></li>
+    {{ range .Pages.ByWeight }}
+    <li><a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $currentURL }} class="active" aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
     {{ end }}
   </ul>
 </div>
-<div class="nav-group">
-  <h4>Developer reference</h4>
-  <ul>
-    {{ range .Site.Menus.developer_reference }}
-    <li><a href="{{ .URL | relURL }}"{{ if eq (urls.Parse (.URL | relURL)).Path $currentURL }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a></li>
-    {{ end }}
-  </ul>
-</div>
+{{ end }}

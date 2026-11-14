@@ -1,8 +1,8 @@
 ---
 title: Glossary
-type: docs
-weight: 7
 description: Plain-language definitions of the terms used across the Privateer docs.
+weight: 5
+aliases: [/getting-started/glossary/]
 ---
 
 Click a term to expand its definition.
@@ -52,7 +52,7 @@ An OpenSSF model for governance, risk and compliance (GRC) engineering. It split
 <details>
 <summary>Policy</summary>
 
-The block in your config file that says what to check against. It names one or more control catalogs and an applicability filter. A policy can be set once for all services or separately per service.
+The block in your config file that says what to check against. It names one or more control catalogs and an applicability filter. A policy can be set once for all targets or separately per target.
 
 </details>
 
@@ -66,7 +66,14 @@ A filter inside the policy that selects which controls from a catalog apply to y
 <details>
 <summary>Service</summary>
 
-One named entry under `services:` in your config file. It is a single target for Privateer to check, such as one GitHub repository, and says which plugin to run, which test suites to use and what values that plugin needs.
+The older name for a target. Configs written before `targets` existed list them under the legacy `services` key, which still works.
+
+</details>
+
+<details>
+<summary>Target</summary>
+
+One named entry under `targets:` in your config file. It is a single thing for Privateer to check, such as one GitHub repository, and says which plugin to run, which test suites to use and what values that plugin needs.
 
 </details>
 
@@ -85,15 +92,15 @@ A single check. It is a function inside a plugin that looks at the data collecte
 </details>
 
 <details id="results">
-<summary>Results (Passed, Failed, NeedsReview, NotApplicable, NotRun, Unknown)</summary>
+<summary>Results (Passed, Failed, Needs Review, Not Applicable, Not Run, Unknown)</summary>
 
 Every control in a report ends with one of six results:
 
 * **Passed**: the requirement was observed to be met.
 * **Failed**: the requirement was observed not to be met.
-* **NeedsReview**: the data was missing or ambiguous, so a person needs to decide.
-* **NotApplicable**: the requirement does not apply to this target.
-* **NotRun**: the check was never executed, usually because an earlier step stopped the chain.
+* **Needs Review**: the data was missing or ambiguous, so a person needs to decide.
+* **Not Applicable**: the requirement does not apply to this target.
+* **Not Run**: no check produced a result, because every step for the requirement reported Not Run, as a plugin's placeholder steps do. A step skipped after an earlier `Failed` or `Not Applicable` does not cause it: the requirement keeps that earlier result.
 * **Unknown**: the check could not run, usually because the collected data was unusable.
 
 </details>
@@ -101,7 +108,7 @@ Every control in a report ends with one of six results:
 <details>
 <summary>Non-zero exit code</summary>
 
-When a command finishes, it hands the shell a number called the exit code. Zero means success. For `pvtr run`, zero means every control passed. Any other number means at least one control was Failed, NeedsReview, or Unknown, or the run itself hit an error such as a missing plugin or an invalid config file. Automated pipelines use this number to decide whether to stop.
+When a command finishes, it hands the shell a number called the exit code. Zero means success. For `pvtr run`, zero means every control passed. Any other number means at least one control was Failed, Needs Review, or Unknown, or the run itself hit an error such as a missing plugin or an invalid config file. Automated pipelines use this number to decide whether to stop.
 
 </details>
 

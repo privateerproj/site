@@ -302,7 +302,7 @@ body.drawer-open, body.search-open { overflow: hidden; }
 /* result chips inside prose tables */
 .chip {
   display: inline-block; font-family: var(--font-mono); font-size: 12px;
-  padding: 2px 9px; border-radius: 999px; border: 1px solid transparent;
+  padding: 2px 9px; border-radius: 999px; border: 1px solid transparent; white-space: nowrap;
 }
 .chip.pass  { color: var(--pass);  background: var(--pass-bg);  border-color: color-mix(in srgb, var(--pass) 30%, transparent); }
 .chip.fail  { color: var(--fail);  background: var(--fail-bg);  border-color: color-mix(in srgb, var(--fail) 30%, transparent); }

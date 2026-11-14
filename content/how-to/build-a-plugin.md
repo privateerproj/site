@@ -1,13 +1,13 @@
 ---
 title: Build your first plugin
-type: docs
-weight: 4
 description: Generate a scaffold, write a loader and typed assessment steps, test in debug mode, and run under pvtr.
+weight: 6
+aliases: [/developer-reference/build-a-plugin/]
 ---
 
 A plugin is a Go binary that evaluates one kind of target against a Gemara
 Layer 2 control catalog and emits a Gemara EvaluationLog. `pvtr run` launches
-it, hands it the config for a service, and collects the log. This page walks
+it, hands it the config for a target, and collects the log. This page walks
 the scaffold as `pvtr generate-plugin` emits it today. The maintained reference
 plugin is [pvtr-github-repo-scanner](https://github.com/ossf/pvtr-github-repo-scanner);
 when this page and that repo disagree, the repo is current.
@@ -41,21 +41,8 @@ every file.
 
 ## Step 2: Review the generated structure
 
-```text
-my-plugin/
-  main.go                          # orchestrator wiring
-  go.mod                           # pins privateer-sdk and go-gemara
-  data/
-    data_collection.go             # Payload and Loader
-    catalogs/catalog_<id>_<ver>.yaml  # your catalog, vendored in the binary
-  evaluation_plans/
-    evaluation_plans.go            # TypedStep, and Suite_<id>: requirement id -> step chain
-    reusable_steps/steps.go        # NotImplemented placeholder
-  example-config.yml
-  Makefile
-```
-
-Every requirement id in the catalog is already in `Suite_<id>`, bound to
+The [CLI reference](/reference/cli/#generated-layout) lists every generated
+file. Every requirement id in the catalog is already in `Suite_<id>`, bound to
 `reusable_steps.NotImplemented`. Replacing those bindings is the work.
 
 The scaffold vendors the catalog with `AddReferenceCatalogs`, so the binary is
@@ -139,21 +126,11 @@ Suite_my_catalog = map[string][]TypedStep{
 }
 ```
 
-### Results
-
-| Result | Return when | Halts the chain |
-| --- | --- | --- |
-| `Passed` | You observed the requirement being met. | no |
-| `Failed` | You observed it not being met. | yes |
-| `NotApplicable` | The requirement does not apply to this target. | yes |
-| `NeedsReview` | The data is absent or ambiguous, or only a heuristic could judge it. | no |
-| `Unknown` | The payload was unusable; almost always a loader bug. | no |
-| `NotRun` | Placeholders only. | no |
-
-Steps in a chain run in order. The chain stops at the first `Failed` or
-`NotApplicable`; every other result is folded in and the next step runs. Put
-scope guards first so an inapplicable target stops before a substantive step
-fails it for the wrong reason.
+The [result values](/reference/output-schema/#result-values) table lists the
+six results a step can return and which ones halt the chain. Because a chain
+stops at the first `Failed` or `NotApplicable`, put scope guards first so an
+inapplicable target stops before a substantive step fails it for the wrong
+reason.
 
 Three things to get right in every step:
 
@@ -214,32 +191,53 @@ with a message naming the id.
 ## Step 7: Run under pvtr
 
 ```bash
-cp my-plugin ~/.privateer/bin/
+pvtr install --local ./my-plugin     # installs as local/my-plugin
 pvtr list --installed                # confirm it is discovered
 pvtr run -c config.yml
 ```
 
-Exit codes:
+Under `pvtr`, the target's `plugin` value is the installed coordinate,
+`local/my-plugin`. A binary copied into the binaries path by hand is not
+discovered.
 
-| Code | Meaning |
-| --- | --- |
-| 0 | Everything passed |
-| 1 | The run completed and some assessments failed |
-| 2 | Aborted (signal) |
-| 3 | Internal error in pvtr or the plugin |
-| 4 | Bad config or flags |
-| 5 | No assessments ran; usually a catalog id or applicability mismatch |
+`pvtr run` exits `1` when the run completed and some assessments failed; that
+is a successful run from the plugin's point of view. Every code is listed in the
+[CLI reference](/reference/cli/#exit-codes).
 
-`1` is a successful run from the plugin's point of view. Read the log, not
-just the code.
+## Step 8: Publish to grc.store
 
-## Step 8: Publish
+Users install plugins from [grc.store](https://hub.grc.store) with
+`pvtr install <namespace>/<plugin_id>`. To publish there:
 
-1. Push to a public GitHub repository with the `pvtr-` prefix.
-2. Set `Publisher` and `License` on the orchestrator in `main.go`; both are
-   required to publish and inert at run time.
-3. Tag a release so users can download a compiled binary.
-4. Document required vars and an example `config.yml` in the README.
+1. Set `Publisher` and `License` on the orchestrator in `main.go`. `Publisher`
+   is your grc.store namespace, and with the plugin name it forms the coordinate
+   `<publisher>/<plugin-name>`; `License` is an SPDX expression such as
+   `Apache-2.0`. Both are required to publish and inert at run time.
+2. Create or claim that namespace on grc.store. Publishing to a namespace you
+   do not own is refused.
+3. Push the plugin to GitHub and tag a release.
+4. Run the scaffold's `.github/workflows/publish-plugin.yaml` from the Actions
+   tab, giving it the tag. It builds the tag with GoReleaser and runs
+   `pvtr publish`, which reads the coordinate, license and catalogs from the
+   built binary, pushes the plugin as a signed OCI artifact, and asks the hub to
+   verify it. Before the first run, have the hub list your repository as a
+   trusted publisher for your namespace.
+
+   To publish from your own machine instead, build and publish directly.
+   Signing opens a second browser sign-in, separate from `pvtr login`:
+
+   ```bash
+   goreleaser build --clean
+   pvtr login
+   pvtr publish
+   ```
+
+   The first successful publish pins the signer identity for the coordinate,
+   so choose one path and keep publishing from it.
+5. Document required vars and an example `config.yml` in the README.
+
+The [CLI reference](/reference/cli/#pvtr-publish) lists the `login` and
+`publish` flags.
 
 ## Using an AI agent
 

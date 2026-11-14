@@ -1,21 +1,8 @@
 {{ define "main" }}
 {{ $section := .CurrentSection.Title }}
-{{ .Scratch.Set "brandSuffix" "docs" }}
-{{ if eq $section "Getting started" }}
-  {{ .Scratch.Set "activeTab" "start" }}
-{{ else }}
-  {{ .Scratch.Set "activeTab" "dev" }}
-{{ end }}
 
-{{/* Build flat page list for prev/next */}}
-{{ $allPages := slice }}
-{{ range site.Menus.getting_started }}
-  {{ with site.GetPage .URL }}{{ $allPages = $allPages | append . }}{{ end }}
-{{ end }}
-{{ range site.Menus.developer_reference }}
-  {{ with site.GetPage .URL }}{{ $allPages = $allPages | append . }}{{ end }}
-{{ end }}
-
+{{/* Prev/next stays within the current section */}}
+{{ $allPages := .CurrentSection.Pages.ByWeight }}
 {{ $currentIdx := -1 }}
 {{ range $i, $p := $allPages }}
   {{ if eq $p.RelPermalink $.RelPermalink }}{{ $currentIdx = $i }}{{ end }}
@@ -39,18 +26,18 @@
           {{ $prev := index $allPages (sub $currentIdx 1) }}
           <a class="prev" href="{{ $prev.RelPermalink }}">
             <span class="dir">&larr; Previous</span>
-            <span class="name">{{ $prev.Title }}</span>
+            <span class="name">{{ $prev.LinkTitle }}</span>
           </a>
         {{ else }}<span></span>{{ end }}
         {{ if lt $currentIdx (sub (len $allPages) 1) }}
           {{ $next := index $allPages (add $currentIdx 1) }}
           <a class="next" href="{{ $next.RelPermalink }}">
             <span class="dir">Next &rarr;</span>
-            <span class="name">{{ $next.Title }}</span>
+            <span class="name">{{ $next.LinkTitle }}</span>
           </a>
         {{ else }}
-          <a class="next" href="{{ "library/" | relURL }}">
-            <span class="dir">End of the docs &rarr;</span>
+          <a class="next" href="{{ (site.GetPage "/library").RelPermalink }}">
+            <span class="dir">End of {{ $section }} &rarr;</span>
             <span class="name">Back to the Library</span>
           </a>
         {{ end }}
