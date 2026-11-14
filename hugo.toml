@@ -65,12 +65,6 @@ disableKinds = ["RSS"]
     desc = "Catch security and compliance gaps while software is being built, not after it ships."
 
   [[params.fits]]
-    icon = "cloud"
-    title = "Cloud services"
-    url = "reference/plugin-catalog/"
-    desc = "Check cloud services against FINOS Common Cloud Controls with community plugins."
-
-  [[params.fits]]
     icon = "puzzle"
     title = "Open-source plugins"
     url = "reference/plugin-catalog/"
