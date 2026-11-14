@@ -1,6 +1,5 @@
 {{ define "main" }}
 {{ $section := .CurrentSection.Title }}
-{{ .Scratch.Set "brandSuffix" "docs" }}
 
 {{/* Prev/next stays within the current section */}}
 {{ $allPages := .CurrentSection.Pages.ByWeight }}

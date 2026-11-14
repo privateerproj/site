@@ -1,9 +1,8 @@
-{{ $brandSuffix := .Scratch.Get "brandSuffix" | default "docs" }}
 {{ $docsActive := or (eq .Type "docs") (eq .Type "library") }}
 <header class="site-header">
   <div class="header-inner">
     <button id="menu-btn" class="icon-btn" aria-label="Open navigation" aria-controls="drawer" aria-expanded="false">{{ partial "icons/menu.html" }}</button>
-    <a class="brand" href="{{ "/" | relURL }}" aria-label="Privateer {{ $brandSuffix }} home"><img class="logo" src="{{ .Site.Params.brandLogo | relURL }}" alt="" height="26"><span class="brand-name">privateer</span> <span class="docs">/ {{ $brandSuffix }}</span></a>
+    <a class="brand" href="{{ "/" | relURL }}" aria-label="Privateer home"><img class="logo" src="{{ .Site.Params.brandLogo | relURL }}" alt="" height="26"><span class="brand-name">privateer</span>{{ if eq .Type "docs" }} <span class="docs">/ docs</span>{{ end }}</a>
     <div class="header-search">
       <button class="search-trigger" data-search-open aria-label="Search docs">{{ partial "icons/search.html" }}<span>Search docs&hellip;</span><kbd><span class="search-kbd-mod">Ctrl</span> K</kbd></button>
     </div>
