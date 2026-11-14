@@ -2,6 +2,7 @@
 title: Introduction to Privateer
 type: docs
 weight: 1
+featured: true
 description: What Privateer is, why it exists, and how a validation run works.
 ---
 

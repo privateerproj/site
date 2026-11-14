@@ -1,6 +1,5 @@
 {{ define "main" }}
 {{ .Scratch.Set "brandSuffix" "home" }}
-{{ .Scratch.Set "activeTab" "home" }}
 <section class="home-hero">
   <div class="home-hero-inner">
     <div class="home-hero-copy">
@@ -10,7 +9,7 @@
       <h1>Check your systems against <span class="accent">published security standards</span></h1>
       <p class="sub">Privateer runs automated checks against your infrastructure, compares what it finds to standards like the OpenSSF Baseline, and writes a report that people and tools can both read. The checks come from plugins built by the community, or by you.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="{{ "getting-started/introduction/" | relURL }}">Get started &rarr;</a>
+        <a class="btn btn-primary" href="{{ (site.GetPage "/getting-started/introduction").RelPermalink }}">Get started &rarr;</a>
         <a class="btn btn-ghost" href="{{ .Site.Params.repoURL }}" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
@@ -46,7 +45,7 @@
     </a>
     {{ end }}
   </div>
-  <div class="fits-cta"><a class="btn btn-primary" href="{{ "library/" | relURL }}">Explore Documentation &rarr;</a></div>
+  <div class="fits-cta"><a class="btn btn-primary" href="{{ (site.GetPage "/library").RelPermalink }}">Explore Documentation &rarr;</a></div>
 </section>
 {{ end }}
 

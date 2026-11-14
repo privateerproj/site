@@ -1,5 +1,5 @@
 {{ $brandSuffix := .Scratch.Get "brandSuffix" | default "docs" }}
-{{ $activeTab := .Scratch.Get "activeTab" | default "" }}
+{{ $docsActive := or (eq .Type "docs") (eq .Type "library") }}
 <header class="site-header">
   <div class="header-inner">
     <button id="menu-btn" class="icon-btn" aria-label="Open navigation" aria-controls="drawer" aria-expanded="false">{{ partial "icons/menu.html" }}</button>
@@ -8,10 +8,8 @@
       <button class="search-trigger" data-search-open aria-label="Search docs">{{ partial "icons/search.html" }}<span>Search docs&hellip;</span><kbd><span class="search-kbd-mod">Ctrl</span> K</kbd></button>
     </div>
     <nav class="header-tabs">
-      <a href="{{ "/" | relURL }}"{{ if eq $activeTab "home" }} class="active"{{ end }}>Home</a>
-      <a href="{{ "library/" | relURL }}"{{ if eq $activeTab "library" }} class="active"{{ end }}>Library</a>
-      <a href="{{ "getting-started/introduction/" | relURL }}"{{ if eq $activeTab "start" }} class="active"{{ end }}>Getting started</a>
-      <a href="{{ "developer-reference/cli-reference/" | relURL }}"{{ if eq $activeTab "dev" }} class="active"{{ end }}>Developer reference</a>
+      <a href="{{ "/" | relURL }}"{{ if .IsHome }} class="active"{{ end }}>Home</a>
+      <a href="{{ (site.GetPage "/library").RelPermalink }}"{{ if $docsActive }} class="active"{{ end }}>Docs</a>
     </nav>
     <div class="header-actions">
       <button id="theme-btn" class="icon-btn" aria-label="Toggle theme">{{ partial "icons/sun.html" }}{{ partial "icons/moon.html" }}</button>

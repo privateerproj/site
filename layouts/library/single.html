@@ -1,6 +1,5 @@
 {{ define "main" }}
 {{ .Scratch.Set "brandSuffix" "library" }}
-{{ .Scratch.Set "activeTab" "library" }}
 <main class="landing">
   <section class="hero">
     <svg class="hero-course" viewBox="0 0 400 300" fill="none" aria-hidden="true">
@@ -15,8 +14,8 @@
          then writes structured, machine-readable evidence in YAML, JSON, or SARIF. Built to operate at the
          Evaluation layer of the Gemara GRC engineering model.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="{{ "getting-started/quickstart/" | relURL }}">Get started &rarr;</a>
-        <a class="btn btn-ghost" href="{{ "tldr/" | relURL }}">TL;DR</a>
+        <a class="btn btn-primary" href="{{ (site.GetPage "/getting-started/quickstart").RelPermalink }}">Get started &rarr;</a>
+        <a class="btn btn-ghost" href="{{ (site.GetPage "/tldr").RelPermalink }}">TL;DR</a>
         <a class="btn btn-ghost" href="{{ .Site.Params.repoURL }}" target="_blank" rel="noopener">View on GitHub</a>
       </div>
       <div class="hero-install"><span class="dollar">$</span>/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/privateerproj/pvtr/main/install.sh)"</div>
@@ -32,29 +31,19 @@
     </div>
   </section>
 
-  <h2 class="section-label">Getting started</h2>
-  <p class="section-sub">From zero to a control-by-control validation report.</p>
+  {{ range (where site.Sections "Type" "docs").ByWeight }}
+  <h2 class="section-label">{{ .LinkTitle }}</h2>
+  <p class="section-sub">{{ .Description }}</p>
   <div class="card-grid cols-3">
-    {{ range .Site.Menus.getting_started }}
-    <a class="card{{ if eq .Name "Introduction to Privateer" }} featured{{ end }}" href="{{ .URL | relURL }}">
-      {{ if eq .Name "Introduction to Privateer" }}<span class="badge">Recommended</span>{{ end }}
-      <h3>{{ .Name }}</h3>
-      <p>{{ with site.GetPage .URL }}{{ .Params.description }}{{ end }}</p>
+    {{ range .Pages.ByWeight }}
+    <a class="card{{ if .Params.featured }} featured{{ end }}" href="{{ .RelPermalink }}">
+      {{ if .Params.featured }}<span class="badge">Recommended</span>{{ end }}
+      <h3>{{ .LinkTitle }}</h3>
+      <p>{{ .Description }}</p>
       {{ partial "icons/chevron.html" }}
     </a>
     {{ end }}
   </div>
-
-  <h2 class="section-label">Developer reference</h2>
-  <p class="section-sub">For plugin authors, contributors, and CI/CD pipeline engineers.</p>
-  <div class="card-grid cols-3">
-    {{ range .Site.Menus.developer_reference }}
-    <a class="card" href="{{ .URL | relURL }}">
-      <h3>{{ .Name }}</h3>
-      <p>{{ with site.GetPage .URL }}{{ .Params.description }}{{ end }}</p>
-      {{ partial "icons/chevron.html" }}
-    </a>
-    {{ end }}
-  </div>
+  {{ end }}
 </main>
 {{ end }}
